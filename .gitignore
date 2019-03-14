@@ -5,6 +5,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Directory with production files
+dist/
+
+# Yarn lock file
+yarn.lock
+
 # Runtime data
 pids
 *.pid

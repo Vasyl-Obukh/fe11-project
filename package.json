@@ -1,0 +1,52 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production",
+    "test": "jest"
+  },
+  "author": "Vasyl Obukh",
+  "license": "MIT",
+  "browserslist": [
+    "last 2 versions",
+    "ios >= 8"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.4.2",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^2.0.1",
+    "eslint": "^5.15.1",
+    "eslint-plugin-react": "^7.12.4",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "imagemin": "^6.0.0",
+    "imagemin-webpack-plugin": "^2.3.0",
+    "img-loader": "^3.0.1",
+    "jest": "^24.0.0",
+    "node-sass": "^4.11.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^3.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "svg-url-loader": "^2.3.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
