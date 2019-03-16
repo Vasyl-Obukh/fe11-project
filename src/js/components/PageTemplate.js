@@ -6,14 +6,14 @@ import Footer from './Footer';
 
 export default function PageTemplate({ children }) {
   return (
-  <>
-    <Header />
-    <main className='main'>
-      {children}
-    </main>
-    <SideBar />
-    <Footer />
-  </>
+    <>
+      <Header />
+      <main className='main'>
+        {children}
+      </main>
+      <SideBar />
+      <Footer />
+    </>
   );
 }
 

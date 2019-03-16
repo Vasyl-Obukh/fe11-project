@@ -3,6 +3,7 @@ import Logo from './Logo';
 import Sign from './Sign';
 import Navbar from './NavBar';
 import Search from './Search';
+import Slider from './Slider';
 
 const Header = () => {
   return (
@@ -14,6 +15,9 @@ const Header = () => {
       <div className='header--navbar-search'>
         <Navbar />
         <Search />
+      </div>
+      <div className='header--slider'>
+        <Slider />
       </div>
     </header>
   );

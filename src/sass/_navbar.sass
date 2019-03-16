@@ -6,7 +6,7 @@
   &--item
     display: flex
     position: relative
-    max-width: 200px
+    max-width: 175px
     width: 100vw
     height: 50px
 
@@ -35,4 +35,11 @@
   width: 100%
   flex-direction: column
   border-top: 1px solid #999
-  background-color: $theme--bgc_secondary
+  background-image: linear-gradient($theme--main, $theme--secondary)
+  z-index: 1
+
+  &--item
+    padding: 5px 0
+
+    &:not(:last-child)
+      border-bottom: 1px solid #999

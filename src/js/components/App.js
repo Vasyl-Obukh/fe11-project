@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import AdminPanel from './AdminPanel';
-import CategoriesPage from './CategoriesPage';
 import Category from './Category';
 import AboutUs from './AboutUs';
 import ContactUs from './ContactUs';
@@ -15,7 +14,6 @@ export default function App() {
     <Switch>
       <Route exact path='/' component={Home} />
       <Route path='/post' component={PostPage} />
-      <Route path='/categories' component={CategoriesPage} />
       <Route path='/category' component={Category} />
       <Route path='/about-us' component={AboutUs} />
       <Route path='/contact-us' component={ContactUs} />

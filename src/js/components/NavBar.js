@@ -10,7 +10,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li className='navbar--item'>
-        <NavLink to='/categories' >
+        <NavLink to='/' >
           Categories
         </NavLink>
         <ul className='nested-list'>

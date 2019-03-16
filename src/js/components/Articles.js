@@ -1,0 +1,48 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+const Articles = ({ articles }) => {
+  return (
+    <>
+      {articles.map((_, id) => {
+        return (
+          <article key={id} className='article'>
+            <h2 className='article--title'>
+              <Link to='/post'>{_.title}</Link>
+            </h2>
+            <div className='article--cat-n-date'>
+              <div className='categories'>
+                <span>Category: </span>
+                {_.categories.map((_, id) => {
+                  return (
+                    <Link key={id} to='/category'>{_}</Link>
+                  );
+                })}
+              </div>
+              <div className='date'>
+                <span>3/16/19</span>
+              </div>
+            </div>
+            <div className='article--thumbnail'>
+              <img src={_.thumbnailUrl} alt='post thumbnail'></img>
+            </div>
+            <div className='article--overview'>
+              <p>{_.overview}</p>
+            </div>
+            <div className='article--comments-n-link'>
+              <span>Comments: {_.commentsNumber}</span>
+              <Link to='/post'>Read more...</Link>
+            </div>
+          </article>
+        );
+      })}
+    </>
+  );
+};
+
+Articles.propTypes = {
+  articles: PropTypes.array.isRequired
+};
+
+export default Articles;
