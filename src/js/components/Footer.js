@@ -1,9 +1,14 @@
 import React from 'react';
+import SocialLinks from './SocialLinks';
+import Copyright from './Copyright';
 
-export default function Footer() {
+const Footer = () => {
   return (
-    <footer>
-      <h2>Footer</h2>
+    <footer className='footer'>
+      <SocialLinks />
+      <Copyright />
     </footer>
   );
-}
+};
+
+export default Footer;

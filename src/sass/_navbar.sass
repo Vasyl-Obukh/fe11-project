@@ -1,0 +1,38 @@
+@import colors
+
+.navbar
+  display: flex
+
+  &--item
+    display: flex
+    position: relative
+    max-width: 200px
+    width: 100vw
+    height: 50px
+
+    &:hover
+
+      & .nested-list
+        display: flex
+
+    & a
+      display: flex
+      align-items: center
+      justify-content: center
+      height: 100%
+      width: 100%
+      font-size: 24px
+      color: #fff
+  
+    &:not(:last-child)
+      border-right: 1px solid #999
+
+.nested-list
+  display: none
+  position: absolute
+  top: 100%
+  left: 0
+  width: 100%
+  flex-direction: column
+  border-top: 1px solid #999
+  background-color: $theme--bgc_secondary

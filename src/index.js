@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './js/components/App';
 import storeFactory from './js/store/store';
+import './sass/style.sass';
 
 const store = storeFactory();
 

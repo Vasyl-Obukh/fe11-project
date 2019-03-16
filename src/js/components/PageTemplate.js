@@ -7,10 +7,12 @@ import Footer from './Footer';
 export default function PageTemplate({ children }) {
   return (
   <>
-   <Header />
-   {children}
-   <SideBar />
-   <Footer />
+    <Header />
+    <main className='main'>
+      {children}
+    </main>
+    <SideBar />
+    <Footer />
   </>
   );
 }

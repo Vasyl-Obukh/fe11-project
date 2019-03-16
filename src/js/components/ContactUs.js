@@ -1,12 +1,12 @@
 import React from 'react';
 import PageTemplate from './PageTemplate';
 
-const Home = () => {
+const ContactUs = () => {
   return (
     <PageTemplate>
-      <h2>Main</h2>
+      <h2>Contact us</h2>
     </PageTemplate>
   );
 };
 
-export default Home;
+export default ContactUs;

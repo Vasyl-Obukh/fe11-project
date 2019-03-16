@@ -1,0 +1,55 @@
+@import colors
+
+.header
+  grid-area: header
+  display: flex
+  flex-direction: column
+  padding: 0 calc((100vw - 1000px)/2)
+
+  &--top,
+  &--navbar-search
+    display: flex
+    margin-left: calc((1000px - 100vw)/2)
+    padding: 0 calc((100vw - 1000px)/2)
+    width: 100vw
+
+    align-items: center
+    justify-content: space-between
+
+  &--top
+    background-color: $theme--bgc_secondary
+    opacity: 0.75
+
+  &--navbar-search
+    background-color: $theme--bgc_main
+
+.logo
+  margin-left: 25px
+
+.logo i
+  font-size: 30px
+  line-height: 40px
+  color: #fff
+
+.sign
+  display: flex
+  margin-right: 25px
+  border-radius: 15px
+  //background-color: #2da8a6
+  background-color: #fff
+  border: 1px solid #000
+
+.sign--in,
+.sign--up
+  display: block
+  padding: 5px 10px
+
+//.sign--in a,
+//.sign--up a
+//  color: #fff
+
+.sign--in
+  border-right: 1px solid #000
+
+.sign--up
+  border-left: 1px solid #000

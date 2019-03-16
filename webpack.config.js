@@ -50,7 +50,7 @@ let conf = {
           {
             loader: 'file-loader',
             options: {
-              name: '[path][name].[ext]'
+              name: '[path]/[name].[ext]'
             }
           }
         ]

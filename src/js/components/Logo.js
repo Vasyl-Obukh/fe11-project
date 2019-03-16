@@ -2,7 +2,9 @@ import React from 'react';
 
 const Logo = () => {
   return (
-    <img src='#' alt='logo'/>
+    <div className='logo'>
+      <i className='fab fa-blogger-b'></i>
+    </div>
   );
 };
 

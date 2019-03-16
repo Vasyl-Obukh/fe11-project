@@ -1,12 +1,22 @@
 import React from 'react';
-import Logo from '../components/Logo';
-import SignIn from '../components/SignIn';
+import Logo from './Logo';
+import Sign from './Sign';
+import Navbar from './NavBar';
+import Search from './Search';
 
-export default function Header() {
+const Header = () => {
   return (
-    <header>
-      <Logo />
-      <SignIn />
+    <header className='header'>
+      <div className='header--top'>
+        <Logo />
+        <Sign />
+      </div>
+      <div className='header--navbar-search'>
+        <Navbar />
+        <Search />
+      </div>
     </header>
   );
-}
+};
+
+export default Header;

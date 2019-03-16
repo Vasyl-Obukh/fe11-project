@@ -1,12 +1,12 @@
 import React from 'react';
 import PageTemplate from './PageTemplate';
 
-const Home = () => {
+const Categories = () => {
   return (
     <PageTemplate>
-      <h2>Main</h2>
+      <h2>Categories</h2>
     </PageTemplate>
   );
 };
 
-export default Home;
+export default Categories;
