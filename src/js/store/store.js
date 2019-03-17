@@ -15,17 +15,16 @@ const logger = store => next => action => {
 
 const saver = store => next => action => {
   let result = next(action);
-  localStorage['test-store'] = JSON.stringify(store.getState());
+  localStorage['fe11-app'] = JSON.stringify(store.getState());
   return result;
 };
 
 const storeFactory  = (initialState = stateData) =>
   applyMiddleware(logger, saver)(createStore)(
     reducers,
-    initialState
-    /* (localStorage['redux-store']) ?
-      JSON.parse(localStorage['redux-store']) :
-      stateData */
+    (localStorage['fe11-app']) ?
+      JSON.parse(localStorage['fe11-app']) :
+      initialState
   );
 
 //const store = createStore(reducers, stateData, applyMiddleware(logger, saver));

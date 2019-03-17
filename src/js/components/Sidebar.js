@@ -1,9 +1,13 @@
 import React from 'react';
 
-export default function SideBar() {
+const SideBar = () => {
   return (
     <aside className='sidebar'>
-      <h2>SideBar</h2>
+      <div>
+        <h2>SideBar</h2>
+      </div>
     </aside>
   );
-}
+};
+
+export default SideBar;

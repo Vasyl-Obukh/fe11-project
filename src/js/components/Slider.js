@@ -2,7 +2,9 @@ import React from 'react';
 
 const Slider = () => {
   return (
-    <h2>Here some day will be a slider</h2>
+    <section className='slider'>
+      <h2>Here some day will be a slider</h2>
+    </section>
   );
 };
 

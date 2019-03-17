@@ -1,20 +1,14 @@
 import { combineReducers } from 'redux';
-import { CHANGE_VALUE } from '../constants/actionTypes';
-
-const value = (state = {}, action) => {
-  switch (action.type) {
-  case CHANGE_VALUE:
-    return {
-      ...state,
-      ...action.value
-    };
-  default:
-    return state;
-  }
-};
+import articles from './articles';
+import comments from './comments';
+import categories from './categories';
+import users from './users';
 
 const reducers = combineReducers({
-  value
+  articles,
+  comments,
+  categories,
+  users
 });
 
 export default reducers;
