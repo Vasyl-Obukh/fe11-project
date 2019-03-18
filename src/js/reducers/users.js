@@ -1,4 +1,4 @@
-import { ADD_USER, GET_USERS } from '../constants/actionTypes';
+import { ADD_USER } from '../constants/actionTypes';
 
 const users = (state = [], action) => {
   switch (action.type) {
@@ -12,7 +12,6 @@ const users = (state = [], action) => {
         email: action.email
       }
     ];
-  case GET_USERS:
   default:
     return state;
   }

@@ -22,7 +22,7 @@ const Articles = ({ articles }) => {
                 })}
               </div>
               <div className='date'>
-                <span>3/16/19</span>
+                <span>{_.date}</span>
               </div>
             </div>
             <div className='article--thumbnail'>

@@ -1,6 +1,6 @@
+import { v4 } from 'uuid';
 import { 
   ADD_CATEGORY,
-  GET_CATEGORIES,
   DELETE_CATEGORY,
   CHANGE_CATEGORY_NAME
 } from '../constants/actionTypes';
@@ -23,7 +23,7 @@ const categories = (state = [], action) => {
     return [
       ...state,
       {
-        id: '',
+        id: v4(),
         name: action.name
       }
     ];
@@ -34,7 +34,6 @@ const categories = (state = [], action) => {
       state.filter(_ => _.id !== action.id),
       category(state.filter(_ => _.id === action.id), action)
     ];
-  case GET_CATEGORIES:
   default:
     return state;
   }

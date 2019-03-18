@@ -1,9 +1,10 @@
-import { ADD_COMMENT,
-  GET_COMMENTS,
-  GET_POST_COMMENTS,
+import { v4 } from 'uuid';
+import { 
+  ADD_COMMENT,
   CHANGE_COMMENT,
   DELETE_COMMENT,
-  VALIDATE_COMMENT } from '../constants/actionTypes';
+  VALIDATE_COMMENT 
+} from '../constants/actionTypes';
 
 const comment = (state = {}, action) => {
   switch (action.type) {
@@ -28,8 +29,8 @@ const comments = (state = [], action) => {
     return [
       ...state,
       {
-        id: '',
-        date: '',
+        id: v4(),
+        date: new Date(),
         validate: false,
         articleId: action.articleId,
         userName: action.userName,
@@ -39,18 +40,15 @@ const comments = (state = [], action) => {
   case CHANGE_COMMENT:
     return [
       ...state.filter(_ => _.id !== action.id),
-      comment()
+      comment(...state.filter(_ => _.id === action.id), action)
     ];
   case VALIDATE_COMMENT:
     return [
       ...state.filter(_ => _.id !== action.id),
-      comment()
+      comment(...state.filter(_ => _.id === action.id))
     ];
   case DELETE_COMMENT:
     return state.filter(_ => _.id !== action.id);
-  case GET_POST_COMMENTS:
-    return state.filter(_ => _.articleId === action.articleId && _.validate === true);
-  case GET_COMMENTS:
   default:
     return state;
   }

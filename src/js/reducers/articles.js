@@ -1,9 +1,9 @@
+import { v4 } from 'uuid';
 import {
   ADD_ARTICLE,
   DELETE_ARTICLE,
   CHANGE_ARTICLE,
-  CHANGE_ARTICLE_COMMENTS_NUMBER,
-  GET_ARTICLES
+  CHANGE_ARTICLE_COMMENTS_NUMBER
 } from '../constants/actionTypes';
 
 const article = (state = {}, action) => {
@@ -20,7 +20,7 @@ const article = (state = {}, action) => {
   case CHANGE_ARTICLE_COMMENTS_NUMBER:
     return {
       ...state,
-      commentsNumber: state.commentsNumber + action.commentsNumber
+      commentsNumber: state.commentsNumber + action.commentsNumberChange
     };
   default:
     return state;
@@ -33,8 +33,8 @@ const articles = (state = [], action) => {
     return [
       ...state,
       {
-        id: '',
-        date: '',
+        id: v4(),
+        date: new Date(),
         commentsNumber: 0,
         title: action.title,
         text: action.text,
@@ -55,7 +55,6 @@ const articles = (state = [], action) => {
       ...state.filter(_ => _.id !== action.id),
       article(...state.filter(_ => _.id === action.id, action))
     ];
-  case GET_ARTICLES:
   default:
     return state;
   }
