@@ -59,7 +59,7 @@ const stateData = {
       email: 'vasiaobukh7@gmail.com'
     }
   ],
-//  userType: 'NON_AUTHORIZED',
+//  currentUser: 'NON_AUTHORIZED',
 };
 
 export default stateData;
