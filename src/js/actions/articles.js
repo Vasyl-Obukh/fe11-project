@@ -5,14 +5,14 @@ import {
   CHANGE_ARTICLE_COMMENTS_NUMBER } from '../constants/actionTypes';
 
 
-export const addArticle = ({ title, text, overview, thumbnailUrl, category }) => {
+export const addArticle = ({ title, text, overview, thumbnailUrl, categoryId }) => {
   return {
     type: ADD_ARTICLE,
     title,
     text,
     overview,
     thumbnailUrl,
-    category
+    categoryId
   };
 };
 
@@ -23,7 +23,7 @@ export const deleteArticle = id => {
   };
 };
 
-export const changeArticle = ({ id, title, text, overview, thumbnailUrl, category }) => {
+export const changeArticle = ({ id, title, text, overview, thumbnailUrl, categoryId }) => {
   return {
     type: CHANGE_ARTICLE,
     id,
@@ -31,7 +31,7 @@ export const changeArticle = ({ id, title, text, overview, thumbnailUrl, categor
     text,
     overview,
     thumbnailUrl,
-    category
+    categoryId
   };
 };
 

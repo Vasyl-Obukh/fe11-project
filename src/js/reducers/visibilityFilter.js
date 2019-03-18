@@ -1,10 +1,17 @@
 import visibilityFilters from '../constants/visibilityFilters';
-import { SET_VISIBILITY_FILTER } from '../constants/actionTypes';
+import { SET_SHOW_ALL, SET_SHOW_BY_CATEGORY } from '../constants/actionTypes';
 
-const visibilityFilter = (state = visibilityFilters.SHOW_ALL, action) => {
+const visibilityFilter = (state = { filterType: visibilityFilters.SHOW_ALL }, action) => {
   switch (action.type) {
-  case SET_VISIBILITY_FILTER:
-    return action.visibilityFilter;
+  case SET_SHOW_ALL:
+    return { 
+      filterType: visibilityFilters.SHOW_ALL 
+    };
+  case SET_SHOW_BY_CATEGORY:
+    return {
+      filterType: visibilityFilters.SHOW_BY_CATEGORY,
+      categoriesId: action.categoriesId
+    };
   default:
     return state;
   }

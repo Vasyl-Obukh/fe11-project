@@ -1,16 +1,14 @@
-import visibilityFilters from '../constants/visibilityFilters';
-import { SET_VISIBILITY_FILTER } from '../constants/actionTypes';
+import { SET_SHOW_ALL, SET_SHOW_BY_CATEGORY } from '../constants/actionTypes';
 
 export const showAll = () => {
   return {
-    type: SET_VISIBILITY_FILTER,
-    visibilityFilter: visibilityFilters.SHOW_ALL
+    type: SET_SHOW_ALL,
   };
 };
 
-export const showPage = () => {
+export const showByCategory = (...categoriesId) => {
   return {
-    type: SET_VISIBILITY_FILTER,
-    visibilityFilter: visibilityFilters.SHOW_PAGE
+    type: SET_SHOW_BY_CATEGORY,
+    categoriesId
   };
 };

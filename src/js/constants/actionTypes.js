@@ -16,7 +16,8 @@ export const ADD_USER  = 'ADD_USER';
 
 export const SET_SORT_TYPE = 'SET_SORT_TYPE';
 
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+export const SET_SHOW_ALL = 'SET_SHOW_ALL';
+export const SET_SHOW_BY_CATEGORY = 'SET_SHOW_BY_CATEGORY';
 
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';

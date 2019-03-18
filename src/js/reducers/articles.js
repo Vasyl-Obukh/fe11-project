@@ -15,7 +15,7 @@ const article = (state = {}, action) => {
       text: action.text,
       overview: action.overview,
       thumbnailUrl: action.thumbnailUrl,
-      category: action.category
+      categoryId: action.categoryId
     };
   case CHANGE_ARTICLE_COMMENTS_NUMBER:
     return {
@@ -40,7 +40,7 @@ const articles = (state = [], action) => {
         text: action.text,
         overview: action.overview,
         thumbnailUrl: action.thumbnailUrl,
-        category: action.category
+        categoryId: action.categoryId
       }
     ];
   case CHANGE_ARTICLE:
