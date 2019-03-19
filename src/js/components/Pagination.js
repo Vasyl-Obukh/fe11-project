@@ -6,7 +6,7 @@ export default class TodoApp extends Component {
     this.state = {
       todos: this.props.children,
       currentPage: 1,
-      todosPerPage: 2,
+      todosPerPage: 3,
       upperPageBound: 3,
       lowerPageBound: 0,
       isPrevBtnActive: 'disabled',

@@ -6,9 +6,9 @@ export const showAll = () => {
   };
 };
 
-export const showByCategory = (...categoriesId) => {
+export const showByCategory = (...categories) => {
   return {
     type: SET_SHOW_BY_CATEGORY,
-    categoriesId
+    categories
   };
 };

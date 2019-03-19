@@ -6,23 +6,23 @@ import Pagination from './Pagination';
 const Articles = ({ articles }) => {
   return (
     <Pagination>
-      {articles.map((_, id) => {
+      {articles.map((_) => {
         return (
-          <article key={id} className='article'>
+          <article key={_.id} className='article'>
             <h2 className='article--title'>
               <Link to='/post'>{_.title}</Link>
             </h2>
             <div className='article--cat-n-date'>
               <div className='categories'>
                 <span>Category: </span>
-                {_.categories.map((_, id) => {
+                {_.category.map((_, id) => {
                   return (
                     <Link key={id} to='/category'>{_}</Link>
                   );
                 })}
               </div>
               <div className='date'>
-                <span>{_.date}</span>
+                <span>{_.date.getDay()}</span>
               </div>
             </div>
             <div className='article--thumbnail'>
@@ -33,7 +33,7 @@ const Articles = ({ articles }) => {
             </div>
             <div className='article--comments-n-link'>
               <span>Comments: {_.commentsNumber}</span>
-              <Link to='/post'>Read more...</Link>
+              <Link to={`/post-{_.id}`}>Read more...</Link>
             </div>
           </article>
         );

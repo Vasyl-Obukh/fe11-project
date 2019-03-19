@@ -8,7 +8,7 @@ const stateData = {
       overview: 'Some overview1',
       thumbnailUrl: './dist/img/post-test.gif',
       commentsNumber: 0,
-      categoryId: ['IT', 'Games']
+      category: ['Games']
     },
     {
       id: 'id2',
@@ -18,7 +18,7 @@ const stateData = {
       overview: 'Some overview2',
       thumbnailUrl: './dist/img/post-test.gif',
       commentsNumber: 0,
-      categoryId: ['IT', 'Games']
+      category: ['IT', 'Games']
     },
     {
       id: 'id3',
@@ -28,7 +28,27 @@ const stateData = {
       overview: 'Some overview3',
       thumbnailUrl: './dist/img/post-test.gif',
       commentsNumber: 0,
-      categoryId: ['IT', 'Games']
+      category: ['IT']
+    },
+    {
+      id: 'id3',
+      date: new Date(),
+      title: 'Some title3',
+      text: 'Some text 3',
+      overview: 'Some overview3',
+      thumbnailUrl: './dist/img/post-test.gif',
+      commentsNumber: 0,
+      category: ['IT']
+    },
+    {
+      id: 'id3',
+      date: new Date(),
+      title: 'Some title3',
+      text: 'Some text 3',
+      overview: 'Some overview3',
+      thumbnailUrl: './dist/img/post-test.gif',
+      commentsNumber: 0,
+      category: ['IT']
     }
   ],
   /* comments: [
@@ -58,8 +78,8 @@ const stateData = {
       password: '7123',
       email: 'vasiaobukh7@gmail.com'
     }
-  ],
-//  currentUser: 'NON_AUTHORIZED',
+  ]
+  //  currentUser: 'NON_AUTHORIZED',
 };
 
 export default stateData;

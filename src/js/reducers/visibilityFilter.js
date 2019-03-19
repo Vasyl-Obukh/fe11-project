@@ -10,7 +10,7 @@ const visibilityFilter = (state = { filterType: visibilityFilters.SHOW_ALL }, ac
   case SET_SHOW_BY_CATEGORY:
     return {
       filterType: visibilityFilters.SHOW_BY_CATEGORY,
-      categoriesId: action.categoriesId
+      categories: action.categories
     };
   default:
     return state;
