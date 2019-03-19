@@ -15,17 +15,17 @@ const Navbar = () => {
         </NavLink>
         <ul className='nested-list'>
           <li className='nested-list--item'>
-            <NavLink to='/category'>
+            <NavLink to='/categories/IT'>
               Category
             </NavLink>
           </li>
           <li className='nested-list--item'>
-            <NavLink to='/category'>
+            <NavLink to='/categories/Games'>
               Category
             </NavLink>
           </li>
           <li className='nested-list--item'>
-            <NavLink to='/category'>
+            <NavLink to='/categories/Music'>
               Category
             </NavLink>
           </li>

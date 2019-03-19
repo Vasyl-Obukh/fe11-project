@@ -6,7 +6,7 @@ const stateData = {
       title: 'Some title1',
       text: 'Some text 1',
       overview: 'Some overview1',
-      thumbnailUrl: './dist/img/post-test.gif',
+      thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
       category: ['Games']
     },
@@ -16,7 +16,7 @@ const stateData = {
       title: 'Some title2',
       text: 'Some text 2',
       overview: 'Some overview2',
-      thumbnailUrl: './dist/img/post-test.gif',
+      thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
       category: ['IT', 'Games']
     },
@@ -26,27 +26,27 @@ const stateData = {
       title: 'Some title3',
       text: 'Some text 3',
       overview: 'Some overview3',
-      thumbnailUrl: './dist/img/post-test.gif',
+      thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
       category: ['IT']
     },
     {
-      id: 'id3',
+      id: 'id4',
       date: new Date(),
-      title: 'Some title3',
-      text: 'Some text 3',
-      overview: 'Some overview3',
-      thumbnailUrl: './dist/img/post-test.gif',
+      title: 'Some title4',
+      text: 'Some text 4',
+      overview: 'Some overview4',
+      thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
       category: ['IT']
     },
     {
-      id: 'id3',
+      id: 'id5',
       date: new Date(),
-      title: 'Some title3',
-      text: 'Some text 3',
-      overview: 'Some overview3',
-      thumbnailUrl: './dist/img/post-test.gif',
+      title: 'Some title5',
+      text: 'Some text 5',
+      overview: 'Some overview5',
+      thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
       category: ['IT']
     }
