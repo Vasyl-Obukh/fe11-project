@@ -8,9 +8,9 @@
 
 .root
   display: grid
-  grid-template-columns: calc((100vw - 15px - 1200px)/2) repeat(5, 1fr) calc((100vw - 15px - 1200px)/2)
+  grid-template-columns: calc((100vw - 15px - 1000px)/2) repeat(3, 1fr) calc((100vw - 15px - 1000px)/2)
   grid-template-rows: auto auto 1fr auto
-  grid-template-areas: 'header header header header header header header' '. slider slider slider slider slider .' '. main main main sidebar sidebar .' 'footer footer footer footer footer footer footer'
+  grid-template-areas: 'header header header header header' '. slider slider slider .' '. main main sidebar .' 'footer footer footer footer footer'
   min-height: 100%
   width: 100%
   background-image: linear-gradient(to right, #e7e7e7, #ccc)

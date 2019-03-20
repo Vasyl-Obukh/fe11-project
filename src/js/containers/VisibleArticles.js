@@ -1,22 +1,13 @@
 import { connect } from 'react-redux';
-import Articles from '../components/Articles';
-import visibilityFilters from '../constants/visibilityFilters';
+import { withRouter } from 'react-router-dom';
+import Articles from '../components/articles/Articles';
 
-const getVisibleArticles = (articles, filter) => {
-  switch (filter.filterType) {
-  case visibilityFilters.SHOW_ALL:
-    return articles;
-  case visibilityFilters.SHOW_BY_CATEGORY:
-    return articles.filter(_ => _.category.some(_ => filter.categories.indexOf(_) > -1)); //needs improvement
-  default:
-    throw new Error(`Unknown filter: ${filter}`);
-  }
+const mapStateToProps = (state, ownProps) => {
+  return ({
+    articles: ownProps.match.params.categoryName ? state.articles.filter(_ => _.category.indexOf(ownProps.match.params.categoryName) > -1) : state.articles //need to add sorting
+  });
 };
 
-const mapStateToProps = state => ({
-  articles: getVisibleArticles( state.articles, state.visibilityFilter )
-});
-
-export default connect(
+export default withRouter(connect(
   mapStateToProps
-)(Articles);
+)(Articles));

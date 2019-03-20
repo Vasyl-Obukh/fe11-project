@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Sign = () => {
   return (
-    <div className='sign'>
-      <span className='sign--in'>
-        <a href='#'>Sign in</a>
+    <div className="sign">
+      <span className="sign--in">
+        <Link to="/sign/in">Sign in</Link>
       </span>
-      <span className='sign--up'>
-        <a href='#'>Sign up</a>
+      <span className="sign--up">
+        <Link to="/sign/up">Sign up</Link>
       </span>
     </div>
   );

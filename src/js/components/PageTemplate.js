@@ -1,24 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Header from './Header';
-import Slider from './Slider';
-import SideBar from './Sidebar';
-import Footer from './Footer';
+import HeaderContainer from '../containers/HeaderContainer';
+import SliderContainer from '../containers/SliderContainer';
+import SideBarContainer from '../containers/SidebarContainer';
+import Footer from './footer/Footer';
 
 export default function PageTemplate({ children }) {
   return (
     <>
-      <Header />
-      <Slider />
+      <HeaderContainer />
+      <SliderContainer />
       <main className='main'>
         {children}
       </main>
-      <SideBar />
+      <SideBarContainer />
       <Footer />
     </>
   );
 }
-
-PageTemplate.propTypes = {
-  children: PropTypes.object.isRequired
-};

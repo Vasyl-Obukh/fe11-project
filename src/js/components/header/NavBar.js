@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ categories }) => {
   return (
     <ul className='navbar'>
       <li className='navbar--item'>
@@ -14,21 +14,7 @@ const Navbar = () => {
           Categories
         </NavLink>
         <ul className='nested-list'>
-          <li className='nested-list--item'>
-            <NavLink to='/categories/IT'>
-              Category
-            </NavLink>
-          </li>
-          <li className='nested-list--item'>
-            <NavLink to='/categories/Games'>
-              Category
-            </NavLink>
-          </li>
-          <li className='nested-list--item'>
-            <NavLink to='/categories/Music'>
-              Category
-            </NavLink>
-          </li>
+          {categories.map(({name, id}) => <li key={id} className='nested-list--item'><Link to={`/categories/${name}`}>{name}</Link></li>)}
         </ul>
       </li>
       <li className='navbar--item'>

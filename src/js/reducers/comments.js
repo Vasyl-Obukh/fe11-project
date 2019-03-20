@@ -31,7 +31,7 @@ const comments = (state = [], action) => {
       {
         id: v4(),
         date: new Date(),
-        validate: false,
+        validate: action.userName === 'Admin' ? true : false,
         articleId: action.articleId,
         userName: action.userName,
         text: action.text

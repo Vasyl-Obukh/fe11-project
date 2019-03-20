@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import App from './js/components/App';
 import storeFactory from './js/store/store';
+import App from './js/components/App';
 import './sass/style.sass';
 
 const store = storeFactory();

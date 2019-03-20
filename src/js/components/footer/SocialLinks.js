@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SocialLinks = () => {
+export default function SocialLinks() {
   return (
     <div className='footer--social social'>
       <a href='#' className='social--link'>
@@ -14,6 +14,4 @@ const SocialLinks = () => {
       </a>
     </div>
   );
-};
-
-export default SocialLinks;
+}

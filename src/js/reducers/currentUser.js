@@ -5,7 +5,7 @@ const currentUser = ( state = { userType: userTypes.NON_AUTHORIZED }, action ) =
   switch (action.type) {
   case LOG_IN:
     return {
-      userType: action.name === 'admin' ? userTypes.ADMIN : userTypes.AUTHORIZED,
+      userType: action.login === 'admin' ? userTypes.ADMIN : userTypes.AUTHORIZED,
       name: action.name,
       login: action.login,
       password: action.password,

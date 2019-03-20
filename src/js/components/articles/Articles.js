@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Pagination from './Pagination';
+//import Pagination from './Pagination';
 
 const Articles = ({ articles }) => {
   return (
-    <Pagination>
+    <>
       {articles.map((_) => {
         return (
           <article key={_.id} className='article'>
@@ -24,7 +24,7 @@ const Articles = ({ articles }) => {
               </div>
 
               <div className='date'>
-                <span>{_.date.getDay()}</span>
+                <span>{_.date}</span>
               </div>
             </div>
 
@@ -43,7 +43,7 @@ const Articles = ({ articles }) => {
           </article>
         );
       })}
-    </Pagination>
+    </>
   );
 };
 
