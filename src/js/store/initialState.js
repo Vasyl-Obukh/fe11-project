@@ -29,26 +29,6 @@ const stateData = {
       thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
       category: ['IT']
-    },
-    {
-      id: 'id4',
-      date: new Date(),
-      title: 'Some title4',
-      text: 'Some text 4',
-      overview: 'Some overview4',
-      thumbnailUrl: '/dist/img/post-test.gif',
-      commentsNumber: 0,
-      category: ['IT']
-    },
-    {
-      id: 'id5',
-      date: new Date(),
-      title: 'Some title5',
-      text: 'Some text 5',
-      overview: 'Some overview5',
-      thumbnailUrl: '/dist/img/post-test.gif',
-      commentsNumber: 0,
-      category: ['IT']
     }
   ],
   /* comments: [
@@ -74,12 +54,10 @@ const stateData = {
   users: [
     {
       name: 'Admin',
-      login: 'admin',
       password: '7123',
       email: 'vasiaobukh7@gmail.com'
     }
   ]
-  //  currentUser: 'NON_AUTHORIZED',
 };
 
 export default stateData;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = () => {
+export default function Search() {
   return (
     <div className='search'>
       <form>
@@ -9,6 +9,4 @@ const Search = () => {
       </form>
     </div>
   );
-};
-
-export default Search;
+}

@@ -1,11 +1,9 @@
 import React from 'react';
 
-const Logo = () => {
+export default function Logo() {
   return (
     <div className='logo'>
-      <i className='fab fa-blogger-b'></i>
+      <i className='fab fa-blogger-b' />
     </div>
   );
-};
-
-export default Logo;
+}

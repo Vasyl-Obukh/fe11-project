@@ -1,10 +1,10 @@
 import React from 'react';
+import userTypes from '../../constants/userTypes';
 import Logo from './Logo';
-import Sign from '../Sign';
-import LogOut from './LogOut';
 import Navbar from './NavBar';
 import Search from '../Search';
-import userTypes from '../../constants/userTypes';
+import SignContainer from '../../containers/SignContainer';
+import LogOut from './LogOut';
 
 export default function Header({ categories, currentUser, logOut }) {
   return (
@@ -15,7 +15,15 @@ export default function Header({ categories, currentUser, logOut }) {
       </div>
       <div className='header--right'>
         <Search />
-        {currentUser.userType === userTypes.NON_AUTHORIZED ? <Sign /> : <LogOut userName={currentUser.name} onLogOut={logOut} /> }
+        {currentUser.userType === userTypes.NON_AUTHORIZED ? (
+          <SignContainer />
+        ) : (
+          <LogOut
+            userType={currentUser.userType}
+            userName={currentUser.name}
+            onLogOut={logOut}
+          />
+        )}
       </div>
     </header>
   );

@@ -1,12 +1,10 @@
 import React from 'react';
 import PageTemplate from '../PageTemplate';
 
-const AboutUs = () => {
+export default function AboutUs() {
   return (
     <PageTemplate>
       <h2>About us</h2>
     </PageTemplate>
   );
-};
-
-export default AboutUs;
+}

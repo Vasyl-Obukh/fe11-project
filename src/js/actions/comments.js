@@ -5,33 +5,25 @@ import {
   VALIDATE_COMMENT
 } from '../constants/actionTypes';
 
-export const addComment = ({ articleId, userName, text }) => {
-  return {
-    type: ADD_COMMENT,
-    articleId,
-    userName,
-    text
-  };
-};
+export const addComment = ({ articleId, userName, text }) => ({
+  type: ADD_COMMENT,
+  articleId,
+  userName,
+  text
+});
 
-export const changeComment = (id, text) => {
-  return {
-    type: CHANGE_COMMENT,
-    id,
-    text
-  };
-};
+export const changeComment = (id, text) => ({
+  type: CHANGE_COMMENT,
+  id,
+  text
+});
 
-export const deleteComment = id => {
-  return {
-    type: DELETE_COMMENT,
-    id
-  };
-};
+export const deleteComment = id => ({
+  type: DELETE_COMMENT,
+  id
+});
 
-export const validateComment = id => {
-  return {
-    type: VALIDATE_COMMENT,
-    id
-  };
-};
+export const validateComment = id => ({
+  type: VALIDATE_COMMENT,
+  id
+});

@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import userTypes from '../../constants/userTypes';
 
-const LogOut = ({userName, onLogOut}) => {
+export default function LogOut({ userType, userName, onLogOut }) {
   return (
-    <div className='sign'>
-      <Link to='/admin'>Go to admin panel</Link>
-      <button onClick={onLogOut}>Log out</button>
+    <div className='sign authorized'>
+      {userType === userTypes.ADMIN ? (
+        <Link to='/admin'>Admin panel</Link>
+      ) : (
+        <p>Howdy, {userName}</p>
+      )}
+      <p onClick={onLogOut}>Log out</p>
     </div>
   );
-};
-
-export default LogOut;
+}

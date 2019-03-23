@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
-import articles from './articles';
-import comments from './comments';
 import categories from './categories';
+import articles from './articles';
 import users from './users';
-import sortType from './sortType';
 import currentUser from './currentUser';
+import comments from './comments';
+import sortType from './sortType';
 
 const reducers = combineReducers({
-  articles,
-  comments,
   categories,
+  articles,
   users,
-  sortType,
-  currentUser
+  currentUser,
+  comments,
+  sortType
 });
 
 export default reducers;

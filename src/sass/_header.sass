@@ -12,6 +12,10 @@
   height: 55px
   background-color: $theme--main
 
+  &--admin
+    width: 100vw
+    height: 50px
+
   &--left,
   &--right
     display: flex
@@ -26,20 +30,32 @@
 .sign
   display: flex
   margin-left: 10px
-
-.sign--in,
-.sign--up
-  padding: 5px 10px
-
-.sign--in a,
-.sign--up a
   color: #fff
 
-.sign--in
-  border-right: 1px solid $theme--secondary
+  & a
+    color: #fff
 
-.sign--up
-  border-left: 1px solid $theme--secondary
+  &.authorized
+    flex-flow: column wrap
+    text-align: end
+
+  p:last-child
+    cursor: pointer
+
+    &:hover
+      text-decoration: underline
+
+  &--in,
+  &--up
+    padding: 5px 10px
+    //color: #fff
+    cursor: pointer
+
+  &--in
+    border-right: 1px solid $theme--secondary
+
+  &--up
+    border-left: 1px solid $theme--secondary
 
 .search
   position: relative

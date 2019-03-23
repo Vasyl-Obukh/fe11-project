@@ -1,8 +1,9 @@
 import React from 'react';
 
-export default function Error404(props) {
-  console.log(props.location);
+export default function Error404() {
   return (
-    <h1>Page not found</h1>
+    <div className='errorPage'>
+      <h1>Page not found</h1>
+    </div>
   );
 }
