@@ -2,7 +2,7 @@
 @import admin-media
 
 div.admin
-  grid-template-columns: 300px 4fr
+  grid-template-columns: 200px 1fr
   grid-template-rows: 50px 1fr
   grid-template-areas: 'admin-status admin-status' 'admin-nav admin-main'
 
@@ -22,7 +22,7 @@ div.admin
 
   &--nav-menu
     grid-area: admin-nav
-    position: relative
+    //position: relative
     height: calc(100vh - 50px)
     //overflow: hidden
     //width: 100%
@@ -46,11 +46,12 @@ div.admin
 
   &--item
     font-size: 25px
+    line-height: 25px
     border-bottom: 1px solid #fff
 
     & a
       display: block
-      padding: 25px 25px 25px 50px  
+      padding: 15px 25px  
       color: #fff
 
     & .nav-active
@@ -65,4 +66,41 @@ div.admin
   outline: none
   color: #fff
   font-size: 20px
+  cursor: pointer
+
+.admin-article
+  display: grid
+  position: relative
+  grid-template-columns: 6fr 4fr repeat(3, 1fr)
+  padding: 15px 50px 15px 25px
+  border-radius: 25px
+  color: #eee
+  font-size: 20px
+
+  &:not(:first-child)
+    margin-top: 10px
+
+  &:nth-child(odd)
+    background-color: #666
+
+  &:nth-child(even)
+    background-color: #444
+
+.edit
+  background-color: #777
+  padding: 10px
+  border-radius: 10px
+  text-align: center
+  cursor: pointer
+
+.article-delete
+  position: absolute
+  top: calc(50% - 20px)
+  right: 10px
+  background-color: transparent
+  border: none
+  font-size: 40px
+  line-height: 40px
+  outline: none
+  color: #fff
   cursor: pointer

@@ -9,12 +9,17 @@ export default function Articles({
   deleteArticle,
   changeArticle
 }) {
-  //console.log(props);
   return (
     <>
       <ArticleNew addArticle={addArticle} categories={categories} />
       {articles.map(_ => (
-        <Article key={_.id} article={_} />
+        <Article
+          key={_.id}
+          article={_}
+          categories={categories}
+          deleteArticle={() => deleteArticle(_.id)}
+          changeArticle={changeArticle}
+        />
       ))}
     </>
   );

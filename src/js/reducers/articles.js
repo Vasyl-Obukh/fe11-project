@@ -28,6 +28,7 @@ const article = (state = {}, action) => {
 };
 
 const articles = (state = [], action) => {
+  //console.log(action.type);
   switch (action.type) {
     case ADD_ARTICLE:
       return [
@@ -48,12 +49,12 @@ const articles = (state = [], action) => {
     case CHANGE_ARTICLE:
       return [
         ...state.filter(_ => _.id !== action.id),
-        article(...state.filter(_ => _.id === action.id, action))
+        article(...state.filter(_ => _.id === action.id), action)
       ];
     case CHANGE_ARTICLE_COMMENTS_NUMBER:
       return [
         ...state.filter(_ => _.id !== action.id),
-        article(...state.filter(_ => _.id === action.id, action))
+        article(...state.filter(_ => _.id === action.id), action)
       ];
     default:
       return state;
