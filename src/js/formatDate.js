@@ -1,4 +1,5 @@
 export default function formatDate(date, showMinutes = false) {
+  date = new Date(date);
   let day = date.getDate();
   if (day < 10) day = `0${day}`;
   let month = date.getMonth() + 1;

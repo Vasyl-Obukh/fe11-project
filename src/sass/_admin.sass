@@ -1,0 +1,68 @@
+@import colors
+@import admin-media
+
+div.admin
+  grid-template-columns: 300px 4fr
+  grid-template-rows: 50px 1fr
+  grid-template-areas: 'admin-status admin-status' 'admin-nav admin-main'
+
+  &--status-menu
+    grid-area: admin-status
+    display: flex
+    justify-content: space-between
+    background-color: #666
+
+    & button
+      background-color: $theme--main
+      color: #fff
+      padding: 0 15px
+      border: none
+      outline: none
+      cursor: pointer
+
+  &--nav-menu
+    grid-area: admin-nav
+    position: relative
+    height: calc(100vh - 50px)
+    //overflow: hidden
+    //width: 100%
+    background-color: $theme--main
+
+    & .inner
+      //box-sizing: initial
+      //max-height: 100%
+      //width: calc(100% + 15px)
+      //padding-right: 15px
+      //overflow: auto
+
+  &--main
+    grid-area: admin-main
+    overflow-y: auto
+    height: calc(100vh - 50px)
+    background-color: $theme--secondary
+    padding: 25px
+
+.nav-menu
+
+  &--item
+    font-size: 25px
+    border-bottom: 1px solid #fff
+
+    & a
+      display: block
+      padding: 25px 25px 25px 50px  
+      color: #fff
+
+    & .nav-active
+      color: #000 
+      background-color: #fff
+
+.article-add button
+  padding: 10px 50px
+  background-color: $theme--main
+  border: none
+  border-radius: 20px
+  outline: none
+  color: #fff
+  font-size: 20px
+  cursor: pointer

@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import userTypes from '../../constants/userTypes';
+import StatusBar from './StatusBar';
+import LeftNavBar from './LeftNavBar';
+import Home from './Home';
+import Pages from './Pages';
+import AdminArticlesContainer from '../../containers/AdminArticlesContainer';
+import Categories from './Categories';
+import Comments from './Comments';
+import Users from './Users';
+import Error404 from '../pages/Error404';
 
 export default class AdminPanel extends Component {
   constructor(props) {
@@ -12,7 +22,45 @@ export default class AdminPanel extends Component {
       : null;
   };
 
+  componentDidMount = () => {
+    document.getElementById('root').classList.add('admin');
+  };
+
+  componentWillUnmount = () => {
+    document.getElementById('root').classList.remove('admin');
+  };
+
+  onLogOut = () => {
+    this.props.logOut();
+    this.props.history.push('/');
+  };
+
   render() {
-    return <h1>Admin panel</h1>;
+    const { path } = this.props.match;
+
+    return (
+      <>
+        <div className='admin--status-menu'>
+          <StatusBar logOut={this.onLogOut} history={this.props.history} />
+        </div>
+        <div className='admin--nav-menu'>
+          <LeftNavBar />
+        </div>
+        <div className='admin--main'>
+          <Switch>
+            <Route exact path={path} component={Home} />
+            <Route path={`${path}/pages`} component={Pages} />
+            <Route
+              path={`${path}/articles`}
+              component={AdminArticlesContainer}
+            />
+            <Route path={`${path}/categories`} component={Categories} />
+            <Route path={`${path}/comments`} component={Comments} />
+            <Route path={`${path}/users`} component={Users} />
+            <Route component={Error404} />>
+          </Switch>
+        </div>
+      </>
+    );
   }
 }
