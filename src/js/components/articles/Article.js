@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import formatDate from '../../formatDate';
 
-export default function Article({ article }) {
+export default function Article({ article, categories }) {
   return (
     <article className='article'>
       <h2 className='article--title'>
@@ -11,13 +11,16 @@ export default function Article({ article }) {
 
       <div className='article--cat-n-date'>
         <div className='categories'>
-          <span>Category: </span>
-          {article.category.map((article, id) => {
-            return (
-              <Link key={id} to={`/categories/${article}`}>
-                {article}
-              </Link>
+          <span>Categories: </span>
+          {article.categoriesId.map(categoryId => {
+            let category = categories.filter(
+              category => category.id === categoryId
             );
+            return category.length !== 0 ? (
+              <Link key={categoryId} to={`/categories/${category[0].name}`}>
+                {category[0].name}
+              </Link>
+            ) : '';
           })}
         </div>
 

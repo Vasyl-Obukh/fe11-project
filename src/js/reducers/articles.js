@@ -15,7 +15,8 @@ const article = (state = {}, action) => {
         text: action.text,
         overview: action.overview,
         thumbnailUrl: action.thumbnailUrl,
-        category: action.category
+        //category: action.category
+        categoriesId: action.categoriesId
       };
     case CHANGE_ARTICLE_COMMENTS_NUMBER:
       return {
@@ -28,7 +29,6 @@ const article = (state = {}, action) => {
 };
 
 const articles = (state = [], action) => {
-  //console.log(action.type);
   switch (action.type) {
     case ADD_ARTICLE:
       return [
@@ -41,7 +41,8 @@ const articles = (state = [], action) => {
           text: action.text,
           overview: action.overview,
           thumbnailUrl: action.thumbnailUrl,
-          category: action.category
+          //category: action.category
+          categoriesId: action.categoriesId
         }
       ];
     case DELETE_ARTICLE:

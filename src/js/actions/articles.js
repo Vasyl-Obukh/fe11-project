@@ -10,14 +10,14 @@ export const addArticle = ({
   text,
   overview,
   thumbnailUrl,
-  category
+  categoriesId
 }) => ({
   type: ADD_ARTICLE,
   title,
   text,
   overview,
   thumbnailUrl,
-  category
+  categoriesId
 });
 
 export const deleteArticle = id => ({
@@ -31,7 +31,7 @@ export const changeArticle = ({
   text,
   overview,
   thumbnailUrl,
-  category
+  categoriesId
 }) => ({
   type: CHANGE_ARTICLE,
   id,
@@ -39,7 +39,7 @@ export const changeArticle = ({
   text,
   overview,
   thumbnailUrl,
-  category
+  categoriesId
 });
 
 export const changeCommentsNumber = commentsNumberChange => ({

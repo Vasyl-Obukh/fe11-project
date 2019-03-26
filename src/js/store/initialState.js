@@ -8,7 +8,8 @@ const stateData = {
       overview: 'Some overview1',
       thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
-      category: ['Games']
+      //category: ['Games']
+      categoriesId: ['cid2']
     },
     {
       id: 'id2',
@@ -18,7 +19,8 @@ const stateData = {
       overview: 'Some overview2',
       thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
-      category: ['IT', 'Games']
+      //category: ['IT', 'Games']
+      categoriesId: ['cid1', 'cid2']
     },
     {
       id: 'id3',
@@ -28,7 +30,8 @@ const stateData = {
       overview: 'Some overview3',
       thumbnailUrl: '/dist/img/post-test.gif',
       commentsNumber: 0,
-      category: ['IT']
+      //category: ['IT']
+      categoriesId: ['cid1', 'cid2']
     }
   ],
   /* comments: [

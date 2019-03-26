@@ -12,7 +12,7 @@ export default class Article extends Component {
       text: this.props.article ? this.props.article.text : '',
       overview: this.props.article ? this.props.article.overview : '',
       thumbnailUrl: this.props.article ? this.props.article.thumbnailUrl : '',
-      category: this.props.article ? this.props.article.category : []
+      categoriesId: this.props.article ? this.props.article.categoriesId : []
     };
     this.handleShow = handleShow.bind(this);
     this.handleHide = handleHide.bind(this);
@@ -28,16 +28,16 @@ export default class Article extends Component {
   };
 
   onCheck = e => {
-    const { category } = this.state;
+    const { categoriesId } = this.state;
     let index;
 
     if (e.target.checked) {
-      category.push(e.target.value);
+      categoriesId.push(e.target.value);
     } else {
-      index = category.indexOf(e.target.value);
-      category.splice(index, 1);
+      index = categoriesId.indexOf(e.target.value);
+      categoriesId.splice(index, 1);
     }
-    this.setState({ category });
+    this.setState({categoriesId})
   };
 
   onSubmit = e => {
@@ -48,7 +48,7 @@ export default class Article extends Component {
           text: this.state.text,
           overview: this.state.overview,
           thumbnailUrl: this.state.thumbnailUrl,
-          category: this.state.category
+          categoriesId: this.state.categoriesId
         })
       : this.props.changeArticle({
           id: this.props.article.id,
@@ -56,7 +56,7 @@ export default class Article extends Component {
           text: this.state.text,
           overview: this.state.overview,
           thumbnailUrl: this.state.thumbnailUrl,
-          category: this.state.category
+          categoriesId: this.state.categoriesId
         });
     this.handleHide();
   };
@@ -72,6 +72,7 @@ export default class Article extends Component {
           <ArticleShort
             article={this.props.article}
             handleShow={this.handleShow}
+            categories={this.props.categories.filter(category => this.props.article.categoriesId.includes(category.id)).map(category => category.name)}
             deleteArticle={this.props.deleteArticle}
           />
         )}
@@ -127,9 +128,9 @@ export default class Article extends Component {
                   {category.name}
                   <input
                     type='checkbox'
-                    defaultChecked={this.state.category.includes(category.name)}
+                    defaultChecked={this.state.categoriesId.includes(category.id)}
                     onChange={this.onCheck}
-                    value={category.name}
+                    value={category.id}
                   />
                 </label>
               ))}

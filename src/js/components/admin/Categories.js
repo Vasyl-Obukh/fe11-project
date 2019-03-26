@@ -9,11 +9,16 @@ export default function Categories({
 }) {
   return (
     <>
-      <Category addCategory={addCategory} categories={categories} new={true} />
+      <Category
+        addCategory={addCategory}
+        categories={categories}
+        new={true}
+      />
       {categories.map(category => (
         <Category
           key={category.id}
           category={category}
+          categories={categories}
           deleteCategory={() => deleteCategory(category.id)}
           changeCategory={changeCategory}
         />
