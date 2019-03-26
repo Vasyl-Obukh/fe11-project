@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import ArticleShort from './ArticleShort';
-//import ModalNew from '../Modal';
 
 export default class Article extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      addNew: this.props.new ? this.props.new : false,
       showModal: false,
-      title: this.props.article.title,
-      text: this.props.article.text,
-      overview: this.props.article.overview,
-      thumbnailUrl: this.props.article.thumbnailUrl,
-      category: this.props.article.category
+      title: this.props.article ? this.props.article.title : '',
+      text: this.props.article ? this.props.article.text : '',
+      overview: this.props.article ? this.props.article.overview : '',
+      thumbnailUrl: this.props.article ? this.props.article.thumbnailUrl : '',
+      category: this.props.article ? this.props.article.category : []
     };
     this.handleShow = handleShow.bind(this);
     this.handleHide = handleHide.bind(this);
@@ -42,27 +42,44 @@ export default class Article extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.changeArticle({
-      id: this.props.article.id,
-      title: this.state.title,
-      text: this.state.text,
-      overview: this.state.overview,
-      thumbnailUrl: this.state.thumbnailUrl,
-      category: this.state.category
-    });
+    this.state.addNew
+      ? this.props.addArticle({
+          title: this.state.title,
+          text: this.state.text,
+          overview: this.state.overview,
+          thumbnailUrl: this.state.thumbnailUrl,
+          category: this.state.category
+        })
+      : this.props.changeArticle({
+          id: this.props.article.id,
+          title: this.state.title,
+          text: this.state.text,
+          overview: this.state.overview,
+          thumbnailUrl: this.state.thumbnailUrl,
+          category: this.state.category
+        });
     this.handleHide();
   };
 
   render() {
     return (
       <div className='admin-article'>
-        <ArticleShort
-          article={this.props.article}
-          handleShow={this.handleShow}
-          deleteArticle={this.props.deleteArticle}
-        />
+        {this.state.addNew ? (
+          <div className='article-add'>
+            <button onClick={this.handleShow}>&#43; Add article</button>
+          </div>
+        ) : (
+          <ArticleShort
+            article={this.props.article}
+            handleShow={this.handleShow}
+            deleteArticle={this.props.deleteArticle}
+          />
+        )}
         {this.state.showModal ? (
-          <Modal onOutsideClick={this.onOutsideClick} handleHide={this.handleHide}>
+          <Modal
+            onOutsideClick={this.onOutsideClick}
+            handleHide={this.handleHide}
+          >
             <form className='modal--form' onSubmit={this.onSubmit}>
               <label htmlFor='title'>Title</label>
               <input
@@ -97,9 +114,7 @@ export default class Article extends Component {
                 type='file'
                 accept='image/*'
                 onChange={this.onFileLoad}
-                required={
-                  this.state.thumbnailUrl === '' ? 'required' : null
-                }
+                required={this.state.thumbnailUrl === '' ? 'required' : null}
               />
               {this.state.thumbnailUrl !== '' ? (
                 <img
@@ -107,14 +122,14 @@ export default class Article extends Component {
                   src={this.state.thumbnailUrl}
                 />
               ) : null}
-              {this.props.categories.map(_ => (
-                <label key={_.id}>
-                  {_.name}
+              {this.props.categories.map(category => (
+                <label key={category.id}>
+                  {category.name}
                   <input
                     type='checkbox'
-                    defaultChecked={this.state.category.includes(_.name)}
+                    defaultChecked={this.state.category.includes(category.name)}
                     onChange={this.onCheck}
-                    value={_.name}
+                    value={category.name}
                   />
                 </label>
               ))}

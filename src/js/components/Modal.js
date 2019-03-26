@@ -1,5 +1,10 @@
 import React from 'react';
-import ModalWrapper from './ModalWrapper';
+import { createPortal } from 'react-dom';
+
+function ModalWrapper(props) {
+  const modalRoot = document.getElementById('root');
+  return createPortal(props.children, modalRoot);
+}
 
 export default function Modal({ onOutsideClick, handleHide, children }) {
   return (

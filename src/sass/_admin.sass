@@ -69,18 +69,22 @@ div.admin
   cursor: pointer
 
 .admin-article
-  display: grid
-  position: relative
-  grid-template-columns: 6fr 4fr repeat(3, 1fr)
-  padding: 15px 50px 15px 25px
   border-radius: 25px
-  color: #eee
-  font-size: 20px
+  
+
+  &-container
+    display: grid
+    position: relative
+    grid-template-columns: 6fr 4fr repeat(3, 1fr)
+    padding: 15px 50px 15px 25px
+    color: #eee
+    font-size: 20px
+
 
   &:not(:first-child)
     margin-top: 10px
 
-  &:nth-child(odd)
+  &:not(:first-child):nth-child(odd)
     background-color: #666
 
   &:nth-child(even)

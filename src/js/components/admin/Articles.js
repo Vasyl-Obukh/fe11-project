@@ -1,5 +1,4 @@
 import React from 'react';
-import ArticleNew from './ArticleNew';
 import Article from './Article';
 
 export default function Articles({
@@ -11,13 +10,17 @@ export default function Articles({
 }) {
   return (
     <>
-      <ArticleNew addArticle={addArticle} categories={categories} />
-      {articles.map(_ => (
+      <Article
+        addArticle={addArticle}
+        categories={categories}
+        new={true}
+      />
+      {articles.map(article => (
         <Article
-          key={_.id}
-          article={_}
+          key={article.id}
+          article={article}
           categories={categories}
-          deleteArticle={() => deleteArticle(_.id)}
+          deleteArticle={() => deleteArticle(article.id)}
           changeArticle={changeArticle}
         />
       ))}

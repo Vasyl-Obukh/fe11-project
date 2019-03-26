@@ -3,7 +3,7 @@ import formatDate from '../../formatDate';
 
 export default function ArticleShort({article, handleShow, deleteArticle}) {
   return (
-    <>
+    <div className='admin-article-container'>
       <div className='admin-article--title'>
         {article.title}
       </div>
@@ -22,6 +22,6 @@ export default function ArticleShort({article, handleShow, deleteArticle}) {
       <button className='article-delete' onClick={deleteArticle}>
         &times;
       </button>
-    </>
+    </div>
   );
 }
