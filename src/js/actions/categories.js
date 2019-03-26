@@ -14,7 +14,7 @@ export const deleteCategory = id => ({
   id
 });
 
-export const changeCategoryName = (id, name) => ({
+export const changeCategoryName = ({ id, name }) => ({
   type: CHANGE_CATEGORY_NAME,
   id,
   name

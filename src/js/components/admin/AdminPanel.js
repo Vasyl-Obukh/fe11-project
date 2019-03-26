@@ -6,6 +6,7 @@ import LeftNavBar from './LeftNavBar';
 import Home from './Home';
 import Pages from './Pages';
 import AdminArticlesContainer from '../../containers/AdminArticlesContainer';
+import AdminCategoriesContainer from '../../containers/AdminCategoriesContainer';
 import Categories from './Categories';
 import Comments from './Comments';
 import Users from './Users';
@@ -54,7 +55,10 @@ export default class AdminPanel extends Component {
               path={`${path}/articles`}
               component={AdminArticlesContainer}
             />
-            <Route path={`${path}/categories`} component={Categories} />
+            <Route
+              path={`${path}/categories`}
+              component={AdminCategoriesContainer}
+            />
             <Route path={`${path}/comments`} component={Comments} />
             <Route path={`${path}/users`} component={Users} />
             <Route component={Error404} />>
