@@ -7,8 +7,8 @@ import Home from './Home';
 import Pages from './Pages';
 import AdminArticlesContainer from '../../containers/AdminArticlesContainer';
 import AdminCategoriesContainer from '../../containers/AdminCategoriesContainer';
-import Categories from './Categories';
 import Comments from './Comments';
+import AdminUsersContainer from '../../containers/AdminUsersContainer';
 import Users from './Users';
 import Error404 from '../pages/Error404';
 
@@ -60,7 +60,7 @@ export default class AdminPanel extends Component {
               component={AdminCategoriesContainer}
             />
             <Route path={`${path}/comments`} component={Comments} />
-            <Route path={`${path}/users`} component={Users} />
+            <Route path={`${path}/users`} component={AdminUsersContainer} />
             <Route component={Error404} />>
           </Switch>
         </div>

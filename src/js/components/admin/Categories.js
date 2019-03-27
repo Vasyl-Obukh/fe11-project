@@ -8,7 +8,7 @@ export default function Categories({
   changeCategory
 }) {
   return (
-    <>
+    <div className='admin-categories'>
       <Category
         addCategory={addCategory}
         categories={categories}
@@ -23,6 +23,6 @@ export default function Categories({
           changeCategory={changeCategory}
         />
       ))}
-    </>
+    </div>
   );
 }

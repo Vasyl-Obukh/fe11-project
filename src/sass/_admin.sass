@@ -109,5 +109,50 @@ div.admin
   color: #fff
   cursor: pointer
 
-.admin-category-container
-  position: relative
+.admin-categories
+  //display: grid
+  //grid-gap: 10px
+  //grid-template-rows: 1fr auto
+  //grid-template-columns: repeat(3, 1fr)
+
+.admin-category
+  border-radius: 25px
+
+  &-container
+    display: grid
+    position: relative
+    grid-template-columns: 3fr 1fr
+    padding: 15px 50px 15px 25px
+    color: #eee
+    font-size: 20px
+
+  &:not(:first-child)
+    margin-top: 10px
+
+  &:not(:first-child):nth-child(odd)
+    background-color: #666
+
+  &:nth-child(even)
+    background-color: #444
+
+.admin-users
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  grid-gap: 10px
+
+.admin-user
+  display: grid
+  grid-template-columns: 1fr 1fr
+  padding: 15px 25px
+  color: #eee
+  font-size: 20px
+  border-radius: 20px
+
+  /* &:not(:first-child)
+    margin-top: 10px */
+
+  &:nth-child(odd)
+    background-color: #444
+
+  &:nth-child(even)
+    background-color: #666
