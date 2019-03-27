@@ -60,7 +60,7 @@ export default class Sign extends Component {
               <SignUp
                 users={this.props.users}
                 addUser={this.props.addUser}
-                logIn={this.props.logIn}
+                showSignIn={this.showSignIn}
               />
             )}
           </Modal>

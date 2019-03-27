@@ -11,9 +11,9 @@ export default class SignUp extends Component {
     };
   }
 
-  addAndLogin(user) {
+  addAndSwitchToLogin = user => {
     this.props.addUser(user);
-    this.props.logIn(user);
+    this.props.showSignIn(true);
   }
 
   onSignUp = e => {
@@ -29,7 +29,7 @@ export default class SignUp extends Component {
       ? this.setState({
           errorMessage: 'This name is taken'
         })
-      : this.addAndLogin({
+      : this.addAndSwitchToLogin({
           name: this.name.value.trim(),
           password: this.password.value.trim(),
           email: this.email.value.trim()

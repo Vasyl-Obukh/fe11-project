@@ -5,10 +5,11 @@ import {
   VALIDATE_COMMENT
 } from '../constants/actionTypes';
 
-export const addComment = ({ articleId, /* userName */userId, text }) => ({
+export const addComment = ({ articleId, userId, userType, text }) => ({
   type: ADD_COMMENT,
   articleId,
   userId,
+  userType,
   text
 });
 

@@ -56,6 +56,7 @@ const stateData = {
   ],
   users: [
     {
+      userType: 'ADMIN',
       name: 'Admin',
       password: '7123',
       email: 'vasiaobukh7@gmail.com'

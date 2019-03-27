@@ -5,6 +5,7 @@ import {
   DELETE_COMMENT,
   VALIDATE_COMMENT
 } from '../constants/actionTypes';
+import userTypes from '../constants/userTypes';
 
 const comment = (state = {}, action) => {
   switch (action.type) {
@@ -31,9 +32,9 @@ const comments = (state = [], action) => {
         {
           id: v4(),
           date: new Date(),
-          validate: action.userName === 'Admin' ? true : false,
+          validate: action.userType === userTypes.ADMIN ? true: false,
           articleId: action.articleId,
-          userName: action.userName,
+          userId: action.userId,
           text: action.text
         }
       ];

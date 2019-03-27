@@ -1,5 +1,6 @@
 import { v4 } from 'uuid';
 import { ADD_USER, DELETE_USER, CHANGE_USER } from '../constants/actionTypes';
+import userTypes from '../constants/userTypes';
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -22,6 +23,7 @@ const users = (state = [], action) => {
         ...state,
         {
           id: v4(),
+          userType: userTypes.USER,
           name: action.name,
           password: action.password,
           email: action.email

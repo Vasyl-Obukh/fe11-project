@@ -8,7 +8,7 @@ const currentUser = (
   switch (action.type) {
     case LOG_IN:
       return {
-        userType: action.name === 'Admin' ? userTypes.ADMIN : userTypes.AUTHORIZED,
+        userType: action.userType,
         name: action.name,
         password: action.password,
         email: action.email
