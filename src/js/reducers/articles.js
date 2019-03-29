@@ -20,7 +20,7 @@ const article = (state = {}, action) => {
     case CHANGE_ARTICLE_COMMENTS_NUMBER:
       return {
         ...state,
-        commentsNumber: state.commentsNumber + action.commentsNumberChange
+        commentsNumber: state.commentsNumber + (action.raise ? 1 : -1)
       };
     default:
       return state;

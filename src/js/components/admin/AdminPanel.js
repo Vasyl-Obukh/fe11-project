@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import userTypes from '../../constants/userTypes';
 import StatusBar from './StatusBar';
 import LeftNavBar from './LeftNavBar';
@@ -7,9 +7,8 @@ import Home from './Home';
 import Pages from './Pages';
 import AdminArticlesContainer from '../../containers/AdminArticlesContainer';
 import AdminCategoriesContainer from '../../containers/AdminCategoriesContainer';
-import Comments from './Comments';
+import AdminCommentsContainer from '../../containers/AdminCommentsContainer';
 import AdminUsersContainer from '../../containers/AdminUsersContainer';
-import Users from './Users';
 import Error404 from '../pages/Error404';
 
 export default class AdminPanel extends Component {
@@ -59,7 +58,10 @@ export default class AdminPanel extends Component {
               path={`${path}/categories`}
               component={AdminCategoriesContainer}
             />
-            <Route path={`${path}/comments`} component={Comments} />
+            <Route
+              path={`${path}/comments`}
+              component={AdminCommentsContainer}
+            />
             <Route path={`${path}/users`} component={AdminUsersContainer} />
             <Route component={Error404} />>
           </Switch>

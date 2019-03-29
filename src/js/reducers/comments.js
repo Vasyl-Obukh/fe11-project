@@ -17,7 +17,7 @@ const comment = (state = {}, action) => {
     case VALIDATE_COMMENT:
       return {
         ...state,
-        validate: true
+        validate: action.validate
       };
     default:
       return state;
@@ -48,7 +48,7 @@ const comments = (state = [], action) => {
     case VALIDATE_COMMENT:
       return [
         ...state.filter(_ => _.id !== action.id),
-        comment(...state.filter(_ => _.id === action.id))
+        comment(...state.filter(_ => _.id === action.id), action)
       ];
     default:
       return state;

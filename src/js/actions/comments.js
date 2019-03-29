@@ -24,7 +24,8 @@ export const deleteComment = id => ({
   id
 });
 
-export const validateComment = id => ({
+export const validateComment = (id, validate) => ({
   type: VALIDATE_COMMENT,
-  id
+  id,
+  validate
 });
