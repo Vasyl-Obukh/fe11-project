@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import AdminPanelContainer from '../containers/AdminPanelContainer';
 import ArticlePage from './pages/ArticlePage';
+import ArticlePageContainer from '../containers/ArticlePageContainer';
 import CategoryPage from './pages/CategoryPage';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
@@ -15,7 +16,7 @@ export default function App() {
       <Route exact path='/' component={Home} />
       <Route path='/admin' component={AdminPanelContainer} />
       <Redirect exact from='/articles' to='/' />
-      <Route path='/articles/:articleId' component={ArticlePage} />
+      <Route path='/articles/:articleId' component={ArticlePageContainer} />
       <Redirect exact from='/categories' to='/' />
       <Route path='/categories/:categoryName' component={CategoryPage} />
       <Route path='/about-us' component={AboutUs} />

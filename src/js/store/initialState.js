@@ -36,12 +36,12 @@ const stateData = {
   ],
   /* comments: [
     {
-      id: '',
-      articleId: '',
-      date: '',
-      userName: '',
-      text: '',
-      validate: ''
+      id: 'comid1',
+      articleId: 'id1',
+      date: new Date(),
+      userId: '0',
+      text: 'some comment1',
+      validate: true
     }
   ], */
   categories: [

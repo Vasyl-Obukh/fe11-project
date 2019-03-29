@@ -42,7 +42,8 @@ export const changeArticle = ({
   categoriesId
 });
 
-export const changeCommentsNumber = commentsNumberChange => ({
+export const changeCommentsNumber = (id, commentsNumberChange) => ({
   type: CHANGE_ARTICLE_COMMENTS_NUMBER,
+  id,
   commentsNumberChange
 });

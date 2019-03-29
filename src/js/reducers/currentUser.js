@@ -9,6 +9,7 @@ const currentUser = (
     case LOG_IN:
       return {
         userType: action.userType,
+        id: action.id,
         name: action.name,
         password: action.password,
         email: action.email
