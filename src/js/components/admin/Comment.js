@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import formatDate from '../../formatDate';
 
@@ -31,7 +32,7 @@ export default class Comment extends Component {
           <p>{comment.text}</p>
         </div>
         <div className='comment-article-title'>
-          <p>{comment.articleTitle}</p>
+          <Link to={`/articles/${comment.articleId}`}>{comment.articleTitle}</Link>
         </div>
         <div className='comment-date'>
           <p>{formatDate(comment.date, true)}</p>
@@ -59,7 +60,7 @@ export default class Comment extends Component {
           Edit
         </div>
         <button
-          className='comment-delete'
+          className='article-delete'
           onClick={deleteComment}
         >
           &times;

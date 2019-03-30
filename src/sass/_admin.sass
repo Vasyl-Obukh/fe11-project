@@ -156,3 +156,21 @@ div.admin
 
   &:nth-child(even)
     background-color: #666
+
+.admin-comment
+  display: grid
+  position: relative
+  padding: 15px 50px 15px 25px
+  grid-template-columns: 2fr 5fr 3fr 1.5fr 1.5fr 1fr
+  color: #eee
+  //font-size: 20px
+  border-radius: 20px
+
+  &:not(:first-child)
+    margin-top: 10px
+
+  &:nth-child(odd)
+    background-color: #444
+
+  &:nth-child(even)
+    background-color: #666
