@@ -2,17 +2,79 @@
 
 .sidebar
   grid-area: sidebar
+  padding-left: 25px
+  margin-top: 25px
+
+.widgets-wrapper
   position: sticky
-  top: 50px
-  padding: 25px 0 25px 25px
-  height: 750px
+  top: 75px
+  border-radius: 50px
+  padding: 25px
+  background-color: #ccc
+
+.widgets-list
+  max-height: 70vh
+  overflow-y: auto
+
+.widget
+  padding: 0 0 25px
+
+  &:not(:first-child)
+    padding-top: 25px
+    border-top: 1px solid #e7e7e7
 
 .cat-widget
-  //display: flex
-  padding: 25px
-  //width: 100%
-  justify-content: center
-  background-color: #bbb
-  border-radius: 50px
-  height: 100%
   text-align: center
+
+  &--title
+    margin: 0 0 10px
+
+  &--list
+    padding: 0 25px
+
+    & .list--item
+      border-radius: 25px
+      background-color: #999
+
+      &:not(:first-child)
+        margin-top: 10px
+
+      & a
+        display: block
+        padding: 10px 25px
+        color: #e7e7e7
+
+.most-commented-widget
+
+  & h3
+    text-align: center
+
+.commented-item
+  display: grid
+  grid-template-columns: 1fr 2fr
+  grid-template-rows: auto auto
+  grid-template-areas: 'thumbnail title' 'thumbnail overview'
+
+  &:not(:first-child)
+    margin-top: 10px
+
+  & .thumb
+    grid-area: thumbnail
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 100px
+    background-color: #777
+
+    & img
+      max-width: 100%
+
+
+  & h4
+    grid-area: title
+    padding-left: 10px
+    margin: 0
+  
+  & p
+    padding-left: 10px
+    grid-area: overview

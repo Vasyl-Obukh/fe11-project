@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const CategoriesWidget = ({ categories }) => {
   return (
     <div className='cat-widget'>
-      <h2 className='cat-widget--title'>Categories</h2>
+      <h3 className='cat-widget--title'>Categories</h3>
       <ul className='cat-widget--list list'>
         {categories.map(({ id, name }) => (
           <li key={id} className='list--item'>
