@@ -19,7 +19,6 @@ export default function CategoryPage(props) {
           component={ArticlesContainer}
         />
       </Switch>
-      {/* <VisibleArticles /> */}
     </PageTemplate>
   );
 }

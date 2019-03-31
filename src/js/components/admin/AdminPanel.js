@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import userTypes from '../../constants/userTypes';
 import StatusBar from './StatusBar';
 import LeftNavBar from './LeftNavBar';
@@ -63,7 +63,7 @@ export default class AdminPanel extends Component {
               component={AdminCommentsContainer}
             />
             <Route path={`${path}/users`} component={AdminUsersContainer} />
-            <Route component={Error404} />>
+            <Redirect to='/error-404' />
           </Switch>
         </div>
       </>

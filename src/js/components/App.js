@@ -22,7 +22,8 @@ export default function App() {
       <Route path='/categories/:categoryName' component={CategoryPage} />
       <Route path='/about-us' component={AboutUs} />
       <Route path='/contact-us' component={ContactUs} />
-      <Route component={Error404} />
+      <Route path='/error-404' component={Error404} />
+      <Redirect to='/error-404' />
     </Switch>
   );
 }

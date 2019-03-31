@@ -1,12 +1,13 @@
 import React from 'react';
 import PageTemplate from '../PageTemplate';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import formatDate from '../../formatDate';
 import CommentsContainer from '../../containers/CommentsContainer';
 
-export default function ArticlePage({ article, categories }) {
+export default function ArticlePage({ article = {}, categories }) {
   return (
     <PageTemplate>
+      {!article ? <Redirect to='/error-404' /> : null}
       <article className='article'>
         <h2 className='article--title'>{article.title}</h2>
 

@@ -7,9 +7,9 @@ const mapStateToProps = (state, ownProps) => {
   )[0];
   return {
     article: article,
-    categories: state.categories.filter(category =>
+    categories: article ? state.categories.filter(category =>
       article.categoriesId.includes(category.id)
-    )
+    ) : []
   };
 };
 

@@ -1,10 +1,12 @@
 import React from 'react';
 import Article from './Article';
-import { Link } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
+import Pagination from '../Pagination';
 
-export default function Articles({ articles, categories }) {
+export default function Articles({ articles, categories, articlesNotFound, pages }) {
   return (
     <>
+      {articlesNotFound ? <Redirect to='/error-404' /> : null}
       {articles.map(article => (
         <Article
           key={article.id}
@@ -12,6 +14,7 @@ export default function Articles({ articles, categories }) {
           categories={categories}
         />
       ))}
+      <Pagination pages={pages} />
     </>
   );
 }
