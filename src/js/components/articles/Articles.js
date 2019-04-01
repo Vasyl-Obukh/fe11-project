@@ -1,20 +1,25 @@
 import React from 'react';
 import Article from './Article';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Pagination from '../Pagination';
+import paths from '../../constants/paths';
 
-export default function Articles({ articles, categories, articlesNotFound, pages }) {
+export default function Articles({
+  articles,
+  pageNotFound,
+  pages,
+  currentPage,
+  match: { url, path }
+}) {
+  //console.log(url);
   return (
     <>
-      {articlesNotFound ? <Redirect to='/error-404' /> : null}
-      {articles.map(article => (
-        <Article
-          key={article.id}
-          article={article}
-          categories={categories}
-        />
-      ))}
-      <Pagination pages={pages} />
+      {pageNotFound ? (
+        <Redirect to={paths.ERROR_404} />
+      ) : (
+        articles.map(article => <Article key={article.id} article={article} />)
+      )}
+      <Pagination pages={pages} currentPage={currentPage} url={url} path={path} />
     </>
   );
 }

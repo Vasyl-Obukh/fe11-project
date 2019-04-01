@@ -1,21 +1,21 @@
 import React from 'react';
-import PageTemplate from '../PageTemplate';
-import VisibleArticles from '../../containers/VisibleArticles';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import PageTemplate from '../PageTemplate';
 import ArticlesContainer from '../../containers/ArticlesContainer';
+import paths from '../../constants/paths';
 
-export default function CategoryPage(props) {
+export default function CategoryPage() {
   return (
     <PageTemplate>
       <Switch>
-        <Route exact path={props.match.path} component={ArticlesContainer} />
+        <Route exact path={paths.CATEGORY_FIRST_PAGE} component={ArticlesContainer} />
         <Redirect
           exact
-          from={`${props.match.path}/page-1`}
-          to={props.match.path}
+          from={`${paths.CATEGORY_N_PAGE.split(':').slice(0, 2).join(':')}1`}
+          to={paths.CATEGORY_FIRST_PAGE}
         />
         <Route
-          path={`${props.match.path}/page-:number`}
+          path={paths.CATEGORY_N_PAGE}
           component={ArticlesContainer}
         />
       </Switch>
