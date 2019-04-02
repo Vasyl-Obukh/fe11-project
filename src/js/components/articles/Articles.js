@@ -7,11 +7,8 @@ import paths from '../../constants/paths';
 export default function Articles({
   articles,
   pageNotFound,
-  pages,
-  currentPage,
-  match: { url, path }
+  paginationSettings
 }) {
-  //console.log(url);
   return (
     <>
       {pageNotFound ? (
@@ -19,7 +16,7 @@ export default function Articles({
       ) : (
         articles.map(article => <Article key={article.id} article={article} />)
       )}
-      <Pagination pages={pages} currentPage={currentPage} url={url} path={path} />
+      <Pagination paginationSettings={paginationSettings} />
     </>
   );
 }

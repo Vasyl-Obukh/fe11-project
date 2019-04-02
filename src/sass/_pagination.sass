@@ -1,5 +1,32 @@
+@import colors
+
 .pagination
   display: flex
-  width: 250px
   margin: 30px auto 0
-  justify-content: space-around
+  justify-content: center
+
+  & ul
+    display: flex
+
+    & li
+      //padding: 5px 10px
+      border-radius: 10px
+      //background-color: $theme--main
+
+      &:not(:first-child)
+        margin-left: 15px
+
+      & span,
+      & a
+        display: block
+        padding: 5px 10px
+        color: #fff
+        font-size: 20px
+        background-color: $theme--main
+        border-radius: 10px
+
+      & span
+        color: #111
+        background-color: #fff
+
+      
