@@ -2,9 +2,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Articles from '../components/articles/Articles';
 import paths from '../constants/paths';
+import { compareFunctions } from '../constants/sortTypes';
 
 const mapStateToProps = (state, props) => {
   const pageLimit = 3;
+  const { sortType } = props;
   const pageNeighbours = 1;
   let pageNotFound = false;
   let pagesAmount;
@@ -22,16 +24,16 @@ const mapStateToProps = (state, props) => {
     ? state.articles.filter(_ => _.categoriesId.includes(category.id))
     : [];
 
-  const urlTemplate =
-    path === paths.CATEGORY_FIRST_PAGE
-      ? path.replace(':categoryName', url.split('/')[2])
-      : path === paths.CATEGORY_N_PAGE
-        ? path
-          .replace(':categoryName', url.split('/')[2])
-          .split('/')
-          .slice(0, -1)
-          .join('/')
-        : '';
+  const { urlTemplate } = props;
+  /* path === paths.CATEGORY_FIRST_PAGE
+    ? path.replace(':categoryName', url.split('/')[2])
+    : path === paths.CATEGORY_N_PAGE
+      ? path
+        .replace(':categoryName', url.split('/')[2])
+        .split('/')
+        .slice(0, -1)
+        .join('/')
+      : ''; */
 
   const getPagesAmount = (articles, limit) =>
     Math.ceil(articles.length / limit);
@@ -39,12 +41,14 @@ const mapStateToProps = (state, props) => {
   switch (path) {
     case paths.MAIN_FIRST_PAGE:
       pagesAmount = getPagesAmount(state.articles, pageLimit);
-      articles = state.articles.slice(offset, offset + pageLimit);
+      articles = state.articles.sort(compareFunctions[sortType]).slice(offset, offset + pageLimit);
       break;
     case paths.MAIN_N_PAGE:
       if (pageValidation && state.articles.length > offset) {
         pagesAmount = getPagesAmount(state.articles, pageLimit);
-        articles = state.articles.slice(offset, offset + pageLimit);
+        articles = state.articles
+          .sort(compareFunctions[sortType])
+          .slice(offset, offset + pageLimit);
       } else {
         pageNotFound = true;
       }
@@ -52,7 +56,9 @@ const mapStateToProps = (state, props) => {
     case paths.CATEGORY_FIRST_PAGE:
       if (category) {
         pagesAmount = getPagesAmount(articles, pageLimit);
-        articles = articles.slice(offset, pageLimit);
+        articles = articles
+          .sort(compareFunctions[sortType])
+          .slice(offset, pageLimit);
       } else {
         pageNotFound = true;
       }
@@ -60,7 +66,9 @@ const mapStateToProps = (state, props) => {
     case paths.CATEGORY_N_PAGE:
       if (category && pageValidation && articles.length > offset) {
         pagesAmount = getPagesAmount(articles, pageLimit);
-        articles = articles.slice(offset, offset + pageLimit);
+        articles = articles
+          .sort(compareFunctions[sortType])
+          .slice(offset, offset + pageLimit);
       } else {
         pageNotFound = true;
       }

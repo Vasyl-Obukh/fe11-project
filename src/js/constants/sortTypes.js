@@ -5,3 +5,9 @@ const sortTypes = {
 };
 
 export default sortTypes;
+
+export const compareFunctions = {
+  [sortTypes.DATE_DOWN]: (a, b) => new Date(b.date) - new Date(a.date),
+  [sortTypes.DATE_UP]: (a, b) => new Date(a.date) - new Date(b.date),
+  [sortTypes.COMMENTS_NUMBER]: (a, b) => b.commentsNumber - a.commentsNumber
+};
