@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import sortTypes from '../constants/sortTypes';
 
 const range = (from, to, step = 1) => {
   let i = from;
@@ -13,7 +14,7 @@ const range = (from, to, step = 1) => {
   return range;
 };
 
-export default function Pagination({ paginationSettings }) {
+export default function Pagination({ paginationSettings, sortType }) {
   const fetchPageNumbers = () => {
     const { pagesAmount, currentPage, pageNeighbours } = paginationSettings;
 
@@ -59,13 +60,20 @@ export default function Pagination({ paginationSettings }) {
   if (!pagesAmount || pagesAmount === 1) return null;
 
   const pages = fetchPageNumbers();
+  console.log(urlTemplate);
 
   return (
     <nav className='pagination'>
       <ul>
         {currentPage !== 1 ? (
           <li>
-            <NavLink to={`${urlTemplate}/page-${currentPage - 1}`}>{'<'}</NavLink>
+            <NavLink
+              to={`${urlTemplate}/${
+                currentPage - 1 !== 1 ? `page-${currentPage - 1}` : ''
+              }${sortType !== sortTypes.LATEST ? `?sort=${sortType}` : ''}`}
+            >
+              {'<'}
+            </NavLink>
           </li>
         ) : null}
         {pages.map((page, index) => (
@@ -75,13 +83,25 @@ export default function Pagination({ paginationSettings }) {
             ) : page === currentPage ? (
               <span>{page}</span>
             ) : (
-              <NavLink to={`${urlTemplate}/page-${page}`}>{page}</NavLink>
+              <NavLink
+                to={`${urlTemplate}${page !== 1 ? `/page-${page}` : '/'}${
+                  sortType !== sortTypes.LATEST ? `?sort=${sortType}` : ''
+                }`}
+              >
+                {page}
+              </NavLink>
             )}
           </li>
         ))}
         {currentPage !== pagesAmount ? (
           <li>
-            <NavLink to={`${urlTemplate}/page-${currentPage + 1}`}>{'>'}</NavLink>
+            <NavLink
+              to={`${urlTemplate}/page-${currentPage + 1}${
+                sortType !== sortTypes.LATEST ? `?sort=${sortType}` : ''
+              }`}
+            >
+              {'>'}
+            </NavLink>
           </li>
         ) : null}
       </ul>

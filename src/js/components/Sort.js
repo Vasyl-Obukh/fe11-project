@@ -2,19 +2,19 @@ import React from 'react';
 import sortTypes from '../constants/sortTypes';
 
 export default function Sort(props) {
-  const { sortType, onChange } = props;
+  const { sortType, changeSortType } = props;
   return (
     <div>
       <label htmlFor='sort'>Sort by</label>
       <select
         id='sort'
         name='select'
-        defaultValue={sortType}
-        onChange={e => onChange(e.target.value)}
+        value={sortType}
+        onChange={({ target: { value } }) => changeSortType(value)}
       >
-        <option value={sortTypes.DATE_DOWN}>Newest</option>
-        <option value={sortTypes.DATE_UP}>Oldest</option>
-        <option value={sortTypes.COMMENTS_NUMBER}>Popular</option>
+        <option value={sortTypes.LATEST}>{sortTypes.LATEST}</option>
+        <option value={sortTypes.FIRSTS}>{sortTypes.FIRSTS}</option>
+        <option value={sortTypes.POPULAR}>{sortTypes.POPULAR}</option>
       </select>
     </div>
   );

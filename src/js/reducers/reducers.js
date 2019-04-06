@@ -12,7 +12,7 @@ const reducers = combineReducers({
   users,
   currentUser,
   comments,
-  sortType
+  //sortType
 });
 
 export default reducers;
