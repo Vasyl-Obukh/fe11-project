@@ -1,12 +1,20 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
-export default function Search() {
+function Search(props) {
+  let query;
+  const onSubmit = e => {
+    e.preventDefault();
+    props.history.push(`/search?query=${query.value}`);
+  };
   return (
     <div className='search'>
-      <form>
-        <input type='text' placeholder='search...'></input>
+      <form onSubmit={onSubmit}>
+        <input type='text' placeholder='search...' ref={node => (query = node)} required></input>
         <i className='fas fa-search'></i>
       </form>
     </div>
   );
 }
+
+export default withRouter(Search);

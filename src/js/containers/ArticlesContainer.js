@@ -6,7 +6,7 @@ import sortTypes from '../constants/sortTypes';
 import { compareFunctions } from '../constants/sortTypes';
 
 const mapStateToProps = (state, props) => {
-  const pageLimit = 1;
+  const pageLimit = 3;
   const pageNeighbours = 1;
   let pageNotFound = false;
   let pagesAmount;
@@ -101,8 +101,6 @@ const mapStateToProps = (state, props) => {
       .map(category => category.name);
     return article;
   });
-
-  console.log(urlTemplate);
 
   return {
     pageNotFound,

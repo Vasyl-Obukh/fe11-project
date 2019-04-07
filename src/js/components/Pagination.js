@@ -60,7 +60,6 @@ export default function Pagination({ paginationSettings, sortType }) {
   if (!pagesAmount || pagesAmount === 1) return null;
 
   const pages = fetchPageNumbers();
-  console.log(urlTemplate);
 
   return (
     <nav className='pagination'>
