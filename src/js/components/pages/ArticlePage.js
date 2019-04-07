@@ -3,11 +3,13 @@ import PageTemplate from '../PageTemplate';
 import { Link, Redirect } from 'react-router-dom';
 import formatDate from '../../formatDate';
 import CommentsContainer from '../../containers/CommentsContainer';
+import BreadCrumbs from '../Breadcrumbs';
 
-export default function ArticlePage({ article = {}, categories }) {
+export default function ArticlePage({ article = {}, categories, breadcrumbs }) {
   return (
     <PageTemplate>
       {!article ? <Redirect to='/error-404' /> : null}
+      <BreadCrumbs breadcrumbs={breadcrumbs} />
       <article className='article'>
         <h2 className='article--title'>{article.title}</h2>
 

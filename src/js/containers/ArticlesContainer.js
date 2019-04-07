@@ -102,9 +102,24 @@ const mapStateToProps = (state, props) => {
     return article;
   });
 
+  const breadcrumbs =
+    path === paths.CATEGORY_FIRST_PAGE || path === paths.CATEGORY_N_PAGE
+      ? [
+        {
+          name: 'Categories',
+          url: '/'
+        },
+        {
+          name: category.name,
+          last: true
+        }
+      ]
+      : null;
+
   return {
     pageNotFound,
     articles,
+    breadcrumbs,
     paginationSettings: {
       currentPage: Number(currentPage),
       pagesAmount,

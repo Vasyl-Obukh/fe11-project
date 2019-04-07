@@ -9,7 +9,8 @@ const mapStateToProps = (state, ownProps) => {
     article: article,
     categories: article ? state.categories.filter(category =>
       article.categoriesId.includes(category.id)
-    ) : []
+    ) : [],
+    breadcrumbs: [{name: 'Articles', url: '/'}, {name: article.title.slice(0, 30) + '...', last: true}]
   };
 };
 
