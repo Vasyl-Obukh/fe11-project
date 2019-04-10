@@ -20,3 +20,7 @@ export const SET_SORT_TYPE = 'SET_SORT_TYPE';
 
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
+
+export const CHANGE_SETTINGS = 'CHANGE_SETTINGS';
+
+export const CHANGE_ABOUT_US_CONTENT = 'CHANGE_ABOUT_US_CONTENT';

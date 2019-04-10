@@ -6,8 +6,8 @@ import sortTypes from '../constants/sortTypes';
 import { compareFunctions } from '../constants/sortTypes';
 
 const mapStateToProps = (state, props) => {
-  const pageLimit = 3;
-  const pageNeighbours = 1;
+  const pageLimit = Number(state.settings.pageLimit) || 2;
+  const pageNeighbours = state.settings.pageNeighbours || 1;
   let pageNotFound = false;
   let pagesAmount;
   const {

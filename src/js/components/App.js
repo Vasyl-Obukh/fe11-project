@@ -5,8 +5,8 @@ import AdminPanelContainer from '../containers/AdminPanelContainer';
 import ArticlePageContainer from '../containers/ArticlePageContainer';
 import CategoryPage from './pages/CategoryPage';
 import SearchPage from './pages/SearchPage';
-import AboutUs from './pages/AboutUs';
-import ContactUs from './pages/ContactUs';
+import AboutUsContainer from '../containers/AboutUsContainer';
+import ContactUsContainer from '../containers/ContactUsContainer';
 import Error404 from './pages/Error404';
 import '../../sass/app.sass';
 import paths from '../constants/paths';
@@ -23,8 +23,8 @@ export default function App() {
       <Redirect exact from={paths.CATEGORY_FIRST_PAGE.split('/:')[0]} to={paths.MAIN_FIRST_PAGE} />
       <Route path={paths.CATEGORY_FIRST_PAGE} component={CategoryPage} />
       <Route path='/search' component={SearchPage} />
-      <Route path={paths.ABOUT_US} component={AboutUs} />
-      <Route path={paths.CONTACT_US} component={ContactUs} />
+      <Route path={paths.ABOUT_US} component={AboutUsContainer} />
+      <Route path={paths.CONTACT_US} component={ContactUsContainer} />
       <Route path={paths.ERROR_404} component={Error404} />
       <Redirect to={paths.ERROR_404} />
     </Switch>

@@ -4,7 +4,7 @@ export default class Slider extends Component {
   constructor(props) {
     super(props);
     this.interval;
-    this.slidesAmount = 5;
+    this.slidesAmount = this.props.slidesNumber || 2;
     this.state = {
       currentSlide: 0
     };

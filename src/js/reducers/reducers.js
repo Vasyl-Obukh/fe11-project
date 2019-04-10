@@ -4,7 +4,8 @@ import articles from './articles';
 import users from './users';
 import currentUser from './currentUser';
 import comments from './comments';
-import sortType from './sortType';
+import settings from './settings';
+import aboutUs from './aboutUs';
 
 const reducers = combineReducers({
   categories,
@@ -12,7 +13,8 @@ const reducers = combineReducers({
   users,
   currentUser,
   comments,
-  //sortType
+  settings,
+  aboutUs
 });
 
 export default reducers;

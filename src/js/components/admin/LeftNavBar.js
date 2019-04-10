@@ -11,11 +11,6 @@ export default function LeftNavBar(props) {
           </NavLink>
         </li>
         <li className='nav-menu--item'>
-          <NavLink to='/admin/pages' activeClassName='nav-active'>
-            Pages
-          </NavLink>
-        </li>
-        <li className='nav-menu--item'>
           <NavLink to='/admin/articles' activeClassName='nav-active'>
             Articles
           </NavLink>
@@ -35,8 +30,12 @@ export default function LeftNavBar(props) {
             Users
           </NavLink>
         </li>
+        <li className='nav-menu--item'>
+          <NavLink to='/admin/settings' activeClassName='nav-active'>
+            Settings
+          </NavLink>
+        </li>
       </ul>
     </div>
-    
   );
 }

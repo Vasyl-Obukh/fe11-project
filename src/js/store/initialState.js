@@ -62,7 +62,40 @@ const stateData = {
       password: '1111',
       email: 'admin@gmail.com'
     }
-  ]
+  ],
+  settings: {
+    socialLinks: {
+      gitHub: 'aaa',
+      facebook: 'aaa',
+      linkedIn: 'aaa',
+      twitter: 'aaa'
+    },
+    pageLimit: 3,
+    pageNeighbours: 1,
+    slidesNumber: 5,
+    address: 'somewhere',
+    phoneNumber: '+380999999999'
+  },
+  aboutUs: {
+    gallery: [
+      {
+        url: '/dist/img/post-test.gif'
+      },
+      {
+        url: '/dist/img/post-test.gif'
+      },
+      {
+        url: '/dist/img/post-test.gif'
+      },
+      {
+        url: '/dist/img/post-test.gif'
+      },
+      {
+        url: '/dist/img/post-test.gif'
+      }
+    ],
+    text: 'some information about us'
+  }
 };
 
 export default stateData;

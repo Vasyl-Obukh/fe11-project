@@ -4,7 +4,7 @@ import userTypes from '../../constants/userTypes';
 import StatusBar from './StatusBar';
 import LeftNavBar from './LeftNavBar';
 import Home from './Home';
-import Pages from './Pages';
+import SettingsContainer from '../../containers/SettingsContainer';
 import AdminArticlesContainer from '../../containers/AdminArticlesContainer';
 import AdminCategoriesContainer from '../../containers/AdminCategoriesContainer';
 import AdminCommentsContainer from '../../containers/AdminCommentsContainer';
@@ -49,7 +49,7 @@ export default class AdminPanel extends Component {
         <div className='admin--main'>
           <Switch>
             <Route exact path={path} component={Home} />
-            <Route path={`${path}/pages`} component={Pages} />
+            <Route path={`${path}/settings`} component={SettingsContainer} />
             <Route
               path={`${path}/articles`}
               component={AdminArticlesContainer}

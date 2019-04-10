@@ -1,8 +1,8 @@
 import React from 'react';
 import HeaderContainer from '../containers/HeaderContainer';
 import SliderContainer from '../containers/SliderContainer';
-import SideBarContainer from '../containers/SidebarContainer';
-import Footer from './footer/Footer';
+import SidebarContainer from '../containers/SidebarContainer';
+import FooterContainer from '../containers/FooterContainer';
 
 export default function PageTemplate({ children }) {
   return (
@@ -12,8 +12,8 @@ export default function PageTemplate({ children }) {
       <main className='main'>
         {children}
       </main>
-      <SideBarContainer />
-      <Footer />
+      <SidebarContainer />
+      <FooterContainer />
     </>
   );
 }
