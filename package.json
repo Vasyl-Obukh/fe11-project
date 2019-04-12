@@ -1,6 +1,6 @@
 {
-  "name": "y",
-  "version": "1.0.0",
+  "name": "fe11-project",
+  "version": "0.4.0",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open",
@@ -10,7 +10,7 @@
   "author": "Vasyl Obukh",
   "license": "MIT",
   "browserslist": [
-    "last 2 versions",
+    "last 5 versions",
     "ios >= 8"
   ],
   "devDependencies": {

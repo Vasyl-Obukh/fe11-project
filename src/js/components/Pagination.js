@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import sortTypes from '../constants/sortTypes';
 
 const range = (from, to, step = 1) => {
   let i = from;
@@ -14,7 +13,7 @@ const range = (from, to, step = 1) => {
   return range;
 };
 
-export default function Pagination({ paginationSettings, sortType }) {
+export default function Pagination({ paginationSettings }) {
   const fetchPageNumbers = () => {
     const { pagesAmount, currentPage, pageNeighbours } = paginationSettings;
 
@@ -56,23 +55,22 @@ export default function Pagination({ paginationSettings, sortType }) {
     return range(1, pagesAmount);
   };
 
-  const { pagesAmount, urlTemplate, currentPage } = paginationSettings;
+  const { pagesAmount, urlTemplate, currentPage, queryString } = paginationSettings;
   if (!pagesAmount || pagesAmount === 1) return null;
 
   const pages = fetchPageNumbers();
+
+  const prev = `${urlTemplate}/${
+    currentPage - 1 !== 1 ? `page-${currentPage - 1}` : ''
+  }${queryString}`;
+  const next = `${urlTemplate}/page-${currentPage + 1}${queryString}`;
 
   return (
     <nav className='pagination'>
       <ul>
         {currentPage !== 1 ? (
           <li>
-            <NavLink
-              to={`${urlTemplate}/${
-                currentPage - 1 !== 1 ? `page-${currentPage - 1}` : ''
-              }${sortType !== sortTypes.LATEST ? `?sort=${sortType}` : ''}`}
-            >
-              {'<'}
-            </NavLink>
+            <NavLink to={prev}>{'<'}</NavLink>
           </li>
         ) : null}
         {pages.map((page, index) => (
@@ -83,9 +81,7 @@ export default function Pagination({ paginationSettings, sortType }) {
               <span>{page}</span>
             ) : (
               <NavLink
-                to={`${urlTemplate}${page !== 1 ? `/page-${page}` : '/'}${
-                  sortType !== sortTypes.LATEST ? `?sort=${sortType}` : ''
-                }`}
+                to={`${urlTemplate}${page !== 1 ? `/page-${page}` : '/'}${queryString}`}
               >
                 {page}
               </NavLink>
@@ -94,13 +90,7 @@ export default function Pagination({ paginationSettings, sortType }) {
         ))}
         {currentPage !== pagesAmount ? (
           <li>
-            <NavLink
-              to={`${urlTemplate}/page-${currentPage + 1}${
-                sortType !== sortTypes.LATEST ? `?sort=${sortType}` : ''
-              }`}
-            >
-              {'>'}
-            </NavLink>
+            <NavLink to={next}>{'>'}</NavLink>
           </li>
         ) : null}
       </ul>

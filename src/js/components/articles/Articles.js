@@ -22,7 +22,7 @@ export default function Articles({
       {breadcrumbs ? <Breadcrumbs breadcrumbs={breadcrumbs} /> : null}
       <Sort sortType={sortType} changeSortType={changeSortType} />
       {articles.map(article => <Article key={article.id} article={article} />)}
-      <Pagination sortType={sortType} paginationSettings={paginationSettings} />
+      <Pagination paginationSettings={paginationSettings} />
       </>
     )
   );

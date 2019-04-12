@@ -22,7 +22,8 @@ export default function App() {
       <Route path='/articles/:articleId' component={ArticlePageContainer} />
       <Redirect exact from={paths.CATEGORY_FIRST_PAGE.split('/:')[0]} to={paths.MAIN_FIRST_PAGE} />
       <Route path={paths.CATEGORY_FIRST_PAGE} component={CategoryPage} />
-      <Route path='/search' component={SearchPage} />
+      <Route exact path='/search' component={SearchPage} />
+      <Route path='/search/page-:number' component={SearchPage} />
       <Route path={paths.ABOUT_US} component={AboutUsContainer} />
       <Route path={paths.CONTACT_US} component={ContactUsContainer} />
       <Route path={paths.ERROR_404} component={Error404} />

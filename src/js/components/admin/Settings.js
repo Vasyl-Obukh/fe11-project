@@ -160,7 +160,9 @@ export default class Setings extends Component {
               multiple
             />
             {gallery.map((_, id) =>
-              <div role='img' key={id} onClick={() => this.deletePhoto(id)} style={{backgroundImage: `url('${_}')`, width: '300px', height: '160px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundColor: '#ccc' , display:'inline-block'}}></div>
+              <div role='img' key={id} style={{backgroundImage: `url('${_}')`, width: '300px', height: '160px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundColor: '#ccc' , display:'inline-block'}}>
+                <button onClick={() => this.deletePhoto(id)}>&times;</button>
+              </div>
             )}
             <textarea value={text} onChange={e => this.setState({text: e.target.value})}></textarea>
             <button type='submit'>Submit</button>

@@ -51,6 +51,8 @@ const mapStateToProps = (state, props) => {
           .join('/')
         : '';
 
+  const queryString = sortType !== sortTypes.LATEST ? `?sort=${sortType}` : '';
+
   const getPagesAmount = (articles, limit) =>
     Math.ceil(articles.length / limit);
 
@@ -124,7 +126,8 @@ const mapStateToProps = (state, props) => {
       currentPage: Number(currentPage),
       pagesAmount,
       pageNeighbours,
-      urlTemplate
+      urlTemplate,
+      queryString
     },
     sortType,
     changeSortType: sortType =>
