@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import Sidebar from '../components/sidebar/Sidebar';
+import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
-const mapStateToProps = state => ({
-  articles: state.articles.sort((a, b) => b.commentsNumber - a.commentsNumber).slice(0, 5),
-  categories: state.categories
+const mapStateToProps = ({ articles, categories }) => ({
+  articles: articles.sort(compareFunctions[sortTypes.POPULAR]).slice(0, 3),
+  categories: categories.sort((a, b) => a.name > b.name ? 1 : -1)
 });
 
-export default connect(
-  mapStateToProps
-)(Sidebar);
+export default connect(mapStateToProps)(Sidebar);

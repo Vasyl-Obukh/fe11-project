@@ -3,6 +3,7 @@ import {
   ADD_COMMENT,
   CHANGE_COMMENT,
   DELETE_COMMENT,
+  DELETE_ARTICLE_COMMENTS,
   VALIDATE_COMMENT
 } from '../constants/actionTypes';
 import userTypes from '../constants/userTypes';
@@ -40,6 +41,8 @@ const comments = (state = [], action) => {
       ];
     case DELETE_COMMENT:
       return state.filter(_ => _.id !== action.id);
+    case DELETE_ARTICLE_COMMENTS:
+      return state.filter(_ => !action.commentsId.includes(_.id));
     case CHANGE_COMMENT:
       return [
         ...state.filter(_ => _.id !== action.id),

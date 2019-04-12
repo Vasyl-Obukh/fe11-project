@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Slider extends Component {
   constructor(props) {
     super(props);
     this.interval;
-    this.slidesAmount = this.props.slidesNumber || 2;
+    this.slidesAmount = props.articles.length || 0;
     this.state = {
       currentSlide: 0
     };
@@ -54,15 +55,17 @@ export default class Slider extends Component {
           {'>'}
         </div>
         <div className='slider__images'>
-          {imgArray.map((path, id) => (
+          {articles.map((_, id) => (
             <div
               key={id}
               role='img'
               className={`slider__image slider__image_${
                 this.state.currentSlide === id ? 'active' : 'hidden'
               }`}
-              style={{ backgroundImage: `url('${path}')` }}
-            />
+              style={{ backgroundImage: `url('${_.thumbnailUrl}')` }}
+            >
+              <Link to={`/articles/${_.id}`} >{_.title}</Link>
+            </div>
           ))}
         </div>
       </div>

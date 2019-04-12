@@ -2,6 +2,7 @@ import {
   ADD_COMMENT,
   CHANGE_COMMENT,
   DELETE_COMMENT,
+  DELETE_ARTICLE_COMMENTS,
   VALIDATE_COMMENT
 } from '../constants/actionTypes';
 
@@ -22,6 +23,11 @@ export const changeComment = (id, text) => ({
 export const deleteComment = id => ({
   type: DELETE_COMMENT,
   id
+});
+
+export const deleteArticleComments = commentsId => ({
+  type: DELETE_ARTICLE_COMMENTS,
+  commentsId
 });
 
 export const validateComment = (id, validate) => ({

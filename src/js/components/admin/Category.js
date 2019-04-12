@@ -10,6 +10,7 @@ export default class Category extends Component {
       name: this.props.category ? this.props.category.name : '',
       error: false
     };
+    this.message = 'Do you wanna delete this category?';
     this.handleShow = handleShow.bind(this);
     this.handleHide = handleHide.bind(this);
     this.onOutsideClick = onOutsideClick.bind(this);
@@ -30,6 +31,8 @@ export default class Category extends Component {
     }
   };
 
+  onDelete = e => confirm(this.message) ? this.props.deleteCategory(e) : null;
+
   render() {
     return (
       <div className='admin-category'>
@@ -43,7 +46,7 @@ export default class Category extends Component {
             <div className='edit' onClick={this.handleShow}>
               Edit
             </div>
-            <button className='article-delete' onClick={this.props.deleteCategory}>
+            <button className='article-delete' onClick={this.onDelete}>
               &times;
             </button>
           </div>

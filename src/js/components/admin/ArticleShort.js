@@ -7,6 +7,8 @@ export default function ArticleShort({
   deleteArticle,
   categories
 }) {
+  const message = 'Do you wanna delete this article?';
+  const onDelete = e => confirm(message) ? deleteArticle(e) : null;
   return (
     <div className='admin-article-container'>
       <div className='admin-article--title'>{article.title}</div>
@@ -18,7 +20,7 @@ export default function ArticleShort({
       <div className='edit' onClick={handleShow}>
         Edit
       </div>
-      <button className='article-delete' onClick={deleteArticle}>
+      <button className='article-delete' onClick={onDelete}>
         &times;
       </button>
     </div>
