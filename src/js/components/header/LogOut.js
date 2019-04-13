@@ -4,13 +4,16 @@ import userTypes from '../../constants/userTypes';
 
 export default function LogOut({ userType, userName, onLogOut }) {
   return (
-    <div className='sign authorized'>
+    <div className='sign sign_authorized'>
       {userType === userTypes.ADMIN ? (
-        <Link to='/admin'>Admin panel</Link>
-      ) : (
-        <p>Howdy, {userName}</p>
-      )}
-      <p onClick={onLogOut}>Log out</p>
+        <Link className='sign__admin' to='/admin' title='To admin panel'>
+          <i className='fas fa-user-cog sign__img' />
+        </Link>
+      ) : null}
+      <div className='sign__out' onClick={onLogOut}>
+        <i className='fas fa-sign-out-alt sign__img' />
+        <span className='sign__text'>Log out</span>
+      </div>
     </div>
   );
 }

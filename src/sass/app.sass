@@ -1,30 +1,35 @@
+@import settings
 @import header
 @import navbar
 @import slider
 @import main
 @import sidebar
 @import footer
-@import media
 @import modal
 @import admin
+@import media
 @import comments
 @import pagination
 
+*
+  font-family: $font
+
 .root
   display: grid
-  grid-template-columns: calc((100vw - 15px - 1200px)/2) repeat(3, 1fr) calc((100vw - 15px - 1200px)/2)
-  grid-template-rows: auto auto 1fr auto
-  grid-template-areas: 'header header header header header' '. slider slider slider .' '. main main sidebar .' 'footer footer footer footer footer'
   min-height: 100%
   width: 100%
-  background-color: #ddd
-  //background-image: linear-gradient(to right, #e7e7e7, #ccc)
+  grid-template-columns: $side-width repeat(3, 1fr) $side-width
+  grid-template-rows: auto auto 1fr auto
+  grid-template-areas: 'header header header header header' '. slider slider slider .' '. main main sidebar .' 'footer footer footer footer footer'
+
+  background-color: $light-grey
 
 .errorPage
   display: flex
+  padding-top: 25vh
   width: 100vw
   height: 100vh
   justify-content: center
-  padding-top: 25vh
-  text-transform: uppercase
+
   font-size: 30px
+  text-transform: uppercase

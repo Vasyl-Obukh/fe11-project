@@ -8,12 +8,12 @@ import LogOut from './LogOut';
 
 export default function Header({ categories, currentUser, logOut }) {
   return (
-    <header className='header'>
-      <div className='header--left'>
+    <header className='header header_fixed'>
+      <div className='header__left'>
         <Logo />
         <Navbar categories={categories} />
       </div>
-      <div className='header--right'>
+      <div className='header__right'>
         <Search />
         {currentUser.userType === userTypes.NON_AUTHORIZED ? (
           <SignContainer />

@@ -23,13 +23,13 @@ export default class Sign extends Component {
     return (
       <div className='sign'>
         <span
-          className='sign--in'
+          className='sign__in'
           onClick={() => (this.showSignIn(true), this.handleShow())}
         >
           Sign in
         </span>
         <span
-          className='sign--up'
+          className='sign__up'
           onClick={() => (this.showSignIn(false), this.handleShow())}
         >
           Sign up

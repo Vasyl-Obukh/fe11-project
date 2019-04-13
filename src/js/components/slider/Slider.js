@@ -14,7 +14,7 @@ export default class Slider extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.moveRight();
-    }, 3000);
+    }, 5000);
   }
 
   componentWillUnmount() {
