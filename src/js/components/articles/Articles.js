@@ -19,8 +19,10 @@ export default function Articles({
       <Redirect to={paths.ERROR_404} />
     ) : (
       <>
-      {breadcrumbs ? <Breadcrumbs breadcrumbs={breadcrumbs} /> : null}
-      <Sort sortType={sortType} changeSortType={changeSortType} />
+      <div className='main__head'>
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
+        <Sort sortType={sortType} changeSortType={changeSortType} />
+      </div>
       {articles.map(article => <Article key={article.id} article={article} />)}
       <Pagination paginationSettings={paginationSettings} />
       </>

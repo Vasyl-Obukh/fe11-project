@@ -104,19 +104,27 @@ const mapStateToProps = (state, props) => {
     return article;
   });
 
-  const breadcrumbs =
-    path === paths.CATEGORY_FIRST_PAGE || path === paths.CATEGORY_N_PAGE
-      ? [
-        {
-          name: 'Categories',
-          url: '/'
-        },
-        {
-          name: category.name,
-          last: true
-        }
-      ]
-      : null;
+  let arr = [{name: 'Home', url: '/', last: path === paths.MAIN_FIRST_PAGE ? true : false}];
+  if (path === paths.CATEGORY_FIRST_PAGE || path === paths.CATEGORY_N_PAGE) {
+    arr.push({
+      name: 'Categories',
+      url: '/'
+    });
+    arr.push({
+      name: category.name,
+      url: `/Categories/${category.name}`,
+      last: currentPage === 1 ? true : false
+    });
+  }
+
+  if(currentPage !== 1) {
+    arr.push({
+      name: `Page-${currentPage}`,
+      last: true
+    });
+  }
+
+  const breadcrumbs = arr;
 
   return {
     pageNotFound,

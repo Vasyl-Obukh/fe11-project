@@ -15,17 +15,21 @@ export default function Article({
 }) {
   return (
     <article className='article'>
-      <h2 className='article--title'>
+      <h2 className='article__title'>
         <Link to={`/articles/${id}`}>{title}</Link>
       </h2>
 
-      <div className='article--cat-n-date'>
-        <div className='categories'>
+      <div className='article__head'>
+        <div className='article__categories'>
           <span>Categories: </span>
           {categoriesName.length
             ? categoriesName.map((category, id) => {
               return (
-                <Link key={id} to={`/categories/${category}`}>
+                <Link
+                  className='article__category'
+                  key={id}
+                  to={`/categories/${category}`}
+                >
                   {category}
                 </Link>
               );
@@ -33,22 +37,26 @@ export default function Article({
             : null}
         </div>
 
-        <div className='date'>
+        <div className='article__date'>
           <span>{formatDate(date)}</span>
         </div>
       </div>
 
-      <div className='article--thumbnail'>
-        <img src={thumbnailUrl} alt='post thumbnail' />
-      </div>
+      <div
+        role='img'
+        className='article__thumbnail'
+        style={{ backgroundImage: `url(${thumbnailUrl})` }}
+      />
 
-      <div className='article--overview'>
+      <div className='article__overview'>
         <p>{overview}</p>
       </div>
 
-      <div className='article--comments-n-link'>
-        <span>Comments: {commentsNumber}</span>
-        <Link to={`/articles/${id}`}>Read more...</Link>
+      <div className='article__footer'>
+        <span className='article__comments'>Comments: {commentsNumber}</span>
+        <Link className='article__ref' to={`/articles/${id}`}>
+          Read more...
+        </Link>
       </div>
     </article>
   );
