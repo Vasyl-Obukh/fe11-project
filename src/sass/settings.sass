@@ -1,10 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette|Roboto+Slab')
 $font: 'Roboto Slab', sans-serif
 
-$width: 1200px
+$width: 1200
 $scroll-width: 15px
-$window-width: calc(100vw - #{$scroll-width})
-$side-width: calc((#{$window-width} - #{$width}) / 2)
+$window-width: calc(100vw - (#{$scroll-width}))
+$side-width: calc((#{$window-width} - (#{$width}px)) / 2)
 
 $header-height: 60px
 $logo-size: 50px
+
+$slider-height: 500
+$slider-ratio: calc(#{$width} / #{$slider-height})

@@ -14,7 +14,7 @@ export default class Slider extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.moveRight();
-    }, 5000);
+    }, 7000);
   }
 
   componentWillUnmount() {
@@ -42,30 +42,41 @@ export default class Slider extends Component {
       imgArray.push(article.thumbnailUrl);
     }
     return (
-      <div className='slider'
-      onMouseEnter={() => clearInterval(this.interval)}
-        onMouseLeave={() => (this.interval = setInterval(() => {
-          this.moveRight();
-        }, 3000))}
+      <div
+        className='slider'
+        onMouseEnter={() => clearInterval(this.interval)}
+        onMouseLeave={() =>
+          (this.interval = setInterval(() => {
+            this.moveRight();
+          }, 7000))
+        }
       >
-        <div className='slider__btn slider__btn_left' onClick={this.moveLeft}>
-          {'<'}
-        </div>
-        <div className='slider__btn slider__btn_right' onClick={this.moveRight}>
-          {'>'}
-        </div>
+        <i
+          className='fas fa-chevron-left slider__btn slider__btn_left'
+          onClick={this.moveLeft}
+        />
+        <i
+          className='fas fa-chevron-right slider__btn slider__btn_right'
+          onClick={this.moveRight}
+        />
         <div className='slider__images'>
           {articles.map((_, id) => (
-            <div
-              key={id}
-              role='img'
-              className={`slider__image slider__image_${
-                this.state.currentSlide === id ? 'active' : 'hidden'
-              }`}
-              style={{ backgroundImage: `url('${_.thumbnailUrl}')` }}
-            >
-              <Link to={`/articles/${_.id}`} >{_.title}</Link>
-            </div>
+            <Link key={id} to={`/articles/${_.id}`}>
+              <div
+                role='img'
+                className={`slider__image slider__image_${
+                  this.state.currentSlide === id ? 'active' : 'hidden'
+                }`}
+                style={{ backgroundImage: `url('${_.thumbnailUrl}')` }}
+              >
+                <span
+                  className='slider__text'
+                  title={_.title}
+                >
+                  {_.title}
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

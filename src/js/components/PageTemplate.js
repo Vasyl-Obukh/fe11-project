@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import SliderContainer from '../containers/SliderContainer';
 import SidebarContainer from '../containers/SidebarContainer';
@@ -8,7 +9,7 @@ export default function PageTemplate({ children }) {
   return (
     <>
       <HeaderContainer />
-      <SliderContainer />
+      <Route exact path='/' component={SliderContainer} />
       <main className='main'>
         {children}
       </main>

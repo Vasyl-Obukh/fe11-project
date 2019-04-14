@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import storeFactory from './js/store/store';
 import App from './js/components/App';
+import ScrollToTop from './js/components/ScrollToTop';
 import './sass/style.sass';
 
 const store = storeFactory();
@@ -14,7 +15,9 @@ wrapper ?
   render(
     <Provider store={store}>
       <Router>
-        <App />
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
       </Router>
     </Provider>,
     wrapper
