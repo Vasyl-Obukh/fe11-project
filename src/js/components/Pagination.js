@@ -38,16 +38,14 @@ export default function Pagination({ paginationSettings }) {
       const leftDots = startPage > 2;
       const rightDots = endPage < beforeLastPage;
 
-      const dots = '...';
-
       if (leftDots && !rightDots) {
         const extraPages = range(startPage - singleDotsOffset, startPage - 1);
-        pages = [dots, ...extraPages, ...pages];
+        pages = [DOTS, ...extraPages, ...pages];
       } else if (!leftDots && rightDots) {
         const extraPages = range(endPage + 1, endPage + singleDotsOffset);
-        pages = [...pages, ...extraPages, dots];
+        pages = [...pages, ...extraPages, DOTS];
       } else if (leftDots && rightDots) {
-        pages = [dots, ...pages, dots];
+        pages = [DOTS, ...pages, DOTS];
       }
 
       return [1, ...pages, pagesAmount];
@@ -55,8 +53,15 @@ export default function Pagination({ paginationSettings }) {
     return range(1, pagesAmount);
   };
 
-  const { pagesAmount, urlTemplate, currentPage, queryString } = paginationSettings;
+  const {
+    pagesAmount,
+    urlTemplate,
+    currentPage,
+    queryString
+  } = paginationSettings;
   if (!pagesAmount || pagesAmount === 1) return null;
+
+  const DOTS = '...';
 
   const pages = fetchPageNumbers();
 
@@ -66,34 +71,51 @@ export default function Pagination({ paginationSettings }) {
   const next = `${urlTemplate}/page-${currentPage + 1}${queryString}`;
 
   return (
-    <nav className='pagination'>
-      <ul>
-        {currentPage !== 1 ? (
-          <li>
-            <NavLink to={prev}>{'<'}</NavLink>
-          </li>
-        ) : null}
-        {pages.map((page, index) => (
-          <li key={index}>
-            {page === '...' ? (
-              <span>...</span>
-            ) : page === currentPage ? (
-              <span>{page}</span>
-            ) : (
-              <NavLink
-                to={`${urlTemplate}${page !== 1 ? `/page-${page}` : '/'}${queryString}`}
-              >
-                {page}
-              </NavLink>
-            )}
-          </li>
-        ))}
-        {currentPage !== pagesAmount ? (
-          <li>
-            <NavLink to={next}>{'>'}</NavLink>
-          </li>
-        ) : null}
-      </ul>
-    </nav>
+    <ul className='pagination'>
+      {currentPage !== 1 ? (
+        <li className='pagination__list-item'>
+          <NavLink
+            className='pagination__item pagination__item_arrow'
+            to={prev}
+          >
+            <i className='fas fa-chevron-left' />
+          </NavLink>
+        </li>
+      ) : null}
+
+      {pages.map((page, index) => (
+        <li key={index} className='pagination__list-item'>
+          {page === DOTS ? (
+            <span className='pagination__item pagination__item_dots'>
+              ...
+            </span>
+          ) : page === currentPage ? (
+            <span className='pagination__item pagination__item_current'>
+              {page}
+            </span>
+          ) : (
+            <NavLink
+              className='pagination__item pagination__item_link'
+              to={`${urlTemplate}${
+                page !== 1 ? `/page-${page}` : '/'
+              }${queryString}`}
+            >
+              {page}
+            </NavLink>
+          )}
+        </li>
+      ))}
+
+      {currentPage !== pagesAmount ? (
+        <li className='pagination__list-item'>
+          <NavLink
+            className='pagination__item pagination__item_arrow'
+            to={next}
+          >
+            <i className='fas fa-chevron-right' />
+          </NavLink>
+        </li>
+      ) : null}
+    </ul>
   );
 }

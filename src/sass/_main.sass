@@ -6,7 +6,6 @@
 
   &__head
     display: flex
-    padding: 0 25px
     justify-content: space-between
 
 .sort
@@ -52,19 +51,27 @@
 .breadcrumbs
   display: flex
   font-size: 20px
+  border-radius: 25px
+  padding: 10px 15px
+  background-color: $blog-main
+  color: $white
+  box-shadow: -3px 3px 5px $deep-dark
 
   &__item
     position: relative
 
+    & a
+      color: $white
+
     &_change
       transition: all .2s
 
-      &:hover
-        opacity: .65
+      & a:hover
+        color: $blog-secondary
         transition: all .2s
 
     &:not(:first-child)
-      padding-left: 7.5px
+      margin-left: 10px
 
     &:not(:last-child)::after
       content: '/'

@@ -1,4 +1,5 @@
 @import colors
+@import settings
 
 .footer
   grid-area: footer
@@ -6,21 +7,22 @@
   flex-direction: column
   align-items: center
   justify-content: center
-  padding: 25px calc((100vw - 15px - 1200px)/2) 15px
-  background-color: $theme--main
+  padding: 5px $side-width
+  background-color: $blog-main
+  box-shadow: 0 0 10px $deep-dark
 
-  &--social
-    padding: 0 15vw
+  &__social
     width: 100%
 
-  &--copyright p
+  &__copyright
     margin-top: 10px
     color: #fff
 
 .social
   display: flex
+  max-width: 600px
   justify-content: space-around
 
-  &--link i
+  &__link
     font-size: 35px
     color: #fff

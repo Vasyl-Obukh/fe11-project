@@ -2,31 +2,39 @@
 
 .pagination
   display: flex
-  margin: 30px auto 0
+  margin-top: 30px
   justify-content: center
 
-  & ul
+  &__list-item
     display: flex
+    font-size: 20px
 
-    & li
-      //padding: 5px 10px
-      border-radius: 10px
-      //background-color: $theme--main
+    &:not(:first-child)
+      margin-left: 15px
 
-      &:not(:first-child)
-        margin-left: 15px
+  &__item
+    padding: 5px 12.5px
+    border-radius: 20px
+    background-color: $blog-main
+    color: $blog-secondary
+    box-shadow: 0 2px 5px $deep-dark
+    transition: all .2s
+    text-align: center
+    cursor: default
 
-      & span,
-      & a
-        display: block
-        padding: 5px 10px
-        color: #fff
-        font-size: 20px
-        background-color: $theme--main
-        border-radius: 10px
+    &_link:hover,
+    &_arrow:hover
+      opacity: .85
+      transition: all .2s
+      box-shadow: none
+      cursor: pointer
+
+    &_current
+      background-color: $blog-secondary
+      color: $blog-main
+      border: 1px solid $blog-main
+      box-shadow: none
 
       & span
-        color: #111
-        background-color: #fff
-
+        color: $blog-main
       
