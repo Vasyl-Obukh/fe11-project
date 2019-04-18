@@ -38,9 +38,12 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <form className='modal--form' onSubmit={this.onSignUp}>
-        <label htmlFor='name'>full name</label>
+      <form className='sign-form' onSubmit={this.onSignUp}>
+        <label className='sign-form__label' htmlFor='name'>
+          full name
+        </label>
         <input
+          className='sign-form__item'
           type='text'
           id='name'
           placeholder='Enter your full name'
@@ -50,8 +53,11 @@ export default class SignUp extends Component {
             this.name = node;
           }}
         />
-        <label htmlFor='email'>e-mail</label>
+        <label className='sign-form__label' htmlFor='email'>
+          e-mail
+        </label>
         <input
+          className='sign-form__item'
           type='email'
           id='email'
           placeholder='Enter your email'
@@ -61,8 +67,11 @@ export default class SignUp extends Component {
             this.email = node;
           }}
         />
-        <label htmlFor='password'>password</label>
+        <label className='sign-form__label' htmlFor='password'>
+          password
+        </label>
         <input
+          className='sign-form__item'
           type='password'
           id='password'
           placeholder='Enter your password'
@@ -73,9 +82,9 @@ export default class SignUp extends Component {
           }}
         />
         {this.state.errorMessage !== '' ? (
-          <p className='error'>{this.state.errorMessage}</p>
+          <p className='sign-form__error error'>{this.state.errorMessage}</p>
         ) : null}
-        <button type='submit'>Sign up</button>
+        <button className='sign-form__submit' type='submit'>Sign up</button>
       </form>
     );
   }

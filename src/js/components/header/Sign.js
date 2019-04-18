@@ -22,6 +22,10 @@ export default class Sign extends Component {
   render() {
     return (
       <div className='sign'>
+        <i
+          className='fas fa-sign-in-alt sign__img sign__in_mobile'
+          onClick={() => (this.showSignIn(true), this.handleShow())}
+        />
         <span
           className='sign__in'
           onClick={() => (this.showSignIn(true), this.handleShow())}
@@ -35,34 +39,39 @@ export default class Sign extends Component {
           Sign up
         </span>
         {this.state.showModal ? (
-          <Modal onOutsideClick={this.onOutsideClick} handleHide={this.handleHide}>
-            <div className='modal--toggle'>
-              <span
-                onClick={() => this.showSignIn(true)}
-                style={
-                  this.state.isSignIn ? { backgroundColor: '#777' } : null
-                }
-              >
-                Sign in
-              </span>
-              <span
-                onClick={() => this.showSignIn(false)}
-                style={
-                  !this.state.isSignIn ? { backgroundColor: '#777' } : null
-                }
-              >
-                Sign up
-              </span>
+          <Modal
+            onOutsideClick={this.onOutsideClick}
+            handleHide={this.handleHide}
+          >
+            <div className='sign-modal'>
+              <div className='sign-modal__head'>
+                <span
+                  className={`sign-modal__toggle sign-modal__toggle_left sign-modal__toggle_${
+                    this.state.isSignIn ? 'active' : 'default'
+                  }`}
+                  onClick={() => this.showSignIn(true)}
+                >
+                  Sign in
+                </span>
+                <span
+                  onClick={() => this.showSignIn(false)}
+                  className={`sign-modal__toggle sign-modal__toggle_right sign-modal__toggle_${
+                    !this.state.isSignIn ? 'active' : 'default'
+                  }`}
+                >
+                  Sign up
+                </span>
+              </div>
+              {this.state.isSignIn ? (
+                <SignIn users={this.props.users} logIn={this.props.logIn} />
+              ) : (
+                <SignUp
+                  users={this.props.users}
+                  addUser={this.props.addUser}
+                  showSignIn={this.showSignIn}
+                />
+              )}
             </div>
-            {this.state.isSignIn ? (
-              <SignIn users={this.props.users} logIn={this.props.logIn} />
-            ) : (
-              <SignUp
-                users={this.props.users}
-                addUser={this.props.addUser}
-                showSignIn={this.showSignIn}
-              />
-            )}
           </Modal>
         ) : null}
       </div>

@@ -26,9 +26,12 @@ class SignIn extends Component {
 
   render() {
     return (
-      <form className='modal--form' onSubmit={this.onSignIn}>
-        <label htmlFor='email'>e-mail address</label>
+      <form className='sign-form' onSubmit={this.onSignIn}>
+        <label className='sign-form__label' htmlFor='email'>
+          e-mail address
+        </label>
         <input
+          className='sign-form__item'
           type='email'
           id='email'
           placeholder='Enter your email'
@@ -38,8 +41,11 @@ class SignIn extends Component {
             this.email = node;
           }}
         />
-        <label htmlFor='password'>password</label>
+        <label className='sign-form__label' htmlFor='password'>
+          password
+        </label>
         <input
+          className='sign-form__item'
           type='password'
           id='password'
           placeholder='Enter your password'
@@ -50,9 +56,9 @@ class SignIn extends Component {
           }}
         />
         {this.state.error ? (
-          <p className='error'>Email or password is incorrect</p>
+          <p className='sign-form__error error'>Email or password is incorrect</p>
         ) : null}
-        <button type='submit'>Sign in</button>
+        <button className='sign-form__submit' type='submit'>Sign in</button>
       </form>
     );
   }

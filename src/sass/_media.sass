@@ -1,30 +1,343 @@
-@media (max-width: 999px)
+@media (max-width: 1199px)
   div.root
     grid-template-columns: repeat(3, 1fr)
     grid-template-areas: 'header header header' 'slider slider slider' 'main main sidebar' 'footer footer footer'
 
-  .header
-    padding: 0
-
-  .header--top
-    padding: 0
-    margin: 0
-
-  .header--navbar-search
-    padding: 0
-    margin: 0
-
-  .header--slider
-    margin: 25px 0 0 0
-
-  .navbar--item
-    max-width: 150px
-
-  footer
-    padding: 0
+  .widget-popular__thumb
+    display: none
 
   .main
-    padding: 0
+    padding-left: 5px
 
   .sidebar
+    padding-right: 5px
+
+  .widget-categories__list
+    padding: 0 10px
+
+  .slider
+    margin: 25px 10px 0
+    width: calc(100% - 20px)
+
+  .widget-categories
+    max-height: calc(100vh - 620px)
+
+  .article__thumbnail
+    height: 300px
+
+  .widget-popular__item
+    grid-template-columns: 1fr
+    grid-template-areas: 'title' 'overview'
+
+@media (max-width: 999px)
+  div.root
+    grid-template-areas: 'header header header' 'slider slider slider' 'main main main' 'footer footer footer'
+
+  .sign__in,
+  .sign__up,
+  .sign__text,
+  .sidebar
+    display: none
+
+  .sign__in_mobile
+    display: block
+
+  .sign__img
+    font-size: 30px
+
+  .search
+    width: 120px
+
+    &__field
+      width: 120px
+      padding: 10px 10px 10px 35px
+
+    &__icon
+      left: 10px
+
+  .navbar__item
+    min-width: 100px
+    font-size: 18px
+
+  .main
+    padding-right: 5px
+
+  .navbar_nested
+    padding: 0 5px
+
+  .navbar__item_nested
     padding: 0
+    min-width: 100px
+    font-size: 16px
+
+  .article__thumbnail
+    height: 400px
+
+  .slider
+
+    &__btn
+      top: calc(50% - 25px)
+      font-size: 40px
+      width: 50px
+      height: 50px
+
+    &__text
+      bottom: 25px
+      left: 25px
+      padding: 7.5px 12.5px
+      font-size: 18px
+
+@media (max-width: 767px)
+  .burger + label
+    display: block
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+  .header__navbar,
+  .breadcrumbs
+    display: none
+
+  .main__head
+    justify-content: flex-end
+
+  .header__navbar
+    position: absolute
+    top: $header-height
+    background-color: #{$blog-main}f0
+    flex-direction: column
+    width: 100%
+    height: calc(100vh - #{$header-height})
+
+  .navbar
+
+    &__item
+
+      &:hover
+        background-color: transparent
+
+        & a,
+        & span
+          color: $white
+
+      &_primary
+        border: none
+        flex-direction: column
+        flex-basis: 20px
+        font-size: 24px
+
+        &:hover
+          box-shadow: none
+
+        &:not(:last-child)
+          border-radius: 0
+          border-right: none
+          border-bottom: 1px solid $strong-grey
+
+      &_nested
+        width: 70%
+        font-size: 20px
+
+    &_nested
+      z-index: 0
+      position: static
+      box-shadow: none
+      border-radius: 0
+      align-items: center
+      height: 300px
+      overflow-y: auto
+      background-color: transparent
+
+  .burger:checked ~ .header__navbar
+    display: flex
+  
+  .slider,
+  .logo
+    display: none
+
+  .search
+    flex-grow: 1
+    justify-content: flex-end
+
+    &__field
+
+      &:focus
+        width: calc(100% - 5px)
+
+        & + .search__icon
+          right: 100%
+          transition: all .5s
+
+    &__icon
+      left: auto
+      right: 90px
+      transition: all .5s
+
+  .sort
+    font-size: 16px
+
+  .article
+    padding-left: 15px
+    padding-right: 15px
+    font-size: 14px
+
+    &__thumbnail
+      height: 300px
+  
+  .footer__copyright
+    font-size: 14px
+
+  .social__link
+    font-size: 30px
+
+  .comment
+    font-size: 14px
+
+  .about-us__text
+    font-size: 14px
+
+  .contact-us__map
+    height: 400px
+
+  .sign-modal,
+  .sign-form__item
+    font-size: 14px
+
+  .main__search-result
+    font-size: 22px
+
+
+
+@media (max-width: 479px)
+  .navbar__item
+
+    &_primary
+      font-size: 20px
+
+      & > a,
+      & > span
+        line-height: 45px
+
+    &_nested
+      font-size: 16px
+
+      & a,
+      & span
+        line-height: 30px
+
+  .header
+    height: calc(#{$header-height} - 10px)
+
+  .header__navbar
+    top: calc(#{$header-height} - 10px)
+    height: calc(100vh - #{$header-height} + 10px)
+
+  .navbar_nested
+    height: 200px
+
+  .sign__img
+    font-size: 25px
+
+  .search__field
+    font-size: 14px
+    padding: 8px 10px 8px 30px
+    line-height: 16px
+    width: 100px
+    top: calc(50% - 16px)
+
+  .search__icon
+    top: calc(50% - 9px)
+    line-height: 18px
+    font-size: 18px
+    right: 75px
+  
+  .burger + label span
+    //height: 4px
+    width: 40px
+
+  .burger + label span:nth-child(even) 
+    margin-top: 6px
+
+  .burger:checked + label span:nth-child(2) 
+    width: 35px
+
+  .burger:checked + label span:nth-child(3) 
+    width: 35px
+
+  .burger:checked + label span:nth-child(3n + 1) 
+    margin-left: 20px
+
+  .sort
+    font-size: 14px
+
+  .article
+    padding-right: 10px
+    padding-left: 10px
+    border-radius: 15px
+    font-size: 12px
+
+    &__thumbnail
+      height: 225px
+
+    &__title
+      margin: 5px 0
+
+  .footer__copyright
+    font-size: 10px
+
+  .social__link
+    font-size: 25px
+
+  .pagination
+
+    &__list-item
+      font-size: 12px
+
+      &:not(:first-child)
+        margin-left: 2.5px
+
+  .comment
+    font-size: 12px
+
+  .about-us
+    font-size: 14px
+
+  .contact-us
+    font-size: 16px
+
+    &__map
+      height: 325px
+
+    &__list
+      padding-left: 0
+
+    &__address
+      font-size: 16px
+
+    &__item
+
+      & a,
+      & span
+        font-size: 16px
+
+  .modal-wrapper
+
+    &__window
+      padding: 20px 10px 10px
+
+    &__close
+      font-size: 40px
+      line-height: 25px
+
+  .sign-form
+    width: 200px
+
+    &__submit
+      margin-top: 15px
+      padding: 10px 0 
+
+  .sign-modal,
+  .sign-form__item
+    font-size: 12px
+
+  .main__search-result
+    padding-left: 5px
+    font-size: 18px

@@ -9,16 +9,22 @@ export default function ArticlePage({ article = {}, categories, breadcrumbs }) {
   return (
     <PageTemplate>
       {!article ? <Redirect to='/error-404' /> : null}
-      <BreadCrumbs breadcrumbs={breadcrumbs} />
+      <div className='main__head'>
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
       <article className='article'>
-        <h2 className='article--title'>{article.title}</h2>
+        <h2 className='article__title'>{article.title}</h2>
 
-        <div className='article--cat-n-date'>
-          <div className='categories'>
+        <div className='article__head'>
+          <div className='article__categories'>
             <span>Categories: </span>
             {categories.map(category => {
               return category.length !== 0 ? (
-                <Link key={category.id} to={`/categories/${category.name}`}>
+                <Link
+                  className='article__category'
+                  key={category.id}
+                  to={`/categories/${category.name}`}
+                >
                   {category.name}
                 </Link>
               ) : (
@@ -27,21 +33,24 @@ export default function ArticlePage({ article = {}, categories, breadcrumbs }) {
             })}
           </div>
 
-          <div className='date'>
+          <div className='article__date'>
             <span>{formatDate(article.date)}</span>
           </div>
         </div>
 
-        <div className='article--thumbnail'>
-          <img src={article.thumbnailUrl} alt='post thumbnail' />
+        <div
+          role='img'
+          className='article__thumbnail'
+          style={{ backgroundImage: `url(${article.thumbnailUrl})` }}
+        >
         </div>
 
-        <div className='article--text'>
+        <div className='article__text'>
           <p>{article.text}</p>
         </div>
       </article>
       <section className='article--comments'>
-        <CommentsContainer articleId={article.id}/>
+        <CommentsContainer articleId={article.id} />
       </section>
     </PageTemplate>
   );

@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 const CategoriesWidget = ({ categories }) => {
   return (
-    <div className='cat-widget'>
-      <h3 className='cat-widget--title'>Categories</h3>
-      <ul className='cat-widget--list list'>
+    <div className='widget-categories'>
+      <h3 className='widget-categories__title'>Categories</h3>
+      <ul className='widget-categories__list'>
         {categories.map(({ id, name }) => (
-          <li key={id} className='list--item'>
+          <li key={id} className='widget-categories__item'>
             <NavLink to={`/categories/${name}`}>{name}</NavLink>
           </li>
         ))}

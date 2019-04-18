@@ -3,6 +3,7 @@ import Comments from '../components/Comments';
 import { addComment } from '../actions/comments';
 import { changeCommentsNumber } from '../actions/articles';
 import userTypes from '../constants/userTypes';
+import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
 const mapStateToProps = (state, ownProps) => {
   const comments = state.comments
@@ -10,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
       comment =>
         comment.validate === true && comment.articleId === ownProps.articleId
     )
+    .sort(compareFunctions[sortTypes.LATEST])
     .map(_ => {
       const comment = Object.assign({}, _);
       comment.userName = state.users.filter(

@@ -53,7 +53,7 @@ export default function Article({
       </div>
 
       <div className='article__footer'>
-        <span className='article__comments'>Comments: {commentsNumber}</span>
+        <span className='article__comments-number'>Comments: {commentsNumber}</span>
         <Link className='article__ref' to={`/articles/${id}`}>
           Read more...
         </Link>

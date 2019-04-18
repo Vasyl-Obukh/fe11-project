@@ -12,87 +12,104 @@
   justify-content: center
   z-index: 9999
 
-.modal
-  position: relative
-  display: flex
-  padding: 50px
-  //max-width: 500px
-  //width: 100%
-  flex-direction: column
-  border-radius: 50px
-  background-color: $theme--secondary
-  
-  & textarea
-    resize: none
-  
-  &-thumbnail
-    max-height: 300px
-    max-width: 300px
-    min-height: 100px
-    min-width: 100px
-    margin: 0 auto
+  &__window
+    position: relative
+    padding: 40px 25px 25px
+    border-radius: 25px
+    background-color: $dark
+    box-shadow: 0 15px 25px $deep-dark
 
-  &--close
+  &__close
     position: absolute
     top: 10px
-    right: 25px
+    right: 10px
     background-color: transparent
     border: none
     font-size: 50px
+    line-height: 30px
     outline: none
-    color: #fff
+    color: $white
     cursor: pointer
+    transition: all .2s
 
-  &--toggle
+    &:hover
+      color: darken($white, 25%)
+      transition: all .2s
+
+.sign-modal
+  padding: 25px
+  
+  &__head
     display: flex
     justify-content: center
     
-    & span
-      display: inline-block
-      padding: 10px 25px
-      cursor: pointer
-      background-color: $theme--main
-      color: #fff
+  &__toggle
+    display: inline-block
+    padding: 10px 25px
+    cursor: pointer
+    background-color: $blog-main
+    color: $white
+    box-shadow: 0 2px 5px 2px $deep-dark
 
-      &:first-child
-        border-top-left-radius: 25px
-        border-bottom-left-radius: 25px
+    &_left
+      border-top-left-radius: 25px
+      border-bottom-left-radius: 25px
 
-      &:last-child
-        border-top-right-radius: 25px
-        border-bottom-right-radius: 25px
+    &_right
+      border-top-right-radius: 25px
+      border-bottom-right-radius: 25px
 
-  &--form
-    display: flex
-    flex-direction: column
+    &_default
+      transition: all .2s
 
-    & label
-      display: block
-      margin-top: 30px
-      text-transform: uppercase
-      color: #fff
-      cursor: pointer
+      &:hover
+        background-color: rgba($blog-main, .75)
+        transition: all .2s
 
-    & input
-      background-color: transparent
-      border: none
-      color: white
-      outline: none
-      border-bottom: 1px solid #777
-      padding-bottom: 10px
-      margin-top: 10px
+    &_active
+      background-color: $light-dark
+      box-shadow: 0 2px 5px $deep-dark
 
-    & button
-      margin-top: 25px
-      background-color: $theme--main
-      color: white
-      border: none
-      outline: none
-      border-radius: 25px
-      padding: 15px 70px
-      cursor: pointer
 
-    & .error
-      margin-bottom: 0
-      text-align: center
-      color: #f33
+.sign-form
+  display: flex
+  width: 250px
+  flex-direction: column
+
+  &__label
+    display: block
+    margin-top: 15px
+    text-transform: uppercase
+    color: #fff
+    cursor: pointer
+
+  &__item
+    background-color: transparent
+    border: none
+    color: white
+    outline: none
+    border-bottom: 1px solid #777
+    padding-bottom: 10px
+    margin-top: 10px
+
+  &__submit
+    margin-top: 25px
+    background-color: $blog-main
+    color: white
+    border: none
+    outline: none
+    border-radius: 25px
+    padding: 15px 0
+    box-shadow: 0 4px 5px $deep-dark
+    cursor: pointer
+    transition: all .2s
+
+    &:hover
+      background-color: rgba($blog-main, .75)
+      box-shadow: 0 2px 5px $deep-dark
+      transition: all .2s
+
+  &__error
+    padding-top: 5px
+    text-align: center
+    color: #f33

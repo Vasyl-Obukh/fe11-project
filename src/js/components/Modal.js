@@ -13,8 +13,8 @@ export default function Modal({ onOutsideClick, handleHide, children }) {
         className='modal-wrapper'
         onClick={e => onOutsideClick(e, 'modal-wrapper')}
       >
-        <div className='modal'>
-          <button className='modal--close' onClick={handleHide}>
+        <div className='modal-wrapper__window'>
+          <button className='modal-wrapper__close' onClick={handleHide}>
             &times;
           </button>
           {children}

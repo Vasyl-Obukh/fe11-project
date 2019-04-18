@@ -1,20 +1,35 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-function Search(props) {
-  let query;
-  const onSubmit = e => {
+class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: ''
+    };
+  }
+
+  onSubmit = e => {
     e.preventDefault();
-    props.history.push(`/search?query=${query.value}`);
+    this.props.history.push(`/search?query=${this.state.query}`);
+    this.setState({query: ''});
   };
-  return (
-    <div className='search'>
-      <form onSubmit={onSubmit}>
-        <input className='search__field' type='text' placeholder='search...' ref={node => (query = node)} required></input>
-        <i className='fas fa-search search__icon'></i>
+
+  render() {
+    return (
+      <form className='search' onSubmit={this.onSubmit}>
+        <input
+          className='search__field'
+          type='text'
+          placeholder='search...'
+          value={this.state.query}
+          onChange={({ target: { value } }) => this.setState({ query: value })}
+          required
+        />
+        <i className='fas fa-search search__icon' />
       </form>
-    </div>
-  );
+    );
+  }
 }
 
 export default withRouter(Search);

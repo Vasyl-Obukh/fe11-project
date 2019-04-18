@@ -3,78 +3,106 @@
 .sidebar
   grid-area: sidebar
   padding-left: 25px
-  margin-top: 25px
+  margin-top: 35px
 
-.widgets-wrapper
-  position: sticky
-  top: 75px
-  border-radius: 50px
-  padding: 25px
-  background-color: #ccc
+  &__widgets
+    position: sticky
+    top: 75px
+    border-radius: 40px
+    padding: 15px
+    background-color: $blog-secondary
+    box-shadow: 0 5px 5px $strong-grey
+    transition: all .5s
 
-.widgets-list
-  max-height: 70vh
+    &:hover
+      box-shadow: 0px 5px 10px $strong-grey
+      transition: all .5s
+
+    &:not(:first-child)
+      padding-top: 15px
+      border-top: 1px solid $blog-light
+    
+    &:not(:last-child)
+      padding-bottom: 15px
+
+.widget-categories
+  max-height: calc(100vh - 580px)
   overflow-y: auto
 
-.widget
-  padding: 0 0 25px
-
-  &:not(:first-child)
-    padding-top: 25px
-    border-top: 1px solid #e7e7e7
-
-.cat-widget
-  text-align: center
-
-  &--title
-    margin: 0 0 10px
-
-  &--list
-    padding: 0 25px
-
-    & .list--item
-      border-radius: 25px
-      background-color: #999
-
-      &:not(:first-child)
-        margin-top: 10px
-
-      & a
-        display: block
-        padding: 10px 25px
-        color: #e7e7e7
-
-.most-commented-widget
-
-  & h3
+  &__title
+    margin: 0 0 5px 0
     text-align: center
 
-.commented-item
-  display: grid
-  grid-template-columns: 1fr 2fr
-  grid-template-rows: auto auto
-  grid-template-areas: 'thumbnail title' 'thumbnail overview'
-
-  &:not(:first-child)
-    margin-top: 10px
-
-  & .thumb
-    grid-area: thumbnail
+  &__list
     display: flex
-    justify-content: center
-    align-items: center
-    height: 100px
-    background-color: #777
+    padding: 0 35px
+    flex-direction: column
 
-    & img
-      max-width: 100%
+  &__item
+    text-align: center
+    border-radius: 25px
+    background-color: $blog-main
+    box-shadow: 0 2px 5px $deep-dark
+    transition: all .2s
 
+    & a
+      display: block
+      padding: 7.5px
 
-  & h4
+    &:hover
+      opacity: .90
+      box-shadow: 0 5px 5px
+      transition: all .2s
+
+    &:not(:first-child)
+      margin-top: 5px
+
+    & a
+      color: $blog-secondary
+
+.widget-popular
+
+  &__item
+    display: grid
+    grid-template-columns: 1fr 2fr
+    grid-template-rows: auto auto
+    grid-template-areas: 'thumb title' 'thumb overview'
+
+    &:not(:first-child)
+      margin-top: 10px
+
+  &__title
+    margin: 10px 0 5px 0
+    text-align: center
+
+  &__post-title
     grid-area: title
-    padding-left: 10px
+    white-space: nowrap;
+    overflow: hidden
+    text-overflow: ellipsis
     margin: 0
-  
-  & p
-    padding-left: 10px
+    transition: all .2s
+
+    &:hover
+      opacity: .75
+      transition: all .2s
+
+  &__overview
     grid-area: overview
+    font-size: 14px
+
+  &__img-container
+    grid-area: thumb
+
+  &__thumb
+    height: 100px
+    width: calc(100% - 10px)
+    border-radius: 20px
+    background-size: cover
+    background-position: center
+    background-color: $middle-grey
+    transition: all .5s
+
+    &:hover
+      opacity: .75
+      transition: all .5s

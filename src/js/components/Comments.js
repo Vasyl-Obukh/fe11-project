@@ -29,37 +29,37 @@ export default class Comments extends Component {
       userType: this.props.currentUser.userType,
       text: this.state.comment.trim()
     });
+    this.setState({comment: ''})
   };
 
   render() {
     return (
-      <section className='article--comments'>
+      <section className='article__comments comments'>
         {this.state.isSigned ? (
-          <div className='comment-form'>
-            <form onSubmit={this.onSubmit}>
-              <p>Please, leave your comment here</p>
+            <form className='comments__form' onSubmit={this.onSubmit}>
+              <p className='comments__text'>Please, leave your comment here</p>
               <textarea
+              className='comments__field'
                 value={this.state.comment}
                 onChange={e =>
                   this.setState({ comment: e.target.value.trimLeft() })
                 }
-                placeholder='Enter your comment'
+                placeholder='Enter your comment...'
                 rows='5'
                 required
               />
-              <button type='submit'>Submit</button>
+              <button className='comments__submit' type='submit'>Submit</button>
             </form>
-          </div>
         ) : (
           <div>
-            <h3>Please, sign in or make a new account</h3>
+            <h3 className='comments__text'>Please, sign in or make a new account</h3>
           </div>
         )}
-        <div className='comments'>
+        <ul className='comments__list'>
           {this.props.comments.length > 0 ? this.props.comments.map(comment => (
             <Comment key={comment.id} comment={comment} />
-          )) : <h2>This artilce doesn't have any comments yet</h2>}
-        </div>
+          )) : <h2 className='comments__absence'>This artilce doesn't have any comments yet</h2>}
+        </ul>
       </section>
     );
   }
