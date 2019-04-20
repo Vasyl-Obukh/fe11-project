@@ -23,7 +23,7 @@ export default class Setings extends Component {
     for (let img of e.target.files) {
       let reader = new FileReader();
       reader.onload = () => {
-        this.setState({ gallery: [...this.state.gallery, reader.result ]});
+        this.setState({ gallery: [...this.state.gallery, reader.result] });
       };
       reader.readAsDataURL(img);
     }
@@ -31,24 +31,30 @@ export default class Setings extends Component {
 
   onGeneralSubmit = e => {
     e.preventDefault();
-    const { gallery, text, gitHub, facebook, linkedIn, twitter, ...settings } = this.state;
-    const socialLinks = {gitHub, facebook, linkedIn, twitter};
-    this.props.changeSettings({...settings, socialLinks});
-  }
+    const {
+      gallery,
+      text,
+      gitHub,
+      facebook,
+      linkedIn,
+      twitter,
+      ...settings
+    } = this.state;
+    const socialLinks = { gitHub, facebook, linkedIn, twitter };
+    this.props.changeSettings({ ...settings, socialLinks });
+  };
 
   onAboutSubmit = e => {
     e.preventDefault();
     const { gallery, text } = this.state;
-    this.props.changeContent({gallery, text});
-  }
+    this.props.changeContent({ gallery, text });
+  };
 
   deletePhoto = id => {
-    //console.log(id);
-    //const a = [...this.state.gallery].splice(id, 1);
     this.setState({
       gallery: this.state.gallery.filter((_, i) => i !== id)
-    })
-  }
+    });
+  };
 
   render() {
     const {
@@ -67,8 +73,12 @@ export default class Setings extends Component {
     } = this.state;
     return (
       <>
-        <div className='general'>
-          <form onSubmit={this.onGeneralSubmit}>
+        <form
+          className='settings settings_general'
+          onSubmit={this.onGeneralSubmit}
+        >
+          <h2 className='settings__title'>General settings</h2>
+          <div className='settings__item'>
             <label htmlFor='github'>Github</label>
             <input
               type='text'
@@ -76,6 +86,8 @@ export default class Setings extends Component {
               value={gitHub}
               onChange={e => this.setState({ gitHub: e.target.value })}
             />
+          </div>
+          <div className='settings__item'>
             <label htmlFor='facebook'>Facebook</label>
             <input
               type='text'
@@ -83,6 +95,8 @@ export default class Setings extends Component {
               value={facebook}
               onChange={e => this.setState({ facebook: e.target.value })}
             />
+          </div>
+          <div className='settings__item'>
             <label htmlFor='linkedIn'>Linked in</label>
             <input
               type='text'
@@ -90,6 +104,8 @@ export default class Setings extends Component {
               value={linkedIn}
               onChange={e => this.setState({ linkedIn: e.target.value })}
             />
+          </div>
+          <div className='settings__item'>
             <label htmlFor='twitter'>Twitter</label>
             <input
               type='text'
@@ -97,6 +113,8 @@ export default class Setings extends Component {
               value={twitter}
               onChange={e => this.setState({ twitter: e.target.value })}
             />
+          </div>
+          <div className='settings__item'>
             <label htmlFor='pageLimit'>Articles per page</label>
             <input
               type='number'
@@ -106,17 +124,8 @@ export default class Setings extends Component {
               value={pageLimit}
               onChange={e => this.setState({ pageLimit: e.target.value })}
             />
-            <label htmlFor='pageNeighbours'>Page neighbours</label>
-            <input
-              type='number'
-              min='1'
-              max='2'
-              id='pageNeighbours'
-              value={pageNeighbours}
-              onChange={e =>
-                this.setState({ pageNeighbours: e.target.value })
-              }
-            />
+          </div>
+          <div className='settings__item'>
             <label htmlFor='slidesNumber'>Slides number</label>
             <input
               type='number'
@@ -128,6 +137,8 @@ export default class Setings extends Component {
                 this.setState({ slidesNumber: e.target.value })
               }
             />
+          </div>
+          <div className='settings__item'>
             <label htmlFor='address'>Address</label>
             <input
               type='text'
@@ -135,6 +146,8 @@ export default class Setings extends Component {
               value={address}
               onChange={e => this.setState({ address: e.target.value })}
             />
+          </div>
+          <div className='settings__item'>
             <label htmlFor='phoneNumber'>Phone number</label>
             <input
               type='text'
@@ -142,6 +155,8 @@ export default class Setings extends Component {
               value={phoneNumber}
               onChange={e => this.setState({ phoneNumber: e.target.value })}
             />
+          </div>
+          <div className='settings__item'>
             <label htmlFor='copyright'>Copyright</label>
             <input
               type='text'
@@ -149,26 +164,59 @@ export default class Setings extends Component {
               value={copyright}
               onChange={e => this.setState({ copyright: e.target.value })}
             />
-            <button type='submit'>Submit</button>
-          </form>
+          </div>
+          <button className='settings__submit' type='submit'>
+            Submit
+          </button>
+        </form>
 
-          <form onSubmit={this.onAboutSubmit}>
+        <form
+          className='settings settings_info'
+          onSubmit={this.onAboutSubmit}
+        >
+          <h2 className='settings__title'>About us setings</h2>
+          <ul className='settings__gallery'>
+            {gallery.map((_, id) => (
+              <li
+                role='img'
+                className='settings__img'
+                key={id}
+                style={{
+                  backgroundImage: `url('${_}')`
+                }}
+              >
+                <span
+                  className='settings__delete'
+                  onClick={() => this.deletePhoto(id)}
+                >
+                  &times;
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className='settings__file-select file-select'>
+            <label className='file-select__btn' htmlFor='gallery'>
+              Select files
+            </label>
             <input
+              className='file-select__input'
+              id='gallery'
               type='file'
               accept='image/*'
               onChange={this.onFileLoad}
               multiple
             />
-            {gallery.map((_, id) =>
-              <div role='img' key={id} style={{backgroundImage: `url('${_}')`, width: '300px', height: '160px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundColor: '#ccc' , display:'inline-block'}}>
-                <button onClick={() => this.deletePhoto(id)}>&times;</button>
-              </div>
-            )}
-            <textarea value={text} onChange={e => this.setState({text: e.target.value})}></textarea>
-            <button type='submit'>Submit</button>
-          </form>
-        </div>
-        <div />
+          </div>
+          <textarea
+            className='settings__text settings__text_lg'
+            value={text}
+            placeholder='Tipe something about you...'
+            onChange={e => this.setState({ text: e.target.value })}
+          />
+          <button className='settings__submit' type='submit'>
+            Submit
+          </button>
+        </form>
       </>
     );
   }

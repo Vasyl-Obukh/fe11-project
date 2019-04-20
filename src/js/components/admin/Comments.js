@@ -8,20 +8,30 @@ export default function Comments({
   changeComment
 }) {
   return (
-    <div className='admin-comments'>
-      {comments.map(comment => (
-        <Comment
-          key={comment.id}
-          comment={comment}
-          deleteComment={() =>
-            deleteComment(comment.id, comment.articleId, comment.validate)
-          }
-          validateComment={validate =>
-            validateComment(comment.id, comment.articleId, validate)
-          }
-          changeComment={text => changeComment(comment.id, text)}
-        />
-      ))}
-    </div>
+    <>
+      <ul className='list-head list-head_comments'>
+        <li className='list-head__item'>Author</li>
+        <li className='list-head__item'>Comment</li>
+        <li className='list-head__item'>Article</li>
+        <li className='list-head__item'>Date</li>
+        <li className='list-head__item'>Validation</li>
+        <li className='list-head__item'>Edit</li>
+      </ul>
+      <ul className='admin-list'>
+        {comments.map(comment => (
+          <Comment
+            key={comment.id}
+            comment={comment}
+            deleteComment={() =>
+              deleteComment(comment.id, comment.articleId, comment.validate)
+            }
+            validateComment={validate =>
+              validateComment(comment.id, comment.articleId, validate)
+            }
+            changeComment={text => changeComment(comment.id, text)}
+          />
+        ))}
+      </ul>
+    </>
   );
 }

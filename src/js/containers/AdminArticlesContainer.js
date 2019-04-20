@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import Articles from '../components/admin/Articles';
 import { addArticle, deleteArticle, changeArticle } from '../actions/articles';
 import { deleteArticleComments } from '../actions/comments';
+import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
 const mapStateToProps = state => ({
-  articles: state.articles,
+  articles: state.articles.sort(compareFunctions[sortTypes.LATEST]),
   categories: state.categories,
   comments: state.comments
 });

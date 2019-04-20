@@ -6,6 +6,7 @@ import {
   validateComment
 } from '../actions/comments';
 import { changeCommentsNumber } from '../actions/articles';
+import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
 const mapStateToProps = state => {
   const comments = state.comments.map(_ => {
@@ -19,7 +20,7 @@ const mapStateToProps = state => {
     return comment;
   });
   return {
-    comments
+    comments: comments.sort(compareFunctions[sortTypes.LATEST])
   };
 };
 

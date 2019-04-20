@@ -1,15 +1,14 @@
 import React from 'react';
-import User from './User';
 
 export default function Users({ users }) {
   return (
-    <div className='admin-users'>
+    <ul className='users-list'>
       {users.map(user => (
-        <div key={user.id} className='admin-user'>
-          <span>{user.name}</span>
-          <span>{user.email}</span>
-        </div>
+        <li key={user.id} className='users-list__item'>
+          <span className='users-list__name'>{user.name}</span>
+          <span className='users-list__email'>{user.email}</span>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

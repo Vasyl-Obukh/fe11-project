@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import userTypes from '../../constants/userTypes';
-import StatusBar from './StatusBar';
-import LeftNavBar from './LeftNavBar';
-import Home from './Home';
+import NavBar from './LeftNavBar';
 import HomeContainer from '../../containers/AdminHomeContainer';
 import SettingsContainer from '../../containers/SettingsContainer';
 import AdminArticlesContainer from '../../containers/AdminArticlesContainer';
@@ -41,16 +39,16 @@ export default class AdminPanel extends Component {
 
     return (
       <>
-        <div className='admin--status-menu'>
-          <StatusBar logOut={this.onLogOut} history={this.props.history} />
+        <div className='admin__nav-menu nav-menu'>
+          <NavBar logOut={this.onLogOut} history={this.props.history} />
         </div>
-        <div className='admin--nav-menu'>
-          <LeftNavBar />
-        </div>
-        <div className='admin--main'>
+        <div className='admin__main'>
           <Switch>
             <Route exact path={path} component={HomeContainer} />
-            <Route path={`${path}/settings`} component={SettingsContainer} />
+            <Route
+              path={`${path}/settings`}
+              component={SettingsContainer}
+            />
             <Route
               path={`${path}/articles`}
               component={AdminArticlesContainer}

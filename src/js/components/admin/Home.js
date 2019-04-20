@@ -7,21 +7,22 @@ export default function Home({
   commentsNumber
 }) {
   return (
-    <div>
-      <ul>
-        <li>
-          Number of articles: <span>{articlesNumber}</span>
-        </li>
-        <li>
-          Number of categories: <span>{categoriesNumber}</span>
-        </li>
-        <li>
-          Number of users: <span>{usersNumber}</span>
-        </li>
-        <li>
-          Number of validated comments: <span>{commentsNumber}</span>
-        </li>
-      </ul>
-    </div>
+    <ul className='statistic'>
+      <li className='statistic__item'>
+        Number of articles:
+        <span className='statistic__value'>{articlesNumber}</span>
+      </li>
+      <li className='statistic__item'>
+        Number of categories:
+        <span className='statistic__value'>{categoriesNumber}</span>
+      </li>
+      <li className='statistic__item'>
+        Number of users: <span className='statistic__value'>{usersNumber}</span>
+      </li>
+      <li className='statistic__item'>
+        Number of comments:
+        <span className='statistic__value'>{commentsNumber}</span>
+      </li>
+    </ul>
   );
 }

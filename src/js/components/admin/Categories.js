@@ -14,15 +14,21 @@ export default function Categories({
         categories={categories}
         new={true}
       />
-      {categories.map(category => (
-        <Category
-          key={category.id}
-          category={category}
-          categories={categories}
-          deleteCategory={() => deleteCategory(category.id)}
-          changeCategory={changeCategory}
-        />
-      ))}
+      <ul className='list-head list-head_categories'>
+        <li className='list-head__item'>Category name</li>
+        <li className='list-head__item'>Edit</li>
+      </ul>
+      <ul className='admin-list'>
+        {categories.map(category => (
+          <Category
+            key={category.id}
+            category={category}
+            categories={categories}
+            deleteCategory={() => deleteCategory(category.id)}
+            changeCategory={changeCategory}
+          />
+        ))}
+      </ul>
     </div>
   );
 }

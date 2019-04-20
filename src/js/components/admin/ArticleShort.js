@@ -1,5 +1,6 @@
 import React from 'react';
 import formatDate from '../../formatDate';
+import { Link } from 'react-router-dom';
 
 export default function ArticleShort({
   article,
@@ -8,21 +9,29 @@ export default function ArticleShort({
   categories
 }) {
   const message = 'Do you wanna delete this article?';
-  const onDelete = e => confirm(message) ? deleteArticle(e) : null;
+  const onDelete = e => (confirm(message) ? deleteArticle(e) : null);
   return (
-    <div className='admin-article-container'>
-      <div className='admin-article--title'>{article.title}</div>
-      <div className='admin-article--categories'>{categories.join(', ')}</div>
-      <div className='admin-article--comments'>{article.commentsNumber}</div>
-      <div className='admin-article--date'>
-        Published{formatDate(article.date)}
+    <li className='list-item list-item_articles'>
+      <div className='list-item__title'>
+        <Link className='list-item__link' to={`/articles/${article.id}`}>
+          {article.title}
+        </Link>
       </div>
-      <div className='edit' onClick={handleShow}>
-        Edit
+      <div className='list-item__categories'>
+        {categories.map((_, id) => (
+          <Link key={id} className='list-item__link' to={`/categories/${_}`}>
+            {_}
+          </Link>
+        ))}
       </div>
-      <button className='article-delete' onClick={onDelete}>
+      <div className='list-item__comments'>{article.commentsNumber}</div>
+      <div className='list-item__date'>{formatDate(article.date)}</div>
+      <div className='list-item__edit' onClick={handleShow}>
+        <i className='fas fa-edit' />
+      </div>
+      <span className='list-item__delete' onClick={onDelete}>
         &times;
-      </button>
-    </div>
+      </span>
+    </li>
   );
 }

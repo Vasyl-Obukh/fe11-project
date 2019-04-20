@@ -3,7 +3,7 @@ import Categories from '../components/admin/Categories';
 import { addCategory, deleteCategory, changeCategoryName } from '../actions/categories';
 
 const mapStateToProps = state => ({
-  categories: state.categories
+  categories: state.categories.sort((a, b) => a.name > b.name ? 1 : -1)
 });
 
 const mapDispatchToProps = dispatch => ({

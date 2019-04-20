@@ -24,71 +24,72 @@ export default class Comment extends Component {
   render() {
     const { comment, deleteComment, validateComment } = this.props;
     return (
-      <div className='admin-comment'>
-        <div className='comment-author'>
-          <p>{comment.userName}</p>
-        </div>
-        <div className='comment-text'>
-          <p>{comment.text}</p>
-        </div>
-        <div className='comment-article-title'>
-          <Link to={`/articles/${comment.articleId}`}>{comment.articleTitle}</Link>
-        </div>
-        <div className='comment-date'>
-          <p>{formatDate(comment.date, true)}</p>
-        </div>
-        <div className='edit'>
+      <>
+        <li className='list-item list-item_comments'>
+          <div className='list-item__author'>{comment.userName}</div>
+          <div className='list-item__text'>{comment.text}</div>
+          <div className='list-item__article'>
+            <Link
+              className='list-item__link'
+              to={`/articles/${comment.articleId}`}
+            >
+              {comment.articleTitle}
+            </Link>
+          </div>
+          <div className='list-item__date'>
+            {formatDate(comment.date, true)}
+          </div>
           {this.props.comment.validate ? (
-            <span
-              onClick={() =>
-                validateComment(false)
-              }
+            <div
+              className='list-item__validation'
+              onClick={() => validateComment(false)}
             >
-              Unvalidate
-            </span>
+              <span className='list-item__btn'>Unvalidate</span>
+            </div>
           ) : (
-            <span
-              onClick={() =>
-                validateComment(true)
-              }
+            <div
+              className='list-item__validation'
+              onClick={() => validateComment(true)}
             >
-              Validate
-            </span>
+              <span className='list-item__btn'>Validate</span>
+            </div>
           )}
-        </div>
-        <div className='edit' onClick={this.handleShow}>
-          Edit
-        </div>
-        <button
-          className='article-delete'
-          onClick={deleteComment}
-        >
-          &times;
-        </button>
+          <div className='list-item__edit' onClick={this.handleShow}>
+            <i className='fas fa-edit' />
+          </div>
+          <span className='list-item__delete' onClick={deleteComment}>
+            &times;
+          </span>
+        </li>
         {this.state.showModal ? (
           <Modal
             onOutsideClick={this.onOutsideClick}
             handleHide={this.handleHide}
           >
-            <form className='modal--form' onSubmit={this.onSubmit}>
-              <label htmlFor='comment'>Comment text</label>
-              <textarea
-                id='comment'
-                value={this.state.text}
-                rows='5'
-                onChange={e =>
-                  this.setState({ text: e.target.value.trimLeft() })
-                }
-                placeholder='Enter comment text'
-                autoComplete='off'
-                required
-              />
+            <form className='admin-modal' onSubmit={this.onSubmit}>
+              <div className='admin-modal__item'>
+                <label className='admin-modal__label' htmlFor='comment'>
+                  Comment text
+                </label>
+                <textarea
+                  id='comment'
+                  className='admin-modal__textarea'
+                  value={this.state.text}
+                  rows='5'
+                  onChange={e =>
+                    this.setState({ text: e.target.value.trimLeft() })
+                  }
+                  placeholder='Enter comment text'
+                  autoComplete='off'
+                  required
+                />
+              </div>
               {this.state.error ? <p>This category name is taken</p> : null}
-              <button type='submit'>Submit</button>
+              <button className='submit' type='submit'>Submit</button>
             </form>
           </Modal>
         ) : null}
-      </div>
+      </>
     );
   }
 }
