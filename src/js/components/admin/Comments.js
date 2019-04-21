@@ -10,10 +10,10 @@ export default function Comments({
   return (
     <>
       <ul className='list-head list-head_comments'>
-        <li className='list-head__item'>Author</li>
+        <li className='list-head__item list-head__item_author'>Author</li>
         <li className='list-head__item'>Comment</li>
-        <li className='list-head__item'>Article</li>
-        <li className='list-head__item'>Date</li>
+        <li className='list-head__item list-head__item_article'>Article</li>
+        <li className='list-head__item list-head__item_date'>Date</li>
         <li className='list-head__item'>Validation</li>
         <li className='list-head__item'>Edit</li>
       </ul>

@@ -37,7 +37,7 @@ export default class Comment extends Component {
             </Link>
           </div>
           <div className='list-item__date'>
-            {formatDate(comment.date, true)}
+            {formatDate(comment.date)}
           </div>
           {this.props.comment.validate ? (
             <div

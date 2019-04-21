@@ -4,6 +4,13 @@ import { NavLink } from 'react-router-dom';
 export default function LeftNavBar({ logOut, history }) {
   return (
     <>
+      <input type='checkbox' id='burger' className='burger burger_admin' />
+      <label htmlFor='burger'>
+        <span />
+        <span />
+        <span />
+        <span />
+      </label>
       <ul className='nav-menu__list'>
         <li className='nav-menu__item'>
           <NavLink

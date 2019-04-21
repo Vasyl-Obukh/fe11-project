@@ -1,9 +1,11 @@
 @import colors
-@import admin-media
 
 div.root.admin
   grid-template-columns: 200px 1fr
   grid-template-areas: 'admin-nav admin-main'
+
+.admin-head
+  display: none
 
 .admin
 
@@ -103,7 +105,7 @@ div.root.admin
   position: sticky
   top: -25px
   z-index: 1
-  padding: 10px 40px 10px 15px
+  padding: 10px 25px 10px 15px
   margin-top: 25px
   font-size: 20px
   color: $white
@@ -124,7 +126,7 @@ div.root.admin
     grid-template-columns: 7fr 1fr
 
   &_comments
-    grid-template-columns: 1fr 5fr 3fr 1.5fr 1.5fr 1fr
+    grid-template-columns: 2fr 4.5fr 3fr 1.5fr 2fr 1fr
 
 .admin-list
   margin-top: 15px
@@ -132,7 +134,7 @@ div.root.admin
 .list-item
   display: grid
   position: relative
-  padding: 10px 40px 10px 15px
+  padding: 10px 25px 10px 15px
   color: $white
   border-radius: 15px
   box-shadow: 0 2px 5px $deep-dark
@@ -145,7 +147,7 @@ div.root.admin
     grid-template-columns: 7fr 1fr
 
   &_comments
-    grid-template-columns: 1fr 5fr 3fr 1.5fr 1.5fr 1fr
+    grid-template-columns: 2fr 4.5fr 3fr 1.5fr 2fr 1fr
 
   &:hover
     box-shadow: 0 5px 5px$deep-dark
@@ -221,7 +223,7 @@ div.root.admin
     padding: 0 10px
 
   &__validation
-    padding: 10px
+    padding: 10px 0
 
   &__btn
     border-radius: 15px

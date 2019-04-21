@@ -16,8 +16,8 @@ export default function Articles({
       <ul className='list-head list-head_articles'>
         <li className='list-head__item'>Title</li>
         <li className='list-head__item'>Categories</li>
-        <li className='list-head__item'>Comments</li>
-        <li className='list-head__item'>Date</li>
+        <li className='list-head__item list-head__item_comments'>Comments</li>
+        <li className='list-head__item list-head__item_date'>Date</li>
         <li className='list-head__item'>Edit</li>
       </ul>
       <ul className='admin-list'>
