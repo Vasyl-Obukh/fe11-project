@@ -25,6 +25,4 @@ const storeFactory = (initialState = stateData) =>
       : initialState
   );
 
-//const store = createStore(reducers, stateData, applyMiddleware(logger, saver));
-
 export default storeFactory;

@@ -3,21 +3,17 @@ import {
   ADD_ARTICLE,
   DELETE_ARTICLE,
   CHANGE_ARTICLE,
-  CHANGE_ARTICLE_COMMENTS_NUMBER
+  CHANGE_COMMENTS_NUMBER
 } from '../constants/actionTypes';
 
-const article = (state = {}, action) => {
-  switch (action.type) {
+const article = (state = {}, {type, ...action}) => {
+  switch (type) {
     case CHANGE_ARTICLE:
       return {
         ...state,
-        title: action.title,
-        text: action.text,
-        overview: action.overview,
-        thumbnailUrl: action.thumbnailUrl,
-        categoriesId: action.categoriesId
+        ...action
       };
-    case CHANGE_ARTICLE_COMMENTS_NUMBER:
+    case CHANGE_COMMENTS_NUMBER:
       return {
         ...state,
         commentsNumber: state.commentsNumber + (action.raise ? 1 : -1)
@@ -28,7 +24,8 @@ const article = (state = {}, action) => {
 };
 
 const articles = (state = [], action) => {
-  switch (action.type) {
+  const {type, ...data} = action;
+  switch (type) {
     case ADD_ARTICLE:
       return [
         ...state,
@@ -36,11 +33,7 @@ const articles = (state = [], action) => {
           id: v4(),
           date: new Date(),
           commentsNumber: 0,
-          title: action.title,
-          text: action.text,
-          overview: action.overview,
-          thumbnailUrl: action.thumbnailUrl,
-          categoriesId: action.categoriesId
+          ...data
         }
       ];
     case DELETE_ARTICLE:
@@ -48,12 +41,12 @@ const articles = (state = [], action) => {
     case CHANGE_ARTICLE:
       return [
         ...state.filter(_ => _.id !== action.id),
-        article(...state.filter(_ => _.id === action.id), action)
+        article(state.find(_ => _.id === action.id), action)
       ];
-    case CHANGE_ARTICLE_COMMENTS_NUMBER:
+    case CHANGE_COMMENTS_NUMBER:
       return [
         ...state.filter(_ => _.id !== action.id),
-        article(...state.filter(_ => _.id === action.id), action)
+        article(state.find(_ => _.id === action.id), action)
       ];
     default:
       return state;

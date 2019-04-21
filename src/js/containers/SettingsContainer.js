@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import Settings from '../components/admin/Settings';
-import { changeSettings } from '../actions/settings';
-import { changeContent } from '../actions/aboutUs';
+import { changeSettings, changeContent } from '../actions/settings';
 
 const mapStateToProps = ({settings: {socialLinks = {}, ...settings}, aboutUs}) => ({
   socialLinks,

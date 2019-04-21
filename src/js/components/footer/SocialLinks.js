@@ -1,6 +1,13 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
-export default function SocialLinks({socialLinks: {gitHub, facebook, linkedIn, twitter}}) {
+export default function SocialLinks({ socialLinks = {} }) {
+  const {
+    gitHub = '',
+    facebook = '',
+    linkedIn = '',
+    twitter = ''
+  } = socialLinks;
   return (
     <div className='footer__social social'>
       <a href={facebook} className='social__link'>
@@ -18,3 +25,12 @@ export default function SocialLinks({socialLinks: {gitHub, facebook, linkedIn, t
     </div>
   );
 }
+
+SocialLinks.propTypes = {
+  socialLinks: PropTypes.shape({
+    gitHub: PropTypes.string,
+    facebook: PropTypes.string,
+    linkedIn: PropTypes.string,
+    twitter: PropTypes.string
+  })
+};

@@ -26,17 +26,16 @@ const comment = (state = {}, action) => {
 };
 
 const comments = (state = [], action) => {
-  switch (action.type) {
+  const {type, userType, ...data} = action;
+  switch (type) {
     case ADD_COMMENT:
       return [
         ...state,
         {
           id: v4(),
           date: new Date(),
-          validate: action.userType === userTypes.ADMIN ? true: false,
-          articleId: action.articleId,
-          userId: action.userId,
-          text: action.text
+          validate: userType === userTypes.ADMIN ? true: false,
+          ...data
         }
       ];
     case DELETE_COMMENT:
@@ -46,12 +45,12 @@ const comments = (state = [], action) => {
     case CHANGE_COMMENT:
       return [
         ...state.filter(_ => _.id !== action.id),
-        comment(...state.filter(_ => _.id === action.id), action)
+        comment(state.find(_ => _.id === action.id), action)
       ];
     case VALIDATE_COMMENT:
       return [
         ...state.filter(_ => _.id !== action.id),
-        comment(...state.filter(_ => _.id === action.id), action)
+        comment(state.find(_ => _.id === action.id), action)
       ];
     default:
       return state;

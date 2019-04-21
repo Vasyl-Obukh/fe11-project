@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
-import categories from './categories';
+import settings from './settings';
 import articles from './articles';
-import users from './users';
+import categories from './categories';
 import currentUser from './currentUser';
 import comments from './comments';
-import settings from './settings';
+import users from './users';
 import aboutUs from './aboutUs';
 
 const reducers = combineReducers({
-  categories,
+  settings,
   articles,
-  users,
+  categories,
   currentUser,
   comments,
-  settings,
+  users,
   aboutUs
 });
 

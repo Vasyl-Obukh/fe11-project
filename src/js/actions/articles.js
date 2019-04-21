@@ -2,7 +2,7 @@ import {
   ADD_ARTICLE,
   DELETE_ARTICLE,
   CHANGE_ARTICLE,
-  CHANGE_ARTICLE_COMMENTS_NUMBER
+  CHANGE_COMMENTS_NUMBER
 } from '../constants/actionTypes';
 
 export const addArticle = ({
@@ -43,7 +43,7 @@ export const changeArticle = ({
 });
 
 export const changeCommentsNumber = (id, raise) => ({
-  type: CHANGE_ARTICLE_COMMENTS_NUMBER,
+  type: CHANGE_COMMENTS_NUMBER,
   id,
   raise
 });

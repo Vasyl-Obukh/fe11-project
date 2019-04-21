@@ -3,16 +3,12 @@ import userTypes from '../constants/userTypes';
 
 const currentUser = (
   state = { userType: userTypes.NON_AUTHORIZED },
-  action
+  {type, ...data}
 ) => {
-  switch (action.type) {
+  switch (type) {
     case LOG_IN:
       return {
-        userType: action.userType,
-        id: action.id,
-        name: action.name,
-        password: action.password,
-        email: action.email
+        ...data
       };
     case LOG_OUT:
       return {

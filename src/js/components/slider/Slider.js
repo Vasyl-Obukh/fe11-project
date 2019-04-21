@@ -5,6 +5,7 @@ export default class Slider extends Component {
   constructor(props) {
     super(props);
     this.interval;
+    this.mounted = true;
     this.slidesAmount = props.articles.length || 0;
     this.state = {
       currentSlide: 0
@@ -18,6 +19,7 @@ export default class Slider extends Component {
   }
 
   componentWillUnmount() {
+    this.mounted = false;
     clearInterval(this.interval);
   }
 
@@ -30,9 +32,10 @@ export default class Slider extends Component {
 
   moveRight = () => {
     const { currentSlide } = this.state;
+    this.mounted ?
     this.setState({
       currentSlide: currentSlide < this.slidesAmount - 1 ? currentSlide + 1 : 0
-    });
+    }) : null;
   };
 
   render() {

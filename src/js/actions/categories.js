@@ -1,7 +1,7 @@
 import {
   ADD_CATEGORY,
   DELETE_CATEGORY,
-  CHANGE_CATEGORY_NAME
+  CHANGE_CATEGORY
 } from '../constants/actionTypes';
 
 export const addCategory = name => ({
@@ -15,7 +15,7 @@ export const deleteCategory = id => ({
 });
 
 export const changeCategoryName = ({ id, name }) => ({
-  type: CHANGE_CATEGORY_NAME,
+  type: CHANGE_CATEGORY,
   id,
   name
 });
