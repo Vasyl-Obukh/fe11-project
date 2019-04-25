@@ -1,94 +1,83 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Articles from '../components/articles/Articles';
+import 'url-search-params-polyfill';
+import sortTypes, { compareFunctions } from '../constants/sortTypes';
 import paths from '../constants/paths';
-import sortTypes from '../constants/sortTypes';
-import { compareFunctions } from '../constants/sortTypes';
+import { getBreadcrumbs, linkCategories, getSortType } from '../utilities';
+import Articles from '../components/articles/Articles';
+
+const getUrlTemplate = (path, name) =>
+  path === paths.CATEGORY_FIRST_PAGE
+    ? path.replace(/:\w*/, name)
+    : path === paths.CATEGORY_N_PAGE
+      ? path.replace(/:.*/, name)
+      : '';
 
 const mapStateToProps = (state, props) => {
-  const pageLimit = Number(state.settings.pageLimit) || 2;
-  const pageNeighbours = state.settings.pageNeighbours || 1;
-  let pageNotFound = false;
-  let pagesAmount;
-  const {
+  let {
     history: {
       location: { search }
     },
     match: {
       path,
-      url,
-      params: { number: currentPage = 1, categoryName }
+      params: { number = 1, categoryName }
     }
   } = props;
-  const filter = search
-    .slice(1)
-    .split('&')
-    .map(p => p.split('='))
-    .reduce((obj, pair) => {
-      const [key, value] = pair.map(decodeURIComponent);
-      return { ...obj, [key]: value };
-    }, {});
-  const sortType = Object.values(sortTypes).includes(filter.sort)
-    ? filter.sort
-    : sortTypes.LATEST;
-  const pageValidation = /^\d+$/.test(currentPage);
-  const offset = (currentPage - 1) * pageLimit;
-  const category = state.categories.filter(
-    category => category.name === categoryName
-  )[0];
+  const pageLimit = state.settings.pageLimit || 5;
+  const pageNeighbours = 1;
+  const sortType = getSortType(search);
+  let pageNotFound = false;
+  let pagesAmount = 0;
+
+  const getOffset = () => (currentPage - 1) * pageLimit;
+  const getPagesAmount = (articles = state.articles) =>
+    Math.ceil(articles.length / pageLimit);
+  const getArticles = (articles = state.articles) =>
+    articles.sort(compareFunctions[sortType]).slice(offset, offset + pageLimit);
+
+  number = parseInt(number);
+  let currentPage = number > 0 ? number : 1;
+  let offset = getOffset();
+
+  let category = categoryName
+    ? state.categories.find(category => category.name === categoryName)
+    : null;
   let articles = category
     ? state.articles.filter(_ => _.categoriesId.includes(category.id))
     : [];
 
-  const urlTemplate =
-    path === paths.CATEGORY_FIRST_PAGE
-      ? path.replace(':categoryName', url.split('/')[2])
-      : path === paths.CATEGORY_N_PAGE
-        ? path
-          .replace(':categoryName', url.split('/')[2])
-          .split('/')
-          .slice(0, -1)
-          .join('/')
-        : '';
-
-  const queryString = sortType !== sortTypes.LATEST ? `?sort=${sortType}` : '';
-
-  const getPagesAmount = (articles, limit) =>
-    Math.ceil(articles.length / limit);
+  let urlTemplate = getUrlTemplate(path, categoryName);
+  let queryString = sortType !== sortTypes.LATEST ? `?sort=${sortType}` : '';
 
   switch (path) {
     case paths.MAIN_FIRST_PAGE:
-      pagesAmount = getPagesAmount(state.articles, pageLimit);
-      articles = state.articles
-        .sort(compareFunctions[sortType])
-        .slice(offset, offset + pageLimit);
+      pagesAmount = getPagesAmount();
+      articles = getArticles();
       break;
     case paths.MAIN_N_PAGE:
-      if (pageValidation && state.articles.length > offset) {
-        pagesAmount = getPagesAmount(state.articles, pageLimit);
-        articles = state.articles
-          .sort(compareFunctions[sortType])
-          .slice(offset, offset + pageLimit);
-      } else {
-        pageNotFound = true;
+      pagesAmount = getPagesAmount();
+      if (state.articles.length <= offset) {
+        currentPage = pagesAmount;
       }
+      offset = getOffset();
+      articles = getArticles();
       break;
     case paths.CATEGORY_FIRST_PAGE:
       if (category) {
-        pagesAmount = getPagesAmount(articles, pageLimit);
-        articles = articles
-          .sort(compareFunctions[sortType])
-          .slice(offset, pageLimit);
+        pagesAmount = getPagesAmount(articles);
+        articles = getArticles(articles);
       } else {
         pageNotFound = true;
       }
       break;
     case paths.CATEGORY_N_PAGE:
-      if (category && pageValidation && articles.length > offset) {
-        pagesAmount = getPagesAmount(articles, pageLimit);
-        articles = articles
-          .sort(compareFunctions[sortType])
-          .slice(offset, offset + pageLimit);
+      if (category) {
+        pagesAmount = getPagesAmount(articles);
+        if (articles.length <= offset) {
+          currentPage = pagesAmount;
+        }
+        offset = getOffset();
+        articles = getArticles(articles);
       } else {
         pageNotFound = true;
       }
@@ -97,47 +86,26 @@ const mapStateToProps = (state, props) => {
       pageNotFound = true;
   }
 
-  articles.forEach(article => {
-    article.categoriesName = state.categories
-      .filter(category => article.categoriesId.includes(category.id))
-      .map(category => category.name);
-    return article;
+  articles = linkCategories(articles, state.categories);
+
+  let breadcrumbs = getBreadcrumbs({
+    categoryName: category ? category.name : null,
+    currentPage,
+    path
   });
-
-  let arr = [{name: 'Home', url: '/', last: path === paths.MAIN_FIRST_PAGE ? true : false}];
-  if (path === paths.CATEGORY_FIRST_PAGE || path === paths.CATEGORY_N_PAGE) {
-    arr.push({
-      name: 'Categories',
-      url: '/'
-    });
-    arr.push({
-      name: category.name,
-      url: `/Categories/${category.name}`,
-      last: currentPage === 1 ? true : false
-    });
-  }
-
-  if(currentPage !== 1) {
-    arr.push({
-      name: `Page-${currentPage}`,
-      last: true
-    });
-  }
-
-  const breadcrumbs = arr;
 
   return {
     pageNotFound,
     articles,
     breadcrumbs,
+    sortType,
     paginationSettings: {
-      currentPage: Number(currentPage),
+      currentPage,
       pagesAmount,
       pageNeighbours,
       urlTemplate,
       queryString
     },
-    sortType,
     changeSortType: sortType =>
       props.history.push(
         `${urlTemplate}${

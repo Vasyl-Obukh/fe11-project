@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import Pagination from '../Pagination';
 import Sort from '../Sort';
 import Breadcrumbs from '../Breadcrumbs';
+//import Breadcrumbs from '../../containers/BreadCrumbs';
 import paths from '../../constants/paths';
 
 export default function Articles({

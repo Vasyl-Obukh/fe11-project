@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Footer from '../components/footer/Footer';
 
-const mapStateToProps = ({ settings: {copyright, socialLinks} }) => ({
+const mapStateToProps = ({ settings: { copyright, socialLinks } }) => ({
   socialLinks,
   copyright
 });

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import paths from '../../constants/paths';
 
 export default class Slider extends Component {
   constructor(props) {
     super(props);
     this.interval;
     this.mounted = true;
+    this.time = 7000;
     this.slidesAmount = props.articles.length || 0;
     this.state = {
       currentSlide: 0
@@ -15,7 +18,7 @@ export default class Slider extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.moveRight();
-    }, 7000);
+    }, this.time);
   }
 
   componentWillUnmount() {
@@ -32,18 +35,16 @@ export default class Slider extends Component {
 
   moveRight = () => {
     const { currentSlide } = this.state;
-    this.mounted ?
-    this.setState({
-      currentSlide: currentSlide < this.slidesAmount - 1 ? currentSlide + 1 : 0
-    }) : null;
+    this.mounted
+      ? this.setState({
+          currentSlide:
+            currentSlide < this.slidesAmount - 1 ? currentSlide + 1 : 0
+        })
+      : null;
   };
 
   render() {
     const { articles } = this.props;
-    let imgArray = [];
-    for (let article of articles) {
-      imgArray.push(article.thumbnailUrl);
-    }
     return (
       <div
         className='slider'
@@ -51,7 +52,7 @@ export default class Slider extends Component {
         onMouseLeave={() =>
           (this.interval = setInterval(() => {
             this.moveRight();
-          }, 7000))
+          }, this.time))
         }
       >
         <i
@@ -64,7 +65,7 @@ export default class Slider extends Component {
         />
         <div className='slider__images'>
           {articles.map((_, id) => (
-            <Link key={id} to={`/articles/${_.id}`}>
+            <Link key={id} to={paths.ARTICLE_PAGE.replace(/:\w*/, _.id)}>
               <div
                 role='img'
                 className={`slider__image slider__image_${
@@ -72,10 +73,7 @@ export default class Slider extends Component {
                 }`}
                 style={{ backgroundImage: `url('${_.thumbnailUrl}')` }}
               >
-                <span
-                  className='slider__text'
-                  title={_.title}
-                >
+                <span className='slider__text' title={_.title}>
                   {_.title}
                 </span>
               </div>
@@ -86,3 +84,13 @@ export default class Slider extends Component {
     );
   }
 }
+
+Slider.propTypes = {
+  articles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      thumbnailUrl: PropTypes.string,
+      title: PropTypes.string
+    })
+  )
+};

@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import Categories from '../components/admin/Categories';
 import { addCategory, deleteCategory, changeCategoryName } from '../actions/categories';
+import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
 const mapStateToProps = state => ({
-  categories: state.categories.sort((a, b) => a.name > b.name ? 1 : -1)
+  categories: state.categories.sort(compareFunctions[sortTypes.ALPHABETIC])
 });
 
 const mapDispatchToProps = dispatch => ({

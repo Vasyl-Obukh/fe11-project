@@ -8,9 +8,8 @@ export default class Setings extends Component {
       facebook: this.props.socialLinks.facebook || '',
       linkedIn: this.props.socialLinks.linkedIn || '',
       twitter: this.props.socialLinks.twitter || '',
-      pageLimit: this.props.pageLimit || '',
-      pageNeighbours: this.props.pageNeighbours || '',
-      slidesNumber: this.props.slidesNumber || '',
+      pageLimit: this.props.pageLimit || 3,
+      slidesNumber: this.props.slidesNumber || 5,
       address: this.props.address || '',
       phoneNumber: this.props.phoneNumber || '',
       copyright: this.props.copyright || '',
@@ -122,7 +121,7 @@ export default class Setings extends Component {
               max='10'
               id='pageLimit'
               value={pageLimit}
-              onChange={e => this.setState({ pageLimit: e.target.value })}
+              onChange={e => this.setState({ pageLimit: parseInt(e.target.value) })}
             />
           </div>
           <div className='settings__item'>
@@ -134,7 +133,7 @@ export default class Setings extends Component {
               id='slidesNumber'
               value={slidesNumber}
               onChange={e =>
-                this.setState({ slidesNumber: e.target.value })
+                this.setState({ slidesNumber: parseInt(e.target.value) })
               }
             />
           </div>

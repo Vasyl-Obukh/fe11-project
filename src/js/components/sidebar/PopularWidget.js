@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function MostCommentedWidget({ articles }) {
+export default function PopularWidget({ articles = [] }) {
   return (
     <div className='widget-popular'>
       <h3 className='widget-popular__title'>Popular</h3>
@@ -29,3 +30,14 @@ export default function MostCommentedWidget({ articles }) {
     </div>
   );
 }
+
+PopularWidget.propTypes = {
+  articles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      thumbnailUrl: PropTypes.string,
+      title: PropTypes.string,
+      overview: PropTypes.string
+    })
+  )
+};

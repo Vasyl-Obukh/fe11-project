@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CategoriesWidget from './CategoriesWidget';
-import MostCommentdWidget from './MostCommentedWidget';
+import PopularWidget from './PopularWidget';
 
-export default function SideBar({ articles, categories }) {
+export default function Sidebar({ articles = [], categories = [] }) {
   return (
     <aside className='sidebar'>
       <div className='sidebar__widgets'>
@@ -10,9 +11,14 @@ export default function SideBar({ articles, categories }) {
           <CategoriesWidget categories={categories} />
         </div>
         <div className='sidebar__widget-wrapper'>
-          <MostCommentdWidget articles={articles} />
+          <PopularWidget articles={articles} />
         </div>
       </div>
     </aside>
   );
 }
+
+Sidebar.propTypes = {
+  categories: PropTypes.array,
+  articles: PropTypes.array
+};

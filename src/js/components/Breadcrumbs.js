@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function Breadcrumbs({ breadcrumbs }) {
@@ -17,3 +18,7 @@ export default function Breadcrumbs({ breadcrumbs }) {
     </ul>
   );
 }
+
+Breadcrumbs.propTypes = {
+  breadcrumbs: PropTypes.arrayOf(PropTypes.object)
+};

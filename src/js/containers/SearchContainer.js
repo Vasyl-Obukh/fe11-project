@@ -13,7 +13,7 @@ const mapStateToProps = (state, props) => {
     }
   } = props;
   currentPage = parseInt(currentPage);
-  const pageLimit = 3;
+  const pageLimit = 1;
   const pageNeighbours = 1;
   const offset = (currentPage - 1) * pageLimit;
   const urlTemplate = '/search';

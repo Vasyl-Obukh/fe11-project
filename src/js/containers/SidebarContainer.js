@@ -4,7 +4,7 @@ import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
 const mapStateToProps = ({ articles, categories }) => ({
   articles: articles.sort(compareFunctions[sortTypes.POPULAR]).slice(0, 3),
-  categories: categories.sort((a, b) => a.name > b.name ? 1 : -1)
+  categories: categories.sort(compareFunctions[sortTypes.ALPHABETIC])
 });
 
 export default connect(mapStateToProps)(Sidebar);

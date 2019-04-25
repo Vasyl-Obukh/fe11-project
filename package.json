@@ -1,6 +1,6 @@
 {
   "name": "fe11-project",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open",
@@ -46,6 +46,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "svg-url-loader": "^2.3.2",
+    "url-search-params-polyfill": "^5.1.0",
     "uuid": "^3.3.2",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",

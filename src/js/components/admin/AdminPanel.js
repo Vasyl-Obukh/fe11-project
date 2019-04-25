@@ -8,7 +8,7 @@ import AdminArticlesContainer from '../../containers/AdminArticlesContainer';
 import AdminCategoriesContainer from '../../containers/AdminCategoriesContainer';
 import AdminCommentsContainer from '../../containers/AdminCommentsContainer';
 import AdminUsersContainer from '../../containers/AdminUsersContainer';
-import Error404 from '../pages/Error404';
+
 
 export default class AdminPanel extends Component {
   constructor(props) {

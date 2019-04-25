@@ -1,21 +1,17 @@
 import React from 'react';
-import userTypes from '../../constants/userTypes';
+import PropTypes from 'prop-types';
+import Burger from '../Burger';
 import Logo from './Logo';
 import Navbar from './NavBar';
 import Search from '../Search';
 import SignContainer from '../../containers/SignContainer';
 import LogOut from './LogOut';
+import userTypes from '../../constants/userTypes';
 
-export default function Header({ categories, currentUser, logOut }) {
+export default function Header({ categories = [], currentUser, logOut }) {
   return (
     <header className='header header_fixed'>
-      <input type='checkbox' id='burger' className='burger' />
-      <label htmlFor='burger'>
-        <span />
-        <span />
-        <span />
-        <span />
-      </label>
+      <Burger />
       <Logo />
       <Navbar categories={categories} />
       <Search />
@@ -31,3 +27,12 @@ export default function Header({ categories, currentUser, logOut }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  categories: PropTypes.array,
+  currentUser: PropTypes.shape({
+    userType: PropTypes.string.isRequired,
+    name: PropTypes.string
+  }).isRequired,
+  logOut: PropTypes.func.isRequired
+};
