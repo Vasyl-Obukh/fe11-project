@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
-import formatDate from '../../formatDate';
+import { formatDate } from '../../utilities';
 
 export default class Comment extends Component {
   constructor(props) {

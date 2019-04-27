@@ -6,7 +6,7 @@ import {
   SliderContainer,
   SidebarContainer,
   FooterContainer
-} from '../containers/TemplateContainers';
+} from '../containers/Template';
 
 export default function PageTemplate({ children }) {
   return (

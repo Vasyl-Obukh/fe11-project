@@ -1,10 +1,9 @@
 import React from 'react';
 import Article from './Article';
 import { Redirect } from 'react-router-dom';
-import Pagination from '../Pagination';
-import Sort from '../Sort';
-import Breadcrumbs from '../Breadcrumbs';
-//import Breadcrumbs from '../../containers/BreadCrumbs';
+import Pagination from '../other/Pagination';
+import Sort from '../other/Sort';
+import Breadcrumbs from '../other/Breadcrumbs';
 import paths from '../../constants/paths';
 
 export default function Articles({

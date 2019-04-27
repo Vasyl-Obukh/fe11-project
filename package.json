@@ -1,6 +1,6 @@
 {
   "name": "fe11-project",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open",

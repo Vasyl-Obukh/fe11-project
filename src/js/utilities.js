@@ -63,6 +63,16 @@ export const linkCategories = (articles, categories) => articles.map(article => 
     .map(category => category.name)
 }));
 
+export const linkUserName = (comment, users) => ({
+  ...comment,
+  userName: users.find(_ => _.id === comment.userId).name
+});
+
+export const linkArticleTitle = (comment, articles) => ({
+  ...comment,
+  articleTitle: articles.find(_ => _.id === comment.articleId).title
+});
+
 export const getSortType = query => {
   const sortType = new URLSearchParams(query).get('sort');
   return Object.values(sortTypes).includes(sortType)
@@ -70,9 +80,22 @@ export const getSortType = query => {
     : sortTypes.LATEST;
 };
 
+export const range = (from, to, step = 1) => {
+  let i = from;
+  const range = [];
+
+  while (i <= to) {
+    range.push(i);
+    i += step;
+  }
+
+  return range;
+};
+
 export default {
   formatDate,
   getBreadcrumbs,
   linkCategories,
-  getSortType
+  getSortType,
+  range
 };

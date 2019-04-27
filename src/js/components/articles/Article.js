@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import formatDate from '../../formatDate';
+import {formatDate} from '../../utilities';
 
 export default function Article({
   article: {

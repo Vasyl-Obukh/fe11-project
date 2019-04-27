@@ -1,57 +1,79 @@
 import React from 'react';
-import PageTemplate from '../PageTemplate';
+import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import formatDate from '../../formatDate';
-import CommentsContainer from '../../containers/CommentsContainer';
-import BreadCrumbs from '../Breadcrumbs';
+import paths from '../../constants/paths';
+import { formatDate } from '../../utilities';
+import PageTemplate from '../PageTemplate';
+import BreadCrumbs from '../other/Breadcrumbs';
+import Comments from '../../containers/Comments';
 
-export default function ArticlePage({ article = {}, categories, breadcrumbs }) {
+export default function ArticlePage({ article, categories, breadcrumbs }) {
   return (
-    <PageTemplate>
-      {!article ? <Redirect to='/error-404' /> : null}
-      <div className='main__head'>
-        <BreadCrumbs breadcrumbs={breadcrumbs} />
-      </div>
-      <article className='article'>
-        <h2 className='article__title'>{article.title}</h2>
-
-        <div className='article__head'>
-          <div className='article__categories'>
-            <span>Categories: </span>
-            {categories.map(category => {
-              return category.length !== 0 ? (
-                <Link
-                  className='article__category'
-                  key={category.id}
-                  to={`/categories/${category.name}`}
-                >
-                  {category.name}
-                </Link>
-              ) : (
-                ''
-              );
-            })}
+    <>
+      {!article ? (
+        <Redirect to={paths.ERROR_404} />
+      ) : (
+        <PageTemplate>
+          <div className='main__head'>
+            <BreadCrumbs breadcrumbs={breadcrumbs} />
           </div>
+          <article className='article'>
+            <h2 className='article__title'>{article.title}</h2>
 
-          <div className='article__date'>
-            <span>{formatDate(article.date)}</span>
-          </div>
-        </div>
+            <div className='article__head'>
+              <div className='article__categories'>
+                <span>Categories: </span>
+                {categories.map(category => {
+                  return category.length !== 0 ? (
+                    <Link
+                      className='article__category'
+                      key={category.id}
+                      to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, category.name)}
+                    >
+                      {category.name}
+                    </Link>
+                  ) : (
+                    <span>Uncategorized</span>
+                  );
+                })}
+              </div>
 
-        <div
-          role='img'
-          className='article__thumbnail'
-          style={{ backgroundImage: `url(${article.thumbnailUrl})` }}
-        >
-        </div>
+              <div className='article__date'>
+                <span>{formatDate(article.date)}</span>
+              </div>
+            </div>
 
-        <div className='article__text'>
-          <p>{article.text}</p>
-        </div>
-      </article>
-      <section className='article--comments'>
-        <CommentsContainer articleId={article.id} />
-      </section>
-    </PageTemplate>
+            <div
+              role='img'
+              className='article__thumbnail'
+              style={{ backgroundImage: `url(${article.thumbnailUrl})` }}
+            />
+
+            <div className='article__text'>
+              <p>{article.text}</p>
+            </div>
+          </article>
+          <section className='article__comments'>
+            <Comments articleId={article.id} />
+          </section>
+        </PageTemplate>
+      )}
+    </>
   );
 }
+
+ArticlePage.propTypes = {
+  article: PropTypes.shape({
+    title: PropTypes.string,
+    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+    text: PropTypes.string,
+    id: PropTypes.string
+  }),
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      id: PropTypes.string
+    })
+  ),
+  breadcrumbs: PropTypes.arrayOf(PropTypes.object)
+};

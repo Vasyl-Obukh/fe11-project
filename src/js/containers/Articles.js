@@ -58,8 +58,8 @@ const mapStateToProps = (state, props) => {
       pagesAmount = getPagesAmount();
       if (state.articles.length <= offset) {
         currentPage = pagesAmount;
+        offset = getOffset();
       }
-      offset = getOffset();
       articles = getArticles();
       break;
     case paths.CATEGORY_FIRST_PAGE:
@@ -75,8 +75,8 @@ const mapStateToProps = (state, props) => {
         pagesAmount = getPagesAmount(articles);
         if (articles.length <= offset) {
           currentPage = pagesAmount;
+          offset = getOffset();
         }
-        offset = getOffset();
         articles = getArticles(articles);
       } else {
         pageNotFound = true;

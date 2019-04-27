@@ -1,11 +1,11 @@
 import React from 'react';
 import PageTemplate from '../PageTemplate';
-import ArticlesContainer from '../../containers/ArticlesContainer';
+import Articles from '../../containers/Articles';
 
 export default function Home () {
   return (
     <PageTemplate>
-      <ArticlesContainer />
+      <Articles />
     </PageTemplate>
   );
 }

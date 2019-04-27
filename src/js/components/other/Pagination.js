@@ -1,22 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { range } from '../../utilities';
 
-const range = (from, to, step = 1) => {
-  let i = from;
-  const range = [];
-
-  while (i <= to) {
-    range.push(i);
-    i += step;
+export default function Pagination({
+  paginationSettings: {
+    pagesAmount,
+    urlTemplate,
+    currentPage,
+    queryString
   }
-
-  return range;
-};
-
-export default function Pagination({ paginationSettings }) {
+}) {
   const fetchPageNumbers = () => {
-    const { pagesAmount, currentPage, pageNeighbours } = paginationSettings;
-
+    const pageNeighbours = 1;
     const totalNumbers = pageNeighbours * 2 + 3;
     const totalBlocks = totalNumbers + 2;
 
@@ -40,12 +36,12 @@ export default function Pagination({ paginationSettings }) {
 
       if (leftDots && !rightDots) {
         const extraPages = range(startPage - singleDotsOffset, startPage - 1);
-        pages = [DOTS, ...extraPages, ...pages];
+        pages = [dots, ...extraPages, ...pages];
       } else if (!leftDots && rightDots) {
         const extraPages = range(endPage + 1, endPage + singleDotsOffset);
-        pages = [...pages, ...extraPages, DOTS];
+        pages = [...pages, ...extraPages, dots];
       } else if (leftDots && rightDots) {
-        pages = [DOTS, ...pages, DOTS];
+        pages = [dots, ...pages, dots];
       }
 
       return [1, ...pages, pagesAmount];
@@ -53,22 +49,14 @@ export default function Pagination({ paginationSettings }) {
     return range(1, pagesAmount);
   };
 
-  const {
-    pagesAmount,
-    urlTemplate,
-    currentPage,
-    queryString
-  } = paginationSettings;
   if (!pagesAmount || pagesAmount === 1) return null;
+  let dots = '...';
+  let pages = fetchPageNumbers();
 
-  const DOTS = '...';
-
-  const pages = fetchPageNumbers();
-
-  const prev = `${urlTemplate}/${
+  let prev = `${urlTemplate}/${
     currentPage - 1 !== 1 ? `page-${currentPage - 1}` : ''
   }${queryString}`;
-  const next = `${urlTemplate}/page-${currentPage + 1}${queryString}`;
+  let next = `${urlTemplate}/page-${currentPage + 1}${queryString}`;
 
   return (
     <ul className='pagination'>
@@ -85,10 +73,8 @@ export default function Pagination({ paginationSettings }) {
 
       {pages.map((page, index) => (
         <li key={index} className='pagination__list-item'>
-          {page === DOTS ? (
-            <span className='pagination__item pagination__item_dots'>
-              ...
-            </span>
+          {page === dots ? (
+            <span className='pagination__item pagination__item_dots'>{dots}</span>
           ) : page === currentPage ? (
             <span className='pagination__item pagination__item_current'>
               {page}
@@ -119,3 +105,12 @@ export default function Pagination({ paginationSettings }) {
     </ul>
   );
 }
+
+Pagination.propTypes = {
+  paginationSettings: PropTypes.shape({
+    pagesAmount: PropTypes.number.isRequired,
+    urlTemplate: PropTypes.string.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    queryString: PropTypes.string
+  })
+};

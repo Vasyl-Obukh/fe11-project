@@ -3,9 +3,9 @@ import Sign from '../components/header/Sign';
 import { logIn } from '../actions/currentUser';
 import { addUser } from '../actions/users';
 
-const mapStateToProps = state => ({
-  users: state.users,
-  currentUser: state.currentUser
+const mapStateToProps = ({users, currentUser}) => ({
+  users,
+  currentUser
 });
 
 const mapDispatchToProps = dispatch => ({

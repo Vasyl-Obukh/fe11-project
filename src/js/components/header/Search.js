@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import paths from '../../constants/paths';
 
 class Search extends Component {
   constructor(props) {
@@ -11,8 +12,12 @@ class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.history.push(`/search?query=${this.state.query}`);
-    this.setState({query: ''});
+    if (this.state.query) {
+      this.props.history.push(
+        `${paths.SEARCH_FIRST_PAGE}?query=${this.state.query}`
+      );
+      this.setState({ query: '' });
+    }
   };
 
   render() {
@@ -23,8 +28,9 @@ class Search extends Component {
           type='text'
           placeholder='search...'
           value={this.state.query}
-          onChange={({ target: { value } }) => this.setState({ query: value })}
-          required
+          onChange={({ target: { value } }) =>
+            this.setState({ query: value.trimLeft() })
+          }
         />
         <i className='fas fa-search search__icon' />
       </form>

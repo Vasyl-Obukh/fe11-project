@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Comment from './Comment';
-import userTypes from '../constants/userTypes';
+import userTypes from '../../constants/userTypes';
 
 export default class Comments extends Component {
   constructor(props) {

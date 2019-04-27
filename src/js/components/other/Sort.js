@@ -1,5 +1,6 @@
 import React from 'react';
-import sortTypes from '../constants/sortTypes';
+import PropTypes from 'prop-types';
+import sortTypes from '../../constants/sortTypes';
 
 export default function Sort(props) {
   const { sortType, changeSortType } = props;
@@ -42,3 +43,8 @@ export default function Sort(props) {
     </div>
   );
 }
+
+Sort.propTypes = {
+  sortType: PropTypes.string.isRequired,
+  changeSortType: PropTypes.func.isRequired
+};

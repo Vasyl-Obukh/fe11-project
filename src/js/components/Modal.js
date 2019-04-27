@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
 function ModalWrapper(props) {
@@ -7,11 +8,12 @@ function ModalWrapper(props) {
 }
 
 export default function Modal({ onOutsideClick, handleHide, children }) {
+  const wrapperClass = 'modal-wrapper';
   return (
     <ModalWrapper>
       <div
-        className='modal-wrapper'
-        onClick={e => onOutsideClick(e, 'modal-wrapper')}
+        className={wrapperClass}
+        onClick={e => onOutsideClick(e, wrapperClass)}
       >
         <div className='modal-wrapper__window'>
           <button className='modal-wrapper__close' onClick={handleHide}>
@@ -35,3 +37,9 @@ export function handleHide() {
 export function onOutsideClick(e, wrapper) {
   e.target.getAttribute('class') === wrapper ? this.handleHide() : null;
 }
+
+Modal.propTypes = {
+  onOutsideClick: PropTypes.func,
+  handleHide: PropTypes.func.isRequired,
+  children: PropTypes.node
+};

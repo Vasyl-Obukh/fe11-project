@@ -1,6 +1,6 @@
 import React from 'react';
 import PageTemplate from '../PageTemplate';
-import Breadcrumbs from '../Breadcrumbs';
+import Breadcrumbs from '../other/Breadcrumbs';
 
 export default function AboutUs({ gallery = [], text = '' }) {
   const breadcrumbs = [

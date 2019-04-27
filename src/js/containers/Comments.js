@@ -1,28 +1,23 @@
 import { connect } from 'react-redux';
-import Comments from '../components/Comments';
+import Comments from '../components/comments/Comments';
 import { addComment } from '../actions/comments';
 import { changeCommentsNumber } from '../actions/articles';
 import userTypes from '../constants/userTypes';
+import { linkUserName } from '../utilities';
 import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
-const mapStateToProps = (state, ownProps) => {
-  const comments = state.comments
+const mapStateToProps = ({ users, currentUser, ...state }, {articleId}) => {
+  let comments = state.comments
     .filter(
       comment =>
-        comment.validate === true && comment.articleId === ownProps.articleId
+        comment.validate === true && comment.articleId === articleId
     )
     .sort(compareFunctions[sortTypes.LATEST])
-    .map(_ => {
-      const comment = Object.assign({}, _);
-      comment.userName = state.users.filter(
-        user => user.id === comment.userId
-      )[0].name;
-      return comment;
-    });
+    .map(_ => linkUserName(_, users));
   return {
-    comments: comments,
-    currentUser: state.currentUser,
-    articleId: ownProps.articleId
+    comments,
+    currentUser,
+    articleId
   };
 };
 

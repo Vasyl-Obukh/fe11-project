@@ -1,5 +1,5 @@
 import React from 'react';
-import formatDate from '../../formatDate';
+import { formatDate } from '../../utilities';
 import { Link } from 'react-router-dom';
 
 export default function ArticleShort({

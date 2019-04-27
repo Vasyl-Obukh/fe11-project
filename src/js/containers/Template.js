@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { logOut } from '../actions/currentUser';
 import Header from '../components/header/Header';
-import Slider from '../components/slider/Slider';
+import Slider from '../components/other/Slider';
 import Sidebar from '../components/sidebar/Sidebar';
 import Footer from '../components/footer/Footer';
 import sortTypes, { compareFunctions } from '../constants/sortTypes';

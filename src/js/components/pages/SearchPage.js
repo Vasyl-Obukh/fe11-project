@@ -1,11 +1,11 @@
 import React from 'react';
 import PageTemplate from '../PageTemplate';
-import SearchContainer from '../../containers/SearchContainer';
+import Search from '../../containers/Search';
 
 export default function SearchPage() {
   return (
     <PageTemplate>
-      <SearchContainer />
+      <Search />
     </PageTemplate>
   );
 }

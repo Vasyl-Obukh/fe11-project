@@ -7,20 +7,15 @@ import {
 } from '../actions/comments';
 import { changeCommentsNumber } from '../actions/articles';
 import sortTypes, { compareFunctions } from '../constants/sortTypes';
+import { linkUserName, linkArticleTitle } from '../utilities';
 
 const mapStateToProps = state => {
-  const comments = state.comments.map(_ => {
-    const comment = Object.assign({}, _);
-    comment.articleTitle = state.articles.filter(
-      _ => _.id === comment.articleId
-    )[0].title;
-    comment.userName = state.users.filter(
-      user => user.id === comment.userId
-    )[0].name;
-    return comment;
-  });
+  let comments = state.comments
+    .sort(compareFunctions[sortTypes.LATEST])
+    .map(_ => linkArticleTitle(_, state.articles))
+    .map(_ => linkUserName(_, state.users));
   return {
-    comments: comments.sort(compareFunctions[sortTypes.LATEST])
+    comments
   };
 };
 
@@ -30,7 +25,6 @@ const mapDispatchToProps = dispatch => ({
     validate ? dispatch(changeCommentsNumber(articleId, false)) : null;
   },
   validateComment: (id, articleId, validate) => {
-    console.log(validate);
     dispatch(validateComment(id, validate));
     dispatch(changeCommentsNumber(articleId, validate));
   },
