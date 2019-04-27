@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -6,13 +7,13 @@ import SignUp from './SignUp';
 export default class Sign extends Component {
   constructor(props) {
     super(props);
+    this.handleShow = handleShow.bind(this);
+    this.handleHide = handleHide.bind(this);
+    this.onOutsideClick = onOutsideClick.bind(this);
     this.state = {
       showModal: false,
       isSignIn: true
     };
-    this.handleShow = handleShow.bind(this);
-    this.handleHide = handleHide.bind(this);
-    this.onOutsideClick = onOutsideClick.bind(this);
   }
 
   showSignIn = value => {
@@ -63,10 +64,12 @@ export default class Sign extends Component {
                 </span>
               </div>
               {this.state.isSignIn ? (
-                <SignIn users={this.props.users} logIn={this.props.logIn} />
+                <SignIn
+                  isUserExists={this.props.isUserExists}
+                  logIn={this.props.logIn}
+                />
               ) : (
                 <SignUp
-                  users={this.props.users}
                   addUser={this.props.addUser}
                   showSignIn={this.showSignIn}
                 />
@@ -78,3 +81,9 @@ export default class Sign extends Component {
     );
   }
 }
+
+Sign.propTypes = {
+  isUserExists: PropTypes.func.isRequired,
+  addUser: PropTypes.func.isRequired,
+  logIn: PropTypes.func.isRequired
+};

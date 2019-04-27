@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Comment from './Comment';
 import userTypes from '../../constants/userTypes';
+import InputError from '../../InputError';
 
 export default class Comments extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ export default class Comments extends Component {
     let isAdmin = userType === !userTypes.ADMIN;
     try {
       if (!this.state.comment) {
-        throw 'You need to fill the comment field';
+        throw new InputError('You need to fill up the comment field');
       }
 
       addComment({
@@ -69,7 +70,9 @@ export default class Comments extends Component {
         3000
       ) : null;
     } catch (error) {
-      this.setState({ error });
+      if (error instanceof InputError) {
+        this.setState({ error: error.message });
+      }
     }
   };
 
@@ -89,7 +92,7 @@ export default class Comments extends Component {
               <p className='comments__error'>{this.state.error}</p>
             ) : null}
             {this.state.message ? (
-              <p>Your comment will be added after validation</p>
+              <h3>Your comment will be added after validation</h3>
             ) : null}
             <button className='comments__submit' type='submit'>
               Submit
@@ -106,7 +109,7 @@ export default class Comments extends Component {
               <Comment key={comment.id} comment={comment} />
             ))
           ) : (
-            <h2 className='comments__absence'>
+            <h2 className='absence'>
               This artilce doesn't have any comments yet
             </h2>
           )}

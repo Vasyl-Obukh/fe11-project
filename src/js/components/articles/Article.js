@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import {formatDate} from '../../utilities';
+import { formatDate } from '../../utilities';
+import paths from '../../constants/paths';
 
 export default function Article({
   article: {
@@ -16,7 +18,7 @@ export default function Article({
   return (
     <article className='article'>
       <h2 className='article__title'>
-        <Link to={`/articles/${id}`}>{title}</Link>
+        <Link to={paths.ARTICLE_PAGE.replace(/:\w*/, id)}>{title}</Link>
       </h2>
 
       <div className='article__head'>
@@ -28,13 +30,13 @@ export default function Article({
                 <Link
                   className='article__category'
                   key={id}
-                  to={`/categories/${category}`}
+                  to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, category)}
                 >
                   {category}
                 </Link>
               );
             })
-            : null}
+            : <span>none</span>}
         </div>
 
         <div className='article__date'>
@@ -53,11 +55,28 @@ export default function Article({
       </div>
 
       <div className='article__footer'>
-        <span className='article__comments-number'>Comments: {commentsNumber}</span>
-        <Link className='article__ref' to={`/articles/${id}`}>
+        <span className='article__comments-number'>
+          <i className='far fa-comments' /> {commentsNumber}
+        </span>
+        <Link
+          className='article__ref'
+          to={paths.ARTICLE_PAGE.replace(/:\w*/, id)}
+        >
           Read more...
         </Link>
       </div>
     </article>
   );
 }
+
+Article.propTypes = {
+  article: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    categoriesName: PropTypes.arrayOf(PropTypes.string),
+    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+    thumbnailUrl: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
+    commentsNumber: PropTypes.number.isRequired
+  })
+};

@@ -45,7 +45,7 @@ export default class Slider extends Component {
 
   render() {
     const { articles } = this.props;
-    return (
+    return this.slidesAmount ? (
       <div
         className='slider'
         onMouseEnter={() => clearInterval(this.interval)}
@@ -81,7 +81,7 @@ export default class Slider extends Component {
           ))}
         </div>
       </div>
-    );
+    ) : null;
   }
 }
 

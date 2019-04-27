@@ -8,7 +8,11 @@ import Sign from '../../containers/Sign';
 import LogOut from './LogOut';
 import userTypes from '../../constants/userTypes';
 
-export default function Header({ categories = [], currentUser, logOut }) {
+export default function Header({
+  categories = [],
+  currentUser = userTypes.NON_AUTHORIZED,
+  logOut
+}) {
   return (
     <header className='header header_fixed'>
       <Burger />
@@ -20,7 +24,6 @@ export default function Header({ categories = [], currentUser, logOut }) {
       ) : (
         <LogOut
           userType={currentUser.userType}
-          userName={currentUser.name}
           onLogOut={logOut}
         />
       )}
@@ -31,7 +34,7 @@ export default function Header({ categories = [], currentUser, logOut }) {
 Header.propTypes = {
   categories: PropTypes.array,
   currentUser: PropTypes.shape({
-    userType: PropTypes.string.isRequired,
+    userType: PropTypes.string,
     name: PropTypes.string
   }).isRequired,
   logOut: PropTypes.func.isRequired

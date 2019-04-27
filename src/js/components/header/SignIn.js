@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import InputError from '../../InputError';
 
-class SignIn extends Component {
+export default class SignIn extends Component {
   constructor(props) {
     super(props);
-    this.email;
-    this.password;
     this.state = {
-      error: false
+      email: '',
+      password: '',
+      error: ''
     };
   }
 
   onSignIn = e => {
     e.preventDefault();
-    const { users, logIn } = this.props;
 
-    let user = users.filter(
-      user =>
-        user.email === this.email.value.trim() &&
-        user.password === this.password.value.trim()
-    );
-    user.length === 1
-      ? this.props.logIn(...user)
-      : this.setState({ error: true });
+    let email = this.state.email.trim();
+    let password = this.state.password.trim();
+
+    try {
+      if (email === '' || password === '' ) {
+        throw new InputError('You need to fill up all fields');
+      }
+      let user = this.props.isUserExists({email, password});
+      if(user) {
+        this.props.logIn(user);
+      }
+    } catch (error) {
+      if(error instanceof InputError) {
+        this.setState({ error: error.message });
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   render() {
@@ -32,14 +43,14 @@ class SignIn extends Component {
         </label>
         <input
           className='sign-form__item'
-          type='email'
+          type='text'
           id='email'
-          placeholder='Enter your email'
+          placeholder='Enter your email...'
           autoComplete='off'
-          required
-          ref={node => {
-            this.email = node;
-          }}
+          value={this.state.email}
+          onChange={e =>
+            this.setState({ email: e.target.value.trimLeft(), error: '' })
+          }
         />
         <label className='sign-form__label' htmlFor='password'>
           password
@@ -48,20 +59,25 @@ class SignIn extends Component {
           className='sign-form__item'
           type='password'
           id='password'
-          placeholder='Enter your password'
+          placeholder='Enter your password...'
           autoComplete='off'
-          required
-          ref={node => {
-            this.password = node;
-          }}
+          value={this.state.password}
+          onChange={e =>
+            this.setState({ password: e.target.value.trimLeft(), error: '' })
+          }
         />
         {this.state.error ? (
-          <p className='sign-form__error error'>Email or password is incorrect</p>
+          <p className='sign-form__error error'>{this.state.error}</p>
         ) : null}
-        <button className='sign-form__submit' type='submit'>Sign in</button>
+        <button className='sign-form__submit' type='submit'>
+          Sign in
+        </button>
       </form>
     );
   }
 }
 
-export default SignIn;
+SignIn.propTypes = {
+  isUserExists: PropTypes.func.isRequired,
+  logIn: PropTypes.func.isRequired
+};

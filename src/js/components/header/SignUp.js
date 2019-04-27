@@ -1,71 +1,82 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import InputError from '../../InputError';
 
 export default class SignUp extends Component {
   constructor(props) {
     super(props);
-    this.name;
-    this.email;
-    this.password;
     this.state = {
-      errorMessage: ''
+      name: '',
+      email: '',
+      password: '',
+      error: ''
     };
   }
 
   addAndSwitchToLogin = user => {
     this.props.addUser(user);
     this.props.showSignIn(true);
-  }
+  };
 
   onSignUp = e => {
     e.preventDefault();
-
-    const { users } = this.props;
-
-    users.filter(user => user.email === this.email.value.trim()).length > 0
-      ? this.setState({
-          errorMessage: 'Account with this email is already exist'
-        })
-      : users.filter(user => user.name === this.name.value.trim()).length > 0
-      ? this.setState({
-          errorMessage: 'This name is taken'
-        })
-      : this.addAndSwitchToLogin({
-          name: this.name.value.trim(),
-          password: this.password.value.trim(),
-          email: this.email.value.trim()
-        });
+    let name = this.state.name.trim();
+    let email = this.state.email.trim();
+    let password = this.state.password.trim();
+    try {
+      if (name === '' || email === '' || password === '') {
+        throw new InputError('You need to fill up all fields');
+      }
+      if (name.length < 2) {
+        throw new InputError('Name has to contain , at least, 2 symbols');
+      }
+      if (password.length < 7) {
+        throw 'Password has to contain , at least, 7 symbols';
+      }
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        throw new InputError('Email is invalid');
+      }
+      this.addAndSwitchToLogin({ name, email, password });
+    } catch (error) {
+      if(error instanceof InputError) {
+        this.setState({ error: error.message });
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   render() {
     return (
       <form className='sign-form' onSubmit={this.onSignUp}>
         <label className='sign-form__label' htmlFor='name'>
-          full name
+          Name
         </label>
         <input
           className='sign-form__item'
           type='text'
           id='name'
-          placeholder='Enter your full name'
+          placeholder='Enter your name...'
           autoComplete='off'
-          required
-          ref={node => {
-            this.name = node;
-          }}
+          maxLength='20'
+          value={this.state.name}
+          onChange={e =>
+            this.setState({ name: e.target.value.trimLeft(), error: '' })
+          }
         />
         <label className='sign-form__label' htmlFor='email'>
           e-mail
         </label>
         <input
           className='sign-form__item'
-          type='email'
+          type='text'
           id='email'
-          placeholder='Enter your email'
+          placeholder='Enter your email...'
           autoComplete='off'
-          required
-          ref={node => {
-            this.email = node;
-          }}
+          value={this.state.email}
+          onChange={e =>
+            this.setState({ email: e.target.value.trimLeft(), error: '' })
+          }
         />
         <label className='sign-form__label' htmlFor='password'>
           password
@@ -74,18 +85,25 @@ export default class SignUp extends Component {
           className='sign-form__item'
           type='password'
           id='password'
-          placeholder='Enter your password'
+          placeholder='Enter your password...'
           autoComplete='off'
-          required
-          ref={node => {
-            this.password = node;
-          }}
+          value={this.state.password}
+          onChange={e =>
+            this.setState({ password: e.target.value.trimLeft(), error: '' })
+          }
         />
-        {this.state.errorMessage !== '' ? (
-          <p className='sign-form__error error'>{this.state.errorMessage}</p>
+        {this.state.error ? (
+          <p className='sign-form__error error'>{this.state.error}</p>
         ) : null}
-        <button className='sign-form__submit' type='submit'>Sign up</button>
+        <button className='sign-form__submit' type='submit'>
+          Sign up
+        </button>
       </form>
     );
   }
 }
+
+SignUp.propTypes = {
+  addUser: PropTypes.func.isRequired,
+  showSignIn: PropTypes.func.isRequired
+};

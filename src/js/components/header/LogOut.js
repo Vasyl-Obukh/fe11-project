@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import userTypes from '../../constants/userTypes';
 
-export default function LogOut({ userType, userName, onLogOut }) {
+export default function LogOut({ userType, onLogOut }) {
   return (
     <div className='sign sign_authorized'>
       {userType === userTypes.ADMIN ? (
@@ -17,3 +18,8 @@ export default function LogOut({ userType, userName, onLogOut }) {
     </div>
   );
 }
+
+LogOut.propTypes = {
+  userType: PropTypes.string.isRequired,
+  onLogOut: PropTypes.func.isRequired
+};
