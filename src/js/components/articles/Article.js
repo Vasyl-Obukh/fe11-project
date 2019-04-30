@@ -74,7 +74,7 @@ Article.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     categoriesName: PropTypes.arrayOf(PropTypes.string),
-    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
     thumbnailUrl: PropTypes.string.isRequired,
     overview: PropTypes.string.isRequired,
     commentsNumber: PropTypes.number.isRequired

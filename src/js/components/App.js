@@ -12,26 +12,25 @@ import paths from '../constants/paths';
 import '../../sass/app.sass';
 
 export default function App() {
-  const params = /:\w*/;
   return (
     <Switch>
       <Route exact path={paths.MAIN_FIRST_PAGE} component={Home} />
       <Redirect
         exact
-        from={paths.MAIN_N_PAGE.replace(params, '1')}
+        from={paths.MAIN_N_PAGE.replace(/:\w*$/, '1')}
         to={paths.MAIN_FIRST_PAGE}
       />
       <Route path={paths.MAIN_N_PAGE} component={Home} />
       <Route path={paths.ADMIN_PANEL} component={AdminPanel} />
       <Redirect
         exact
-        from={paths.ARTICLE_PAGE.replace(params, '')}
+        from={paths.ARTICLE_PAGE.replace(/:\w*/, '')}
         to={paths.MAIN_FIRST_PAGE}
       />
       <Route path={paths.ARTICLE_PAGE} component={ArticlePage} />
       <Redirect
         exact
-        from={paths.CATEGORY_FIRST_PAGE.replace(params, '')}
+        from={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, '')}
         to={paths.MAIN_FIRST_PAGE}
       />
       <Route path={paths.CATEGORY_FIRST_PAGE} component={CategoryPage} />

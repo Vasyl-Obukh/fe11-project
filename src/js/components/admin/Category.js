@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import { Link } from 'react-router-dom';
+import InputError from '../../InputError';
+import paths from '../../constants/paths';
 
 export default class Category extends Component {
   constructor(props) {
     super(props);
+    const { category } = this.props;
     this.state = {
-      addNew: this.props.new ? this.props.new : false,
+      addNew: this.props.new ? true : false,
       showModal: false,
-      name: this.props.category ? this.props.category.name : '',
-      error: false
+      name: category ? category.name : '',
+      error: ''
     };
     this.message = 'Do you wanna delete this category?';
     this.handleShow = handleShow.bind(this);
@@ -19,20 +23,24 @@ export default class Category extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    if (this.props.categories.some(_ => _.name === this.state.name)) {
-      this.setState({ error: true })
-    } else {
-      this.state.addNew
-        ? this.props.addCategory(this.state.name)
-        : this.props.changeCategory({
-            id: this.props.category.id,
-            name: this.state.name
-          });
-      this.handleHide();
+    const name = this.state.name.trim();
+    
+    try {
+      if(!name) throw new InputError('You need to fill up all fields');
+      this.state.addNew 
+        ? this.props.addCategory(name)
+        : this.props.changeCategory({id: this.props.category.id, name})
+        this.handleHide();
+    } catch (error) {
+      if(error instanceof InputError) {
+        this.setState({error : error.message})
+      } else {
+        console.log(error);
+      }
     }
   };
 
-  onDelete = e => confirm(this.message) ? this.props.deleteCategory(e) : null;
+  onDelete = e => (confirm(this.message) ? this.props.deleteCategory(e) : null);
 
   render() {
     return (
@@ -44,11 +52,14 @@ export default class Category extends Component {
             </button>
           </div>
         ) : (
-          <li className='list-item list-item_categories'>
+          <>
             <div className='list-item__category'>
               <Link
                 className='list-item__link'
-                to={`/categories/${this.props.category.name}`}
+                to={paths.CATEGORY_FIRST_PAGE.replace(
+                  /:\w*$/,
+                  this.props.category.name
+                )}
               >
                 {this.props.category.name}
               </Link>
@@ -59,7 +70,7 @@ export default class Category extends Component {
             <span className='list-item__delete' onClick={this.onDelete}>
               &times;
             </span>
-          </li>
+          </>
         )}
         {this.state.showModal ? (
           <Modal
@@ -74,16 +85,21 @@ export default class Category extends Component {
                 <input
                   type='text'
                   id='name'
+                  maxLength='15'
                   className='admin-modal__text admin-modal__text_category'
                   value={this.state.name}
-                  onChange={e => this.setState({ name: e.target.value })}
+                  onChange={e =>
+                    this.setState({
+                      name: e.target.value.trimLeft(),
+                      error: ''
+                    })
+                  }
                   placeholder='Type the category name...'
                   autoComplete='off'
-                  required
                 />
               </div>
 
-              {this.state.error ? <p>This category name is taken</p> : null}
+              {this.state.error ? <p>{this.state.error}</p> : null}
               <button className='submit' type='submit'>
                 Submit
               </button>
@@ -94,3 +110,14 @@ export default class Category extends Component {
     );
   }
 }
+
+Category.propTypes = {
+  category: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  }),
+  new: PropTypes.bool,
+  addCategory: PropTypes.func,
+  changeCategory: PropTypes.func,
+  deleteCategory: PropTypes.func
+};

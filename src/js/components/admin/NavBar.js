@@ -1,20 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { NavLink, withRouter } from 'react-router-dom';
+import Burger from '../header/Burger';
+import paths from '../../constants/paths';
 
-export default function LeftNavBar({ logOut, history }) {
+function NavBar({ logOut, history }) {
   return (
     <>
-      <input type='checkbox' id='burger' className='burger burger_admin' />
-      <label htmlFor='burger'>
-        <span />
-        <span />
-        <span />
-        <span />
-      </label>
+      <Burger />
       <ul className='nav-menu__list'>
         <li className='nav-menu__item'>
           <NavLink
-            to='/admin'
+            to={paths.ADMIN_PANEL}
             exact
             activeClassName='nav-menu__link_active'
             className='nav-menu__link'
@@ -24,7 +21,7 @@ export default function LeftNavBar({ logOut, history }) {
         </li>
         <li className='nav-menu__item'>
           <NavLink
-            to='/admin/articles'
+            to={paths.ADMIN_ARTICLES}
             activeClassName='nav-menu__link_active'
             className='nav-menu__link'
           >
@@ -33,7 +30,7 @@ export default function LeftNavBar({ logOut, history }) {
         </li>
         <li className='nav-menu__item'>
           <NavLink
-            to='/admin/categories'
+            to={paths.ADMIN_CATEGORIES}
             activeClassName='nav-menu__link_active'
             className='nav-menu__link'
           >
@@ -42,7 +39,7 @@ export default function LeftNavBar({ logOut, history }) {
         </li>
         <li className='nav-menu__item'>
           <NavLink
-            to='/admin/comments'
+            to={paths.ADMIN_COMMENTS}
             activeClassName='nav-menu__link_active'
             className='nav-menu__link'
           >
@@ -51,7 +48,7 @@ export default function LeftNavBar({ logOut, history }) {
         </li>
         <li className='nav-menu__item'>
           <NavLink
-            to='/admin/users'
+            to={paths.ADMIN_USERS}
             activeClassName='nav-menu__link_active'
             className='nav-menu__link'
           >
@@ -60,7 +57,7 @@ export default function LeftNavBar({ logOut, history }) {
         </li>
         <li className='nav-menu__item'>
           <NavLink
-            to='/admin/settings'
+            to={paths.ADMIN_SETTINGS}
             activeClassName='nav-menu__link_active'
             className='nav-menu__link'
           >
@@ -71,10 +68,17 @@ export default function LeftNavBar({ logOut, history }) {
       <div className='nav-menu__outs'>
         <i
           className='fas fa-arrow-circle-left nav-menu__btn'
-          onClick={() => history.push('/')}
+          onClick={() => history.push(paths.MAIN_FIRST_PAGE)}
         />
         <i className='fas fa-sign-out-alt nav-menu__btn' onClick={logOut} />
       </div>
     </>
   );
 }
+
+NavBar.propTypes = {
+  logOut: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+export default withRouter(NavBar);

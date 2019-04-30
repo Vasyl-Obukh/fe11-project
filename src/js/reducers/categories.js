@@ -4,8 +4,9 @@ import {
   DELETE_CATEGORY,
   CHANGE_CATEGORY
 } from '../constants/actionTypes';
+import InputError from '../InputError';
 
-const category = (state = {}, {type, name}) => {
+const category = (state = {}, { type, name }) => {
   switch (type) {
     case CHANGE_CATEGORY:
       return {
@@ -20,6 +21,9 @@ const category = (state = {}, {type, name}) => {
 const categories = (state = [], action) => {
   switch (action.type) {
     case ADD_CATEGORY:
+      if (state.find(_ => _.name === action.name)) {
+        throw new InputError('This category name is taken');
+      }
       return [
         ...state,
         {
@@ -30,6 +34,9 @@ const categories = (state = [], action) => {
     case DELETE_CATEGORY:
       return state.filter(_ => _.id !== action.id);
     case CHANGE_CATEGORY:
+      if (state.find(_ => _.name === action.name)) {
+        throw new InputError('This category name is taken');
+      }
       return [
         ...state.filter(_ => _.id !== action.id),
         category(state.find(_ => _.id === action.id), action)

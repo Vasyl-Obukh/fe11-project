@@ -20,8 +20,8 @@ export const formatDate = (date, showMinutes = false) => {
   return `${time} ${day}/${month}/${year}`;
 };
 
-export const getBreadcrumbs = ({path, currentPage, categoryName, title}) => {
-  const breadcrumbs = [{
+export const getBreadcrumbs = ({path, currentPage, categoryName, title, page}) => {
+  let breadcrumbs = [{
     name: 'Home',
     url: paths.MAIN_FIRST_PAGE,
     last: path === paths.MAIN_FIRST_PAGE ? true : false
@@ -37,6 +37,12 @@ export const getBreadcrumbs = ({path, currentPage, categoryName, title}) => {
       last: currentPage === 1 ? true : false
     });
   }
+  if(page) {
+    breadcrumbs.push({
+      name: page,
+      last: true
+    });
+  }
   if(currentPage && currentPage !== 1) {
     breadcrumbs.push({
       name: `Page-${currentPage}`,
@@ -49,7 +55,7 @@ export const getBreadcrumbs = ({path, currentPage, categoryName, title}) => {
       url: paths.MAIN_FIRST_PAGE,
     },
     {
-      name: title.slice(0, 30) + '...',
+      name: title.length > 30 ? title.slice(0, 30) + '...' : title,
       last: true
     });
   }

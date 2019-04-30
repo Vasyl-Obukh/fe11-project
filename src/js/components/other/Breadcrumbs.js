@@ -20,5 +20,11 @@ export default function Breadcrumbs({ breadcrumbs }) {
 }
 
 Breadcrumbs.propTypes = {
-  breadcrumbs: PropTypes.arrayOf(PropTypes.object)
+  breadcrumbs: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      url: PropTypes.string,
+      last: PropTypes.bool
+    })
+  )
 };

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import userTypes from '../../constants/userTypes';
-import NavBar from './LeftNavBar';
+import NavBar from './NavBar';
 import Home from '../../containers/AdminHome';
 import Settings from '../../containers/Settings';
 import AdminArticles from '../../containers/AdminArticles';
 import AdminCategories from '../../containers/AdminCategories';
 import AdminComments from '../../containers/AdminComments';
 import AdminUsers from '../../containers/AdminUsers';
+import userTypes from '../../constants/userTypes';
+import paths from '../../constants/paths';
 
 
 export default class AdminPanel extends Component {
@@ -17,7 +18,7 @@ export default class AdminPanel extends Component {
 
   componentWillMount = () => {
     this.props.userType !== userTypes.ADMIN
-      ? this.props.history.push('/')
+      ? this.props.history.push(paths.MAIN_FIRST_PAGE)
       : null;
   };
 
@@ -31,7 +32,7 @@ export default class AdminPanel extends Component {
 
   onLogOut = () => {
     this.props.logOut();
-    this.props.history.push('/');
+    this.props.history.push(paths.MAIN_FIRST_PAGE);
   };
 
   render() {
@@ -40,29 +41,29 @@ export default class AdminPanel extends Component {
     return (
       <>
         <div className='admin__nav-menu nav-menu'>
-          <NavBar logOut={this.onLogOut} history={this.props.history} />
+          <NavBar logOut={this.onLogOut} />
         </div>
         <div className='admin__main'>
           <Switch>
             <Route exact path={path} component={Home} />
             <Route
-              path={`${path}/settings`}
+              path={paths.ADMIN_SETTINGS}
               component={Settings}
             />
             <Route
-              path={`${path}/articles`}
+              path={paths.ADMIN_ARTICLES}
               component={AdminArticles}
             />
             <Route
-              path={`${path}/categories`}
+              path={paths.ADMIN_CATEGORIES}
               component={AdminCategories}
             />
             <Route
-              path={`${path}/comments`}
+              path={paths.ADMIN_COMMENTS}
               component={AdminComments}
             />
-            <Route path={`${path}/users`} component={AdminUsers} />
-            <Redirect to='/error-404' />
+            <Route path={paths.ADMIN_USERS} component={AdminUsers} />
+            <Redirect to={paths.ERROR_404} />
           </Switch>
         </div>
       </>

@@ -13,16 +13,12 @@ export default class SignUp extends Component {
     };
   }
 
-  addAndSwitchToLogin = user => {
-    this.props.addUser(user);
-    this.props.showSignIn(true);
-  };
-
   onSignUp = e => {
     e.preventDefault();
     let name = this.state.name.trim();
     let email = this.state.email.trim();
     let password = this.state.password.trim();
+
     try {
       if (name === '' || email === '' || password === '') {
         throw new InputError('You need to fill up all fields');
@@ -36,7 +32,8 @@ export default class SignUp extends Component {
       if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         throw new InputError('Email is invalid');
       }
-      this.addAndSwitchToLogin({ name, email, password });
+      this.props.addUser({name, email, password});
+      this.props.showSignIn(true);
     } catch (error) {
       if(error instanceof InputError) {
         this.setState({ error: error.message });

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import Users from '../components/admin/Users';
 
-const mapStateToProps = state => ({
-  users: state.users
+const mapStateToProps = ({ users }) => ({
+  users
 });
 
 export default connect(

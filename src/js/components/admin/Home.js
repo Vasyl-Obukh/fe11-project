@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Home({
   articlesNumber,
@@ -26,3 +27,10 @@ export default function Home({
     </ul>
   );
 }
+
+Home.propTypes = {
+  articlesNumber: PropTypes.number.isRequired,
+  categoriesNumber: PropTypes.number.isRequired,
+  usersNumber: PropTypes.number.isRequired,
+  commentsNumber: PropTypes.number.isRequired
+};

@@ -21,7 +21,7 @@ export default function PopularWidget({ articles = [] }) {
             </h4>
             <p className='widget-popular__overview'>
               {article.overview.length > 100
-                ? article.overview.slice(0, 120) + '...'
+                ? article.overview.slice(0, 100) + '...'
                 : article.overview}
             </p>
           </li>

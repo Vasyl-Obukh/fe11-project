@@ -8,16 +8,10 @@ export default function CategoryPage() {
   return (
     <PageTemplate>
       <Switch>
-        <Route
-          exact
-          path={paths.CATEGORY_FIRST_PAGE}
-          component={Articles}
-        />
+        <Route exact path={paths.CATEGORY_FIRST_PAGE} component={Articles} />
         <Redirect
           exact
-          from={`${paths.CATEGORY_N_PAGE.split(':')
-            .slice(0, 2)
-            .join(':')}1`}
+          from={paths.CATEGORY_N_PAGE.replace(/:\w*$/, 1)}
           to={paths.CATEGORY_FIRST_PAGE}
         />
         <Route path={paths.CATEGORY_N_PAGE} component={Articles} />

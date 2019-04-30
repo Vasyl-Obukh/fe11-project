@@ -123,7 +123,7 @@
 
   &__item
     display: flex
-    flex-direction: row
+    flex-direction: column
 
     &:not(:first-child)
       margin-top: 15px
@@ -131,8 +131,6 @@
   &__label
     display: inline
     text-transform: capitalize
-    width: 130px
-    text-align: center
     color: #fff
     cursor: pointer
     padding-top: 5px
@@ -187,7 +185,6 @@
 
   &__categories
     display: grid
-    margin-top: 20px
     grid-template-columns: repeat(3, 1fr)
     padding-left: 50px
 
@@ -198,7 +195,7 @@
       display: none
 
       &:checked + label::after
-        content: '';
+        content: ''
         position: absolute
         left: 5px
         top: 9px
@@ -214,11 +211,11 @@
       position: relative
 
       &::before
-        content: '';
-        margin-right: 10px;
-        display: inline-block;
-        vertical-align: text-top;
-        width: 20px;
-        border-radius: 50%;
-        height: 20px;
-        background: white;
+        content: ''
+        margin-right: 10px
+        display: inline-block
+        vertical-align: text-top
+        width: 20px
+        border-radius: 50%
+        height: 20px
+        background: white

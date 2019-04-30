@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import ArticleShort from './ArticleShort';
+import InputError from '../../InputError';
 
 export default class Article extends Component {
   constructor(props) {
     super(props);
+    const { article } = this.props;
     this.state = {
-      addNew: this.props.new ? this.props.new : false,
+      addNew: this.props.new ? true : false,
       showModal: false,
-      title: this.props.article ? this.props.article.title : '',
-      text: this.props.article ? this.props.article.text : '',
-      overview: this.props.article ? this.props.article.overview : '',
-      thumbnailUrl: this.props.article ? this.props.article.thumbnailUrl : '',
-      categoriesId: this.props.article ? this.props.article.categoriesId : []
+      title: article ? article.title : '',
+      text: article ? article.text : '',
+      overview: article ? article.overview : '',
+      thumbnailUrl: article ? article.thumbnailUrl : '',
+      categoriesId: article ? article.categoriesId : [],
+      error: ''
     };
     this.handleShow = handleShow.bind(this);
     this.handleHide = handleHide.bind(this);
@@ -22,7 +26,7 @@ export default class Article extends Component {
   onFileLoad = e => {
     const reader = new FileReader();
     reader.onload = () => {
-      this.setState({ thumbnailUrl: reader.result });
+      this.setState({ thumbnailUrl: reader.result, error: '' });
     };
     reader.readAsDataURL(e.target.files[0]);
   };
@@ -37,34 +41,76 @@ export default class Article extends Component {
       index = categoriesId.indexOf(e.target.value);
       categoriesId.splice(index, 1);
     }
-    this.setState({categoriesId})
+    this.setState({ categoriesId });
   };
 
   onSubmit = e => {
     e.preventDefault();
-    this.state.addNew
-      ? this.props.addArticle({
-          title: this.state.title,
-          text: this.state.text,
-          overview: this.state.overview,
-          thumbnailUrl: this.state.thumbnailUrl,
-          categoriesId: this.state.categoriesId
-        })
-      : this.props.changeArticle({
-          id: this.props.article.id,
-          title: this.state.title,
-          text: this.state.text,
-          overview: this.state.overview,
-          thumbnailUrl: this.state.thumbnailUrl,
-          categoriesId: this.state.categoriesId
+    const { thumbnailUrl, categoriesId, addNew } = this.state;
+    const title = this.state.title.trim();
+    const text = this.state.text.trim();
+    const overview = this.state.overview.trim();
+
+    try {
+      if (!title || !text || !overview) {
+        throw new InputError('You need to fill up all fields');
+      }
+      if (!thumbnailUrl) {
+        throw new InputError('You need to choose thumbnail');
+      }
+      if (addNew) {
+        this.props.addArticle({
+          title,
+          text,
+          overview,
+          thumbnailUrl,
+          categoriesId
         });
-    this.handleHide();
+        this.setState({
+          title: '',
+          text: '',
+          overview: '',
+          thumbnailUrl: '',
+          categoriesId: []
+        });
+      } else {
+        this.props.changeArticle({
+          id: this.props.article.id,
+          title,
+          text,
+          overview,
+          thumbnailUrl,
+          categoriesId
+        });
+      }
+      this.handleHide();
+    } catch (error) {
+      if (error instanceof InputError) {
+        this.setState({ error: error.message });
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   render() {
+    const {
+      state: {
+        addNew,
+        showModal,
+        title,
+        text,
+        overview,
+        thumbnailUrl,
+        categoriesId,
+        error
+      },
+      props: { article, categories, deleteArticle }
+    } = this;
+
     return (
       <>
-        {this.state.addNew ? (
+        {addNew ? (
           <div className='item-new'>
             <button className='item-new__add' onClick={this.handleShow}>
               &#43; Add article
@@ -72,17 +118,12 @@ export default class Article extends Component {
           </div>
         ) : (
           <ArticleShort
-            article={this.props.article}
+            article={article}
             handleShow={this.handleShow}
-            categories={this.props.categories
-              .filter(category =>
-                this.props.article.categoriesId.includes(category.id)
-              )
-              .map(category => category.name)}
-            deleteArticle={this.props.deleteArticle}
+            deleteArticle={deleteArticle}
           />
         )}
-        {this.state.showModal ? (
+        {showModal ? (
           <Modal
             onOutsideClick={this.onOutsideClick}
             handleHide={this.handleHide}
@@ -96,11 +137,16 @@ export default class Article extends Component {
                   className='admin-modal__text'
                   type='text'
                   id='title'
-                  value={this.state.title}
-                  onChange={e => this.setState({ title: e.target.value })}
+                  maxLength='100'
+                  value={title}
+                  onChange={e =>
+                    this.setState({
+                      title: e.target.value.trimLeft(),
+                      error: ''
+                    })
+                  }
                   placeholder={"Type the article's title..."}
                   autoComplete='off'
-                  required
                 />
               </div>
               <div className='admin-modal__item'>
@@ -110,10 +156,14 @@ export default class Article extends Component {
                 <textarea
                   className='admin-modal__textarea admin-modal__textarea_lg'
                   id='text'
-                  value={this.state.text}
-                  onChange={e => this.setState({ text: e.target.value })}
+                  value={text}
+                  onChange={e =>
+                    this.setState({
+                      text: e.target.value.trimLeft(),
+                      error: ''
+                    })
+                  }
                   placeholder={"Type the article's text..."}
-                  required
                 />
               </div>
               <div className='admin-modal__item'>
@@ -123,59 +173,63 @@ export default class Article extends Component {
                 <textarea
                   className='admin-modal__textarea'
                   id='overview'
-                  maxLength='200'
-                  value={this.state.overview}
+                  maxLength='300'
+                  value={overview}
                   onChange={e =>
-                    this.setState({ overview: e.target.value })
+                    this.setState({
+                      overview: e.target.value.trimLeft(),
+                      error: ''
+                    })
                   }
                   placeholder={"Type the article's overview..."}
-                  required
                 />
               </div>
-              <div className='admin-modal__thumb'>
-                {this.state.thumbnailUrl !== '' ? (
+              {thumbnailUrl ? (
+                <div className='admin-modal__thumb'>
                   <div
                     className='admin-modal__img'
                     style={{
-                      backgroundImage: `url(${this.state.thumbnailUrl})`
+                      backgroundImage: `url(${thumbnailUrl})`
                     }}
                   />
-                ) : (
-                  'You need to choose thumbnail'
-                )}
-              </div>
+                </div>
+              ) : null}
               <div className='settings__file-select file-select'>
                 <label className='file-select__btn' htmlFor='thumb'>
-                  Select file
+                  Choose thumbnail
                 </label>
                 <input
                   className='file-select__input'
                   id='thumb'
                   type='file'
                   accept='image/*'
-                  onChange={this.onFileLoad}
-                  multiple
-                  required={
-                    this.state.thumbnailUrl === '' ? 'required' : null
-                  }
+                  onChange={e => (
+                    this.onFileLoad(e), this.setState({ error: '' })
+                  )}
                 />
               </div>
-              <ul className='admin-modal__categories'>
-                {this.props.categories.map(category => (
-                  <li key={category.id} className='admin-modal__category'>
-                    <input
-                      id={category.id}
-                      type='checkbox'
-                      defaultChecked={this.state.categoriesId.includes(
-                        category.id
-                      )}
-                      onChange={this.onCheck}
-                      value={category.id}
-                    />
-                    <label htmlFor={category.id}>{category.name}</label>
-                  </li>
-                ))}
-              </ul>
+              <h3>Choose categories (up to 3)</h3>
+              {categories.length ? (
+                <ul className='admin-modal__categories'>
+                  {categories.map(_ => (
+                    <li key={_.id} className='admin-modal__category'>
+                      <input
+                        id={_.id}
+                        type='checkbox'
+                        disabled={
+                          categoriesId.length > 2 &&
+                          !categoriesId.includes(_.id)
+                        }
+                        defaultChecked={categoriesId.includes(_.id)}
+                        onChange={this.onCheck}
+                        value={_.id}
+                      />
+                      <label htmlFor={_.id}>{_.name}</label>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              {error ? <p>{error}</p> : null}
               <button className='submit' type='submit'>
                 Submit
               </button>
@@ -186,3 +240,17 @@ export default class Article extends Component {
     );
   }
 }
+
+Article.propTypes = {
+  article: PropTypes.object,
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  ),
+  new: PropTypes.bool,
+  addArticle: PropTypes.func,
+  changeArticle: PropTypes.func,
+  deleteArticle: PropTypes.func
+};

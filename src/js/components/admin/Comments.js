@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Comment from './Comment';
 
 export default function Comments({
-  comments,
+  comments = [],
   deleteComment,
   validateComment,
   changeComment
@@ -17,21 +18,33 @@ export default function Comments({
         <li className='list-head__item'>Validation</li>
         <li className='list-head__item'>Edit</li>
       </ul>
-      <ul className='admin-list'>
-        {comments.map(comment => (
-          <Comment
-            key={comment.id}
-            comment={comment}
-            deleteComment={() =>
-              deleteComment(comment.id, comment.articleId, comment.validate)
-            }
-            validateComment={validate =>
-              validateComment(comment.id, comment.articleId, validate)
-            }
-            changeComment={text => changeComment(comment.id, text)}
-          />
-        ))}
-      </ul>
+      {comments.length ? (
+        <ul className='admin-list'>
+          {comments.map(comment => (
+            <li key={comment.id} className='list-item list-item_comments'>
+              <Comment
+                comment={comment}
+                deleteComment={() =>
+                  deleteComment(comment.id, comment.articleId, comment.validate)
+                }
+                validateComment={validate =>
+                  validateComment(comment.id, comment.articleId, validate)
+                }
+                changeComment={text => changeComment(comment.id, text)}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <h3>{'There\'s no comments here yet'}</h3>
+      )}
     </>
   );
 }
+
+Comments.propTypes = {
+  comments: PropTypes.arrayOf(PropTypes.object),
+  deleteComment: PropTypes.func.isRequired,
+  validateComment: PropTypes.func.isRequired,
+  changeComment: PropTypes.func.isRequired
+};
