@@ -1,28 +1,25 @@
-@import colors
-
-.article__comments
-  margin-top: 30px
-
 .comments
+  margin-top: 30px
 
   &__form
     padding: 10px
 
   &__field
-    width: 100%
-    margin-top: 10px
-    border-radius: 15px
+    @extend %transition-s
     padding: 10px
     padding-right: 50px
+    margin-top: 10px
+    height: 150px
+    width: 100%
+    border-radius: 15px
     overflow: hidden
     resize: none
     outline: none
     box-shadow: 0 0 2px $deep-dark
-    transition: all .2s
 
-    &:focus
-      box-shadow: 0 2px 5px $deep-dark
-      transition: all .2s
+    &:focus,
+    &:hover
+      @include shadow-s
 
   &__text
     font-weight: bold
@@ -46,7 +43,7 @@
 
 .comment
   padding: 15px 25px
-  background-color: $blog-secondary
+  background-color: $dash-bg
   border-radius: 20px
   margin-top: 10px
   box-shadow: 0 1px 2px $deep-dark

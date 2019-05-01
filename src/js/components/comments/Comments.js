@@ -78,7 +78,7 @@ export default class Comments extends Component {
 
   render() {
     return (
-      <section className='article__comments comments'>
+      <section className='comments'>
         {this.state.isSigned ? (
           <form className='comments__form' onSubmit={this.onSubmit}>
             <p className='comments__text'>Please, leave your comment here</p>

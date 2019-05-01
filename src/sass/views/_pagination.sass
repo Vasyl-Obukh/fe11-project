@@ -1,5 +1,3 @@
-@import colors
-
 .pagination
   display: flex
   margin-top: 30px
@@ -7,34 +5,36 @@
 
   &__list-item
     display: flex
-    font-size: 20px
+    font-size: 1.25rem
 
     &:not(:first-child)
       margin-left: 15px
+      @include mobile-s
+        margin-left: 5px
 
   &__item
+    @extend %transition-s
     padding: 5px 12.5px
     border-radius: 20px
     background-color: $blog-main
-    color: $blog-secondary
-    box-shadow: 0 2px 5px $deep-dark
-    transition: all .2s
+    color: $pure-white
     text-align: center
     cursor: default
+    @include shadow-s
+    @include mobile-s
+      padding: 2.5px 10px
 
     &_link:hover,
     &_arrow:hover
-      opacity: .85
-      transition: all .2s
+      background-color: lighten($blog-main, 15%)
       box-shadow: none
       cursor: pointer
 
     &_current
-      background-color: $blog-secondary
-      color: $blog-main
       border: 1px solid $blog-main
+      background-color: $pure-white
+      color: $blog-main
       box-shadow: none
 
       & span
         color: $blog-main
-      

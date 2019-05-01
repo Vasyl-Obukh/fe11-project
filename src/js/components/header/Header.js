@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Burger from './Burger';
+import Burger from '../other/Burger';
 import Logo from './Logo';
 import Navbar from './NavBar';
 import Search from './Search';

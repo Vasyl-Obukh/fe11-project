@@ -1,45 +1,45 @@
-@import settings
-@import header
-@import navbar
-@import slider
-@import main
-@import sidebar
-@import footer
+@import './general/settings'
+@import './general/colors'
+@import './general/breakpoints'
+@import './general/common'
+@import './views/navbar'
+@import './views/header'
+@import './views/slider'
+@import './views/main'
+@import './views/sidebar'
+@import './views/footer'
+@import './views/pagination'
+@import './views/error'
+
 @import modal
 @import admin
 @import comments
-@import pagination
 @import about-us
 @import contact-us
-@import error
 @import media
 @import admin-media
 
 *
   font-family: $font
 
+html
+  font-size: 16px
+  @include tablet
+    font-size: 14px
+  @include mobile-s
+    font-size: 12px
+
 input,
 textarea
   color: $deep-dark
-  background-color: $white
+  background-color: $pure-white
 
 .root
   display: grid
   min-height: 100%
   width: 100%
+
   grid-template-columns: $side-width repeat(3, 1fr) $side-width
   grid-template-rows: auto auto 1fr auto
-  grid-template-areas: 'header header header header header' '. slider slider slider .' '. main main sidebar .' 'footer footer footer footer footer'
 
-  background-color: #f0f0f0
-  font-family: $font
-
-.errorPage
-  display: flex
-  padding-top: 25vh
-  width: 100vw
-  height: 100vh
-  justify-content: center
-
-  font-size: 30px
-  text-transform: uppercase
+  background-color: $blog-light

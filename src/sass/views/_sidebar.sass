@@ -1,0 +1,124 @@
+// ==============================
+// GENERAL
+// ==============================
+  
+.sidebar
+  grid-area: 3 / 4 / 4 / 5
+  padding-left: 25px
+  margin-top: 15px
+  @include laptop
+    padding-right: 5px
+  @include tablet
+    display: none
+
+  &__widgets-wrapper
+    @extend %transition-m
+    position: sticky
+    top: 75px
+    padding: 15px 10px 15px 15px
+
+    border-radius: 30px
+    background-color: $dash-bg
+    @include shadow-s
+
+    &:hover
+      @include shadow-m
+    
+  &__widgets
+    max-height: calc(100vh - 225px)
+    overflow-y: auto
+    @include laptop
+      max-height: calc(100vh - 200px)
+
+
+// ==============================
+// POPULAR-WIDGET
+// ==============================
+
+.widget-popular
+  padding-bottom: 10px
+
+  &__title
+    margin: 0 0 5px 0
+    text-align: center
+
+  &__item
+    display: grid
+    grid-template: auto 1fr / 1fr 2fr
+    grid-template-areas: 'thumb title' 'thumb overview'
+    @include laptop
+      grid-template-columns: 1fr
+      grid-template-areas: 'title' 'overview'
+
+    &:not(:first-child)
+      margin-top: 10px
+
+  &__img-container
+    grid-area: thumb
+
+  &__thumb
+    @extend %object-fit
+    @extend %transition-m
+    height: 100px
+    width: calc(100% - 10px)
+    border-radius: 20px
+    @include laptop
+      display: none
+
+    &:hover
+      opacity: .75
+
+  &__post-title
+    @extend %no-overflow
+    grid-area: title
+    margin: 0
+
+    & a
+      @extend %transition-s
+      color: $blog-dark
+
+      &:hover
+        color: lighten($blog-dark, 20%)
+
+  &__overview
+    grid-area: overview
+    font-size: .875rem
+
+
+// ==============================
+// CATEGORIES WIDGET
+// ==============================
+
+.widget-categories
+  padding: 5px 0 7.5px
+  border-top: 1px solid $white
+
+  &__title
+    margin: 0 0 5px 0
+    text-align: center
+
+  &__list
+    display: flex
+    padding: 0 35px
+    flex-direction: column
+    @include laptop
+      padding: 0 10px
+
+  &__item
+    @extend %transition-s
+    border-radius: 25px
+    background-color: $blog-main
+    text-align: center
+    @include shadow-s
+
+    & a
+      display: block
+      padding: 7.5px
+      color: $white
+
+    &:hover
+      background-color: lighten($blog-main, 20%)
+      box-shadow: 0 5px 5px
+
+    &:not(:first-child)
+      margin-top: 5px

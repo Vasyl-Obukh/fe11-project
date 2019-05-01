@@ -4,19 +4,15 @@ import CategoriesWidget from './CategoriesWidget';
 import PopularWidget from './PopularWidget';
 
 export default function Sidebar({ articles = [], categories = [] }) {
-  return articles.length && categories.length ? (
+  return articles.length || categories.length ? (
     <aside className='sidebar'>
-      <div className='sidebar__widgets'>
-        {articles.length ? (
-          <div className='sidebar__widget-wrapper'>
-            <PopularWidget articles={articles} />
-          </div>
-        ) : null}
-        {categories.length ? (
-          <div className='sidebar__widget-wrapper'>
+      <div className='sidebar__widgets-wrapper'>
+        <div className='sidebar__widgets'>
+          {articles.length ? <PopularWidget articles={articles} /> : null}
+          {categories.length ? (
             <CategoriesWidget categories={categories} />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </div>
     </aside>
   ) : null;

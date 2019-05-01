@@ -1,0 +1,135 @@
+@mixin shadow-xl($x: 0, $y: 25px)
+  box-shadow: $x 0 $y 10px $deep-dark
+  
+@mixin shadow-l ($x: 0, $y: 10px)
+  box-shadow: $x $y 15px $deep-dark
+
+@mixin shadow-m ($x: 0, $y: 5px)
+  box-shadow: $x $y 10px $deep-dark
+
+@mixin shadow-s ($x: 0, $y: 2px)
+  box-shadow: $x $y 5px $deep-dark
+
+%transition-l
+  transition: all 1s
+
+%transition-m
+  transition: all .5s
+
+%transition-s
+  transition: all .2s
+
+%no-overflow
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+%center
+  align-items: center
+  justify-content: center
+
+%object-fit
+  background-size: cover
+  background-position: center
+  background-color: $blog-secondary
+
+
+// ==============================
+// BURGER
+// ==============================
+
+.burger 
+  display: none
+
+  &:checked ~ .header__navbar
+    display: flex
+
+  & + label
+    display: none
+    padding-left: 10px
+    cursor: pointer
+    @include mobile
+      display: block
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+  & + label span 
+    @extend %transition-s
+    display: block
+    width: 45px
+    height: 5px
+
+    border-radius: 5px
+    background-color: $pure-white
+    @include mobile-s
+      width: 35px
+
+  & + label span:nth-child(3) 
+    margin-top: -5px
+
+
+  & + label span:nth-child(even) 
+    margin-top: 8px
+    @include mobile-s
+      margin-top: 6px
+
+
+  &:checked + label span:nth-child(3n + 1) 
+    margin-left: 20px
+    width: 0
+    @include mobile-s
+      margin-left: 15px
+
+  &:checked + label span:nth-child(2),
+  &:checked + label span:nth-child(3)
+    width: 40px
+    @include mobile-s
+      width: 30px
+
+  &:checked + label span:nth-child(2)
+    transform: rotate(45deg)
+
+
+  &:checked + label span:nth-child(3)
+    transform: rotate(-45deg)
+
+
+.absence
+  padding: 5px 20px
+  color: $blog-main
+
+
+// ==============================
+// BREADCRUMBS
+// ==============================
+
+.breadcrumbs
+  display: flex
+  padding: 10px 15px
+
+  border-radius: 25px
+  background-color: $blog-main
+  font-size: 1.25rem
+  color: $pure-white
+  @include shadow-s
+  @include mobile
+    display: none
+
+  &__item
+    position: relative
+
+    & a
+      color: $white
+
+    &_change
+      transition: all .2s
+
+      & a:hover
+        color: $blog-secondary
+        transition: all .2s
+
+    &:not(:first-child)
+      margin-left: 10px
+
+    &:not(:last-child)::after
+      content: '/'
+      position: absolute

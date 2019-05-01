@@ -28,7 +28,7 @@ export default function Categories({
           ))}
         </ul>
       ) : (
-        <h3>{'There\'s no categories here yet'}</h3>
+        <h3 className='absence'>{'There\'s no categories here yet'}</h3>
       )}
     </div>
   );

@@ -10,7 +10,7 @@ export default function SearchResults({ query, articles, paginationSettings }) {
       {articles.length ? articles.map(article => (
         <Article key={article.id} article={article} />
       )) : (
-        <h3>{'There\'s no posts with such tags, checkout the input and try again'}</h3>
+        <h3 className='absence'>{'There\'s no posts with such tags, checkout the input and try again'}</h3>
       )}
       <Pagination paginationSettings={paginationSettings} />
     </>

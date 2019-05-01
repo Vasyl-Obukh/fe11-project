@@ -51,9 +51,7 @@ export default function ArticlePage({ article, categories, breadcrumbs }) {
           <p>{article.text}</p>
         </div>
       </article>
-      <section className='article__comments'>
-        <Comments articleId={article.id} />
-      </section>
+      <Comments articleId={article.id} />
     </PageTemplate>
   );
 }

@@ -1,0 +1,122 @@
+$nested-height: calc(2 / 3 * #{$header-height})
+
+.navbar
+  display: flex
+  padding: 0 10px
+  flex-grow: 1
+
+  &__item
+    @extend %transition-s
+    display: flex
+    position: relative
+    padding: 0 5px
+    min-width: 125px
+    @include tablet
+      min-width: 100px
+
+    &:hover
+      background-color: $pure-white
+      @include mobile
+        background-color: transparent
+
+      & > a,
+      & > span
+        color: $blog-main
+        @include mobile
+          color: $pure-white
+
+      & .navbar_nested
+        display: flex
+
+    &_primary
+      flex-basis: 200px
+      font-size: 1.25rem
+      @include mobile
+        border: none
+        flex-direction: column
+        flex-basis: 20px
+        font-size: 1.725rem
+      
+      &:hover
+        @include shadow-m
+        @include mobile
+          box-shadow: none
+
+      & > a,
+      & > span
+        line-height: $header-height
+        @include mobile-s
+          line-height: 45px
+
+      &:last-child
+        border-radius: 0 10px 10px 0
+
+      &:first-child
+        border-radius: 10px 0 0 10px
+
+      &:not(:last-child)
+        border-right: 1px solid $strong-grey
+        @include mobile
+          border-radius: 0
+          border-right: none
+          border-bottom: 1px solid $strong-grey
+
+    &_nested
+      height: $nested-height
+      font-size: 1.125rem
+      @include tablet
+        padding: 0
+        min-width: 100px
+      @include mobile
+        width: 70%
+        font-size: 1.425rem
+
+      &:not(:first-child)
+        border-top: 1px solid $middle-grey
+
+      & a
+        line-height: $nested-height
+        @include mobile-s
+          line-height: 30px
+
+    & > a,
+    & > span
+      @extend %no-overflow
+      @extend %transition-s
+      display: inline-block
+      width: 100%
+
+      text-align: center
+      color: $white
+      cursor: pointer
+
+  &_nested
+    display: none
+    position: absolute
+    top: 100%
+    left: 0
+
+    padding: 0 10px 5px
+    max-height: calc(100vh - #{$header-height} - 25px)
+    overflow-y: auto
+    width: 100%
+    flex-direction: column
+
+    background-color: transparentize($blog-main, .15)
+    border-radius: 0 0 5px 5px
+    z-index: -1
+    @include shadow-xl
+    @include tablet
+      padding: 0 5px
+    @include mobile
+      position: static
+      max-height: 300px
+
+      align-items: center
+      border-radius: 0
+      background-color: transparent
+      overflow-y: auto
+      box-shadow: none
+      z-index: 0
+    @include mobile-s
+      max-height: 200px

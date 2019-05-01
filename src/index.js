@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import storeFactory from './js/store/store';
 import ScrollToTop from './js/components/ScrollToTop';
 import App from './js/components/App';
-import './sass/style.sass';
+import './sass/index.sass';
 
 const store = storeFactory();
 

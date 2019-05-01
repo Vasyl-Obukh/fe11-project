@@ -19,7 +19,6 @@ export default function AboutUs({ gallery = [], text = '' }) {
               {gallery.map((_, id) => (
                 <div
                   className='about-us__img'
-                  role='img'
                   key={id}
                   style={{
                     backgroundImage: `url('${_}')`

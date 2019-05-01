@@ -1,0 +1,36 @@
+.footer
+  @extend %center
+  grid-area: -2 / 1 / -1 / -1
+  display: flex
+  padding: 5px $side-width
+
+  flex-direction: column
+  background-color: $blog-main
+  @include shadow-m(0, 0)
+
+  &__social
+    width: 100%
+
+  &__copyright
+    margin-top: 10px
+    color: $pure-white
+    font-size: 1rem
+    @include mobile-s
+      font-size: 0.725rem
+
+.social
+  display: flex
+  max-width: 600px
+  justify-content: space-around
+
+  &__link
+    @extend %transition-s
+    font-size: 35px
+    color: $pure-white
+    @include mobile
+      font-size: 30px
+    @include mobile-s
+      font-size: 25px
+
+    &:hover
+      color: darken($pure-white, 25%)

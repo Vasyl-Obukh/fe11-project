@@ -20,54 +20,64 @@ export const formatDate = (date, showMinutes = false) => {
   return `${time} ${day}/${month}/${year}`;
 };
 
-export const getBreadcrumbs = ({path, currentPage, categoryName, title, page}) => {
-  let breadcrumbs = [{
-    name: 'Home',
-    url: paths.MAIN_FIRST_PAGE,
-    last: path === paths.MAIN_FIRST_PAGE ? true : false
-  }];
-  if(path === paths.CATEGORY_FIRST_PAGE || path === paths.CATEGORY_N_PAGE) {
-    breadcrumbs.push({
-      name: 'Categories',
-      url: paths.MAIN_FIRST_PAGE
-    },
+export const getBreadcrumbs = ({
+  path,
+  currentPage,
+  categoryName,
+  title,
+  page
+}) => {
+  let breadcrumbs = [
     {
-      name: categoryName,
+      name: 'Home',
+      url: paths.MAIN_FIRST_PAGE,
+      last: path === paths.MAIN_FIRST_PAGE ? true : false
+    }
+  ];
+  if (path === paths.CATEGORY_FIRST_PAGE || path === paths.CATEGORY_N_PAGE) {
+    breadcrumbs.push({
+      name:
+        categoryName.length >= 12
+          ? categoryName.slice(0, 10) + '...'
+          : categoryName,
       url: paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, categoryName),
       last: currentPage === 1 ? true : false
     });
   }
-  if(page) {
+  if (page) {
     breadcrumbs.push({
       name: page,
       last: true
     });
   }
-  if(currentPage && currentPage !== 1) {
+  if (currentPage && currentPage !== 1) {
     breadcrumbs.push({
       name: `Page-${currentPage}`,
       last: true
     });
   }
-  if(path === paths.ARTICLE_PAGE) {
-    breadcrumbs.push({
-      name: 'Articles',
-      url: paths.MAIN_FIRST_PAGE,
-    },
-    {
-      name: title.length > 30 ? title.slice(0, 30) + '...' : title,
-      last: true
-    });
+  if (path === paths.ARTICLE_PAGE) {
+    breadcrumbs.push(
+      {
+        name: 'Articles',
+        url: paths.MAIN_FIRST_PAGE
+      },
+      {
+        name: title.length > 30 ? title.slice(0, 30) + '...' : title,
+        last: true
+      }
+    );
   }
   return breadcrumbs;
 };
 
-export const linkCategories = (articles, categories) => articles.map(article => ({
-  ...article,
-  categoriesName: categories
-    .filter(category => article.categoriesId.includes(category.id))
-    .map(category => category.name)
-}));
+export const linkCategories = (articles, categories) =>
+  articles.map(article => ({
+    ...article,
+    categoriesName: categories
+      .filter(category => article.categoriesId.includes(category.id))
+      .map(category => category.name)
+  }));
 
 export const linkUserName = (comment, users) => ({
   ...comment,

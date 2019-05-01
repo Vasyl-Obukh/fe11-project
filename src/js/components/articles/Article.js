@@ -24,19 +24,23 @@ export default function Article({
       <div className='article__head'>
         <div className='article__categories'>
           <span>Categories: </span>
-          {categoriesName.length
-            ? categoriesName.map((category, id) => {
-              return (
-                <Link
-                  className='article__category'
-                  key={id}
-                  to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, category)}
-                >
-                  {category}
-                </Link>
-              );
-            })
-            : <span>none</span>}
+          {categoriesName.length ? (
+            <div className='article__categories-list'>
+              {categoriesName.map((category, id) => {
+                return (
+                  <Link
+                    className='article__category'
+                    key={id}
+                    to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, category)}
+                  >
+                    {category}
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <span>none</span>
+          )}
         </div>
 
         <div className='article__date'>
@@ -45,7 +49,6 @@ export default function Article({
       </div>
 
       <div
-        role='img'
         className='article__thumbnail'
         style={{ backgroundImage: `url(${thumbnailUrl})` }}
       />
@@ -74,7 +77,8 @@ Article.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     categoriesName: PropTypes.arrayOf(PropTypes.string),
-    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
+    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+      .isRequired,
     thumbnailUrl: PropTypes.string.isRequired,
     overview: PropTypes.string.isRequired,
     commentsNumber: PropTypes.number.isRequired

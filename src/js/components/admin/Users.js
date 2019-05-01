@@ -12,7 +12,7 @@ export default function Users({ users = [] }) {
       ))}
     </ul>
   ) : (
-    <h3>{'There\'s no users here yet'}</h3>
+    <h3 className='absence'>{'There\'s no users here yet'}</h3>
   );
 }
 

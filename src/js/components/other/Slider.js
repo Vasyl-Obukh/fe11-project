@@ -67,7 +67,6 @@ export default class Slider extends Component {
           {articles.map((_, id) => (
             <Link key={id} to={paths.ARTICLE_PAGE.replace(/:\w*/, _.id)}>
               <div
-                role='img'
                 className={`slider__image slider__image_${
                   this.state.currentSlide === id ? 'active' : 'hidden'
                 }`}

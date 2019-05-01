@@ -202,7 +202,6 @@ export default class Settings extends Component {
             <ul className='settings__gallery'>
               {gallery.map((_, id) => (
                 <li
-                  role='img'
                   className='settings__img'
                   key={id}
                   style={{

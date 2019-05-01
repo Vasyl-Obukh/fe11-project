@@ -11,7 +11,7 @@ export default function Sort(props) {
       <div className='sort__types'>
         <span
           className={`sort__type sort__type_${
-            sortType === LATEST ? 'current' : 'change'
+            sortType === LATEST ? 'current' : 'alt'
           }`}
           onClick={() =>
             sortType !== LATEST ? changeSortType(LATEST) : null
@@ -21,7 +21,7 @@ export default function Sort(props) {
         </span>
         <span
           className={`sort__type sort__type_${
-            sortType === FIRSTS ? 'current' : 'change'
+            sortType === FIRSTS ? 'current' : 'alt'
           }`}
           onClick={() =>
             sortType !== FIRSTS ? changeSortType(FIRSTS) : null
@@ -31,7 +31,7 @@ export default function Sort(props) {
         </span>
         <span
           className={`sort__type sort__type_${
-            sortType == POPULAR ? 'current' : 'change'
+            sortType == POPULAR ? 'current' : 'alt'
           }`}
           onClick={() =>
             sortType !== POPULAR ? changeSortType(POPULAR) : null

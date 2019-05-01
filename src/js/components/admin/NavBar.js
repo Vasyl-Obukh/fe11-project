@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
-import Burger from '../header/Burger';
+import Burger from '../other/Burger';
 import paths from '../../constants/paths';
 
 function NavBar({ logOut, history }) {

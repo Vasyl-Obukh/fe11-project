@@ -10,7 +10,7 @@ const CategoriesWidget = ({ categories = [] }) => {
       <ul className='widget-categories__list'>
         {categories.map(({ id, name }) => (
           <li key={id} className='widget-categories__item'>
-            <NavLink to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, name)}>
+            <NavLink to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*$/, name)}>
               {name}
             </NavLink>
           </li>

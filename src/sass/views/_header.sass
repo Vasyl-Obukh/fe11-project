@@ -1,0 +1,183 @@
+// ==============================
+// GENERAL
+// ==============================
+
+.header
+  grid-area: 1 / 1 / 2 / -1
+  display: flex
+  position: relative
+  padding: 0 $side-width
+  height: $header-height
+
+  align-items: center
+  background-color: $blog-main
+  @include shadow-l
+  @include mobile-s
+    height: calc(#{$header-height} - 10px)
+
+  &_fixed
+    position: sticky
+    top: 0
+    z-index: 9999
+  
+  &__navbar
+    @include mobile
+      display: none
+      position: absolute
+      top: $header-height
+      height: calc(100vh - #{$header-height})
+      width: 100%
+      flex-direction: column
+      background-color: transparentize($blog-main, .05)
+    @include mobile-s
+      top: calc(#{$header-height} - 10px)
+      height: calc(100vh - #{$header-height} + 10px)
+
+// ==============================
+// LOGO
+// ==============================
+
+.logo
+  padding: 0 5px 0 10px
+  @include mobile
+    display: none
+
+  &__img
+    @extend %transition-s
+    font-size: $logo-size
+    color: $pure-white
+
+    &:hover
+      color: darken($pure-white, 15%)
+
+
+// ==============================
+// SEARCH
+// ==============================
+
+.search
+  display: flex
+  position: relative
+  height: 100%
+  width: 150px
+  @include tablet
+    width: 120px
+  @include mobile
+    flex-grow: 1
+    justify-content: flex-end
+
+  &__field
+    @extend %transition-m
+    position: absolute
+    top: calc(50% - 20px)
+    right: 0
+    padding: 10px 20px 10px 40px
+    width: 100%
+
+    border: none
+    border-radius: 25px
+    outline: none
+    
+    font-size: 1.15rem
+    @include tablet
+      width: 120px
+      padding: 10px 10px 10px 35px
+    @include mobile-s
+      top: calc(50% - 16px)
+      padding: 8px 10px 8px 30px
+      width: 100px
+
+    &:focus
+      padding-left: 20px
+      width: 250px
+      @include shadow-m
+      @include mobile
+        width: calc(100% - 10px)
+
+      & + .search__icon
+        opacity: 0
+        left: -120px
+        @include mobile
+          right: 100%
+
+  &__icon
+    @extend %transition-m
+    position: absolute
+    top: calc(50% - 8px)
+    left: 15px
+
+    font-size: 1.25rem
+    color: $blog-secondary
+    @include tablet
+      left: 10px
+    @include mobile
+      left: auto
+      right: 90px
+    @include mobile-s
+      top: calc(50% - 5px)
+      right: 75px
+
+
+// ==============================
+// SIGN
+// ==============================
+
+.sign
+  display: flex
+  padding: 0 5px
+  color: $pure-white
+
+  & a
+    color: $pure-white
+
+  &__out,
+  &__admin
+    display: flex
+    padding: 0 5px
+    flex-direction: column
+    justify-content: center
+    text-align: center
+    cursor: pointer
+
+  &__text
+    font-size: 1rem
+    @include tablet
+      display: none
+    
+    &:hover
+      text-decoration: underline
+
+  &__img
+    @extend %transition-s
+    font-size: 25px
+    @include tablet
+      font-size: 30px
+    @include mobile-s
+      font-size: 25px
+
+    &:hover
+      color: darken($pure-white, 20%)
+
+  &__in,
+  &__up
+    padding: 10px 5px
+    cursor: pointer
+    @include tablet
+      display: none
+
+    &:hover
+      text-decoration: underline
+
+  &__in
+    border-right: 1px solid $strong-grey
+    padding-right: 10px
+
+    &_mobile
+      display: none
+      padding: 0 5px
+      @include tablet
+        display: block
+
+  &__up
+    border-left: 1px solid $strong-grey
+    padding-left: 10px
