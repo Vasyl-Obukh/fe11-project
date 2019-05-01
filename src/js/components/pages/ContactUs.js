@@ -16,7 +16,7 @@ export default function ContactUs({
         <Breadcrumbs breadcrumbs={breadcrumbs} />
       </div>
       <div className='contact-us'>
-        {phoneNumber && facebook && gitHub && linkedIn && twitter ? (
+        {phoneNumber || facebook || gitHub || linkedIn || twitter ? (
           <div className='contact-us__contacts'>
             <h2 className='contact-us__title'>You can contact us using:</h2>
             <ul className='contact-us__list'>

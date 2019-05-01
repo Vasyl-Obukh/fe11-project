@@ -1,9 +1,5 @@
 # Blog-project
 
-## Description
-
-Project with typical blog features. User can read posts leave comments after registration and watch contacts page and info about owner. Administrator could add posts, categories, change them, validate comments, watch statistic about content and users, change site settings.
-
 ## Software
 
 * Node.js 8 or higher

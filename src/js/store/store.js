@@ -13,15 +13,15 @@ const logger = store => next => action => {
 
 const saver = store => next => action => {
   let result = next(action);
-  localStorage['fe11-app'] = JSON.stringify(store.getState());
+  localStorage['blog-app'] = JSON.stringify(store.getState());
   return result;
 };
 
 const storeFactory = (initialState = stateData) =>
   applyMiddleware(logger, saver)(createStore)(
     reducers,
-    localStorage['fe11-app']
-      ? JSON.parse(localStorage['fe11-app'])
+    localStorage['blog-app']
+      ? JSON.parse(localStorage['blog-app'])
       : initialState
   );
 
