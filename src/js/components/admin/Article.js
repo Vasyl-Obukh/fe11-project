@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import ArticleShort from './ArticleShort';
+import ButtonAdd from '../other/ButtonAdd';
 import InputError from '../../InputError';
 
 export default class Article extends Component {
@@ -111,11 +112,7 @@ export default class Article extends Component {
     return (
       <>
         {addNew ? (
-          <div className='item-new'>
-            <button className='item-new__add' onClick={this.handleShow}>
-              &#43; Add article
-            </button>
-          </div>
+          <ButtonAdd text='article' onClick={this.handleShow} />
         ) : (
           <ArticleShort
             article={article}
@@ -217,7 +214,7 @@ export default class Article extends Component {
                         id={_.id}
                         type='checkbox'
                         disabled={
-                          categoriesId.length > 2 &&
+                          categoriesId.length >= 3 &&
                           !categoriesId.includes(_.id)
                         }
                         defaultChecked={categoriesId.includes(_.id)}

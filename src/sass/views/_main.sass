@@ -4,7 +4,7 @@
 
 .main
   grid-area: 3 / 2 / 4 / 4
-  padding: 35px 0
+  padding: 25px 0
   @include laptop
     padding-left: 5px
   @include tablet
@@ -18,7 +18,7 @@
       justify-content: flex-end
 
   &__search-result
-    @extend %no-overflow
+    @extend %words-break
     margin-top: 0
     padding-left: 20px
     @include mobile-s
@@ -68,7 +68,6 @@
   padding: 10px 35px 25px
   background-color: $dash-bg
   border-radius: 35px
-  overflow: hidden
 
   @include shadow-s
   @include mobile
@@ -91,6 +90,7 @@
       color: lighten($blog-dark, 20%)
 
   &__title
+    @extend %words-break
     margin-bottom: 5px
     @include mobile-s
       margin: 5px 0
@@ -127,10 +127,14 @@
     @include tablet
       max-height: calc(100vw / #{$img-ratio})
 
+  &__overview
+    @extend %words-break
+
   &__footer
     display: flex
     padding-top: 10px
     justify-content: space-between
 
   &__text
+    @extend %words-break
     margin-top: 15px

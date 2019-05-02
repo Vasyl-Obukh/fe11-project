@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import { Link } from 'react-router-dom';
+import ButtonAdd from '../other/ButtonAdd';
 import InputError from '../../InputError';
 import paths from '../../constants/paths';
 
@@ -24,16 +25,19 @@ export default class Category extends Component {
   onSubmit = e => {
     e.preventDefault();
     const name = this.state.name.trim();
-    
+
     try {
-      if(!name) throw new InputError('You need to fill up all fields');
-      this.state.addNew 
-        ? this.props.addCategory(name)
-        : this.props.changeCategory({id: this.props.category.id, name})
-        this.handleHide();
+      if (!name) throw new InputError('You need to fill up all fields');
+      if (this.state.addNew) {
+        this.props.addCategory(name);
+        this.setState({ name: '', error: '' });
+      } else {
+        this.props.changeCategory({ id: this.props.category.id, name });
+      }
+      this.handleHide();
     } catch (error) {
-      if(error instanceof InputError) {
-        this.setState({error : error.message})
+      if (error instanceof InputError) {
+        this.setState({ error: error.message });
       } else {
         console.log(error);
       }
@@ -46,11 +50,7 @@ export default class Category extends Component {
     return (
       <>
         {this.state.addNew ? (
-          <div className='item-new'>
-            <button className='item-new__add' onClick={this.handleShow}>
-              &#43; Add category
-            </button>
-          </div>
+          <ButtonAdd text='category' onClick={this.handleShow} />
         ) : (
           <>
             <div className='list-item__category'>

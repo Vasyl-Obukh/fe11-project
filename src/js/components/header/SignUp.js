@@ -27,7 +27,7 @@ export default class SignUp extends Component {
         throw new InputError('Name has to contain , at least, 2 symbols');
       }
       if (password.length < 7) {
-        throw 'Password has to contain , at least, 7 symbols';
+        throw new InputError('Password has to contain , at least, 7 symbols');
       }
       if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         throw new InputError('Email is invalid');

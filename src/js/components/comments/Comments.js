@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Comment from './Comment';
+import Submit from '../other/Submit';
 import userTypes from '../../constants/userTypes';
 import InputError from '../../InputError';
 
@@ -47,7 +48,8 @@ export default class Comments extends Component {
       addComment,
       currentUser: { id: userId, userType }
     } = this.props;
-    let isAdmin = userType === !userTypes.ADMIN;
+    const isAdmin = userType === userTypes.ADMIN;
+
     try {
       if (!this.state.comment) {
         throw new InputError('You need to fill up the comment field');
@@ -92,15 +94,13 @@ export default class Comments extends Component {
               <p className='comments__error'>{this.state.error}</p>
             ) : null}
             {this.state.message ? (
-              <h3>Your comment will be added after validation</h3>
+              <h3 className='comments__message'>Your comment will be added after validation</h3>
             ) : null}
-            <button className='comments__submit' type='submit'>
-              Submit
-            </button>
+            <Submit />
           </form>
         ) : (
           <h3 className='comments__text'>
-            Please, sign in or make a new account
+            Please, sign in or make a new account to leave comment
           </h3>
         )}
         <ul className='comments__list'>

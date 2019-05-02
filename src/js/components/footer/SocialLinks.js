@@ -8,22 +8,30 @@ export default function SocialLinks({ socialLinks = {} }) {
     linkedIn = '',
     twitter = ''
   } = socialLinks;
-  return (
+  return gitHub || facebook || linkedIn || twitter ? (
     <div className='footer__social social'>
-      <a href={facebook} className='social__link'>
-        <i className='fab fa-facebook-f' />
-      </a>
-      <a href={gitHub} className='social__link'>
-        <i className='fab fa-github' />
-      </a>
-      <a href={twitter} className='social__link'>
-        <i className='fab fa-twitter' />
-      </a>
-      <a href={linkedIn} className='social__link'>
-        <i className='fab fa-linkedin-in' />
-      </a>
+      {facebook ? (
+        <a href={facebook} className='social__link'>
+          <i className='fab fa-facebook-f' />
+        </a>
+      ) : null}
+      {gitHub ? (
+        <a href={gitHub} className='social__link'>
+          <i className='fab fa-github' />
+        </a>
+      ) : null}
+      {twitter ? (
+        <a href={twitter} className='social__link'>
+          <i className='fab fa-twitter' />
+        </a>
+      ) : null}
+      {linkedIn ? (
+        <a href={linkedIn} className='social__link'>
+          <i className='fab fa-linkedin-in' />
+        </a>
+      ) : null}
     </div>
-  );
+  ) : null;
 }
 
 SocialLinks.propTypes = {

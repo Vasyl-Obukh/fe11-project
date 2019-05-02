@@ -24,6 +24,11 @@
   overflow: hidden
   text-overflow: ellipsis
 
+%words-break
+  overflow-wrap: break-word
+  word-wrap: break-word
+  hyphens: auto
+
 %center
   align-items: center
   justify-content: center
@@ -32,6 +37,14 @@
   background-size: cover
   background-position: center
   background-color: $blog-secondary
+
+@keyframes disappear
+  0%
+    opacity: 1
+  50%
+    opacity: 1
+  100%
+    opacity: 0
 
 
 // ==============================
@@ -92,12 +105,6 @@
   &:checked + label span:nth-child(3)
     transform: rotate(-45deg)
 
-
-.absence
-  padding: 5px 20px
-  color: $blog-main
-
-
 // ==============================
 // BREADCRUMBS
 // ==============================
@@ -133,3 +140,37 @@
     &:not(:last-child)::after
       content: '/'
       position: absolute
+
+
+// ==============================
+// BUTTON
+// ==============================
+
+.btn
+  @extend %transition-s
+  display: block
+  padding: 10px 50px
+  border: none
+  outline: none
+  border-radius: 25px
+  background-color: $blog-main
+  font-size: 1.125rem
+  color: $pure-white
+  cursor: pointer
+  @include shadow-s
+
+  &:hover
+    background-color: lighten($blog-main, 5%)
+
+  &_submit
+    margin-top: 5px
+
+
+// ==============================
+// OTHER
+// ==============================
+
+.absence
+  padding: 5px 20px
+  margin: 10px 0
+  color: $blog-dark

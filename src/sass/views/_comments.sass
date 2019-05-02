@@ -5,12 +5,12 @@
     padding: 10px
 
   &__field
-    @extend %transition-s
-    padding: 10px
-    padding-right: 50px
+    @extend %transition-m
+    padding: 10px 15px
     margin-top: 10px
-    height: 150px
+    height: 125px
     width: 100%
+
     border-radius: 15px
     overflow: hidden
     resize: none
@@ -22,36 +22,28 @@
       @include shadow-s
 
   &__text
+    padding-left: 15px
     font-weight: bold
 
-  &__submit
-    background-color: $blog-main
-    color: white
-    border: none
-    outline: none
-    margin-top: 5px
+  &__message
+    display: inline-block
+    padding: 10px 15px
+    margin: 0
     border-radius: 25px
-    padding: 10px 50px
-    box-shadow: 0 2px 5px $deep-dark
-    cursor: pointer
-    transition: all .2s
-
-    &:hover
-      opacity: .9
-      transition: all .2s
-
+    background-color: transparentize($blog-main, .95)
+    color: $blog-secondary
+    animation: disappear 3s
 
 .comment
+  @extend %transition-s
   padding: 15px 25px
-  background-color: $dash-bg
-  border-radius: 20px
   margin-top: 10px
+  border-radius: 20px
+  background-color: $dash-bg
   box-shadow: 0 1px 2px $deep-dark
-  transition: all .2s
 
   &:hover
-    box-shadow: 0 2px 5px $deep-dark
-    transition: all .2s
+    @include shadow-s
 
   &__header
     display: flex
@@ -61,4 +53,5 @@
     font-weight: bold
 
   &__text
+    @extend %words-break
     padding-top: 5px
