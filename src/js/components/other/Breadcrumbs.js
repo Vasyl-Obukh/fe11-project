@@ -8,7 +8,7 @@ export default function Breadcrumbs({ breadcrumbs }) {
       {breadcrumbs.map((_, id) => (
         <li
           className={`breadcrumbs__item breadcrumbs__item_${
-            _.last ? 'current' : 'change'
+            _.last ? 'current' : 'alt'
           }`}
           key={id}
         >

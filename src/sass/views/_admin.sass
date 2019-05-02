@@ -1,0 +1,503 @@
+// ==============================
+// GENERAL
+// ==============================
+  
+.root.admin
+  grid-template-columns: 200px 1fr
+  grid-template-areas: 'admin-nav admin-main'
+  @include tablet
+    grid-template-columns: 1fr
+    position: relative
+    grid-template-areas: 'admin-main'
+
+.admin-head
+  display: none
+
+.admin
+
+  &__nav-menu
+    grid-area: admin-nav
+    height: 100vh
+    background-color: $blog-main
+    @include tablet
+      position: absolute
+      align-items: center
+
+    & .burger + label
+      @include tablet
+        display: block
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+    & .burger:checked ~ .nav-menu__list
+      display: flex
+      flex-direction: column
+
+  &__main
+    grid-area: admin-main
+    position: relative
+    padding: 25px
+    height: 100vh
+    background-color: darken($blog-light, 40%)
+    overflow-y: auto
+    @include laptop
+      padding: 25px 5px
+    @include tablet
+      padding-top: 75px
+
+
+// ==============================
+// NAV MENU
+// ==============================
+
+.nav-menu
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  @include tablet
+    flex-direction: row
+    height: 50px
+    width: 100%
+    z-index: 9999
+    @include shadow-m
+
+  &__list
+    @include tablet
+      display: none
+      position: absolute
+      top: 50px
+      width: 100vw
+      height: calc(100vh - 50px)
+      align-items: center
+      background-color: transparentize($blog-main, .1)  
+
+  &__item
+    font-size: 25px
+    @include tablet
+      width: 75%
+      text-align: center
+    @include mobile-s
+      font-size: 20px
+    
+    &:not(:last-child)
+      border-bottom: 1px solid $pure-white
+
+  &__link
+    @extend %transition-s
+    display: block
+    padding: 15px 25px  
+    color: $pure-white
+    @include mobile
+      padding: 10px 20px
+
+    &_active,
+    &:hover
+      background-color: $pure-white
+      color: $blog-dark
+      @include tablet
+        background-color: transparent
+        color: $pure-white
+
+  &__outs
+    display: flex
+    justify-content: space-around
+    padding-bottom: 50px
+    @include tablet
+      padding: 0
+
+  &__btn
+    @extend %transition-s
+    color: $pure-white
+    font-size: 2.5rem
+    cursor: pointer
+    @include tablet
+      padding: 10px
+
+    &:hover
+      color: darken($pure-white, 20%)
+
+
+// ==============================
+// HOME PAGE
+// ==============================
+
+.statistic
+  display: inline-block
+
+  &__item
+    padding: 15px 30px
+    border-radius: 25px
+    background-color: $blog-main
+    font-size: 1.375rem
+    color: $pure-white
+    @include shadow-s
+    @include laptop
+      padding: 10px 25px
+
+    &:not(:first-child)
+      margin-top: 10px
+
+  &__value
+    padding-left: 10px
+    font-weight: bold
+
+
+// ==============================
+// LIST
+// ==============================
+
+.list-head,
+.list-item
+  display: grid
+  padding: 10px 25px 10px 15px
+  border-radius: 15px
+  color: $pure-white
+  @include laptop
+    padding: 10px 20px 10px 5px
+
+  &_articles
+    grid-template-columns: 6fr 4fr 2fr 1.5fr 1fr
+    @include mobile
+      grid-template-columns: 6fr 4fr 1fr
+    @include mobile-s
+      grid-template-columns: 5fr 3fr 1fr
+      padding-right: 5px
+
+  &_categories
+    grid-template-columns: 7fr 1fr
+    @include mobile
+      grid-template-columns: 4fr 1fr
+
+  &_comments
+    grid-template-columns: 2fr 4.5fr 3fr 1.5fr 2fr 1fr
+    @include mobile
+      grid-template-columns: 2fr 4.5fr 2fr 1fr
+    @include mobile-s
+      grid-template-columns: 4.5fr 2fr 1fr
+      padding-right: 5px
+
+  &_articles,
+  &_comments
+    @include mobile-s
+      & .list-item__edit
+        padding-top: 20px
+        text-align: end
+
+.list-head
+  position: sticky
+  top: -25px
+  margin-top: 25px
+
+  background-color: transparentize($black, .25)
+  text-align: center
+  font-size: 1rem
+  z-index: 1
+  @include shadow-s(0, 5px)
+  @include tablet
+    top: -25px
+
+  &_comments
+    @include tablet
+      margin-top: 0
+
+  &__item
+
+    &_comments,
+    &_date,
+    &_article
+      @include mobile
+        display: none
+
+    &_author
+      @include mobile-s
+        display: none
+
+    &:not(:last-child)
+      border-right: 1px solid $pure-white
+
+.admin-list
+  margin-top: 15px
+
+.list-item
+  @extend %transition-s
+  position: relative
+  font-size: .925rem
+  @include shadow-s
+
+  &:hover
+    @include shadow-s(0, 5px)
+
+  & div:not(:first-child)
+    border-left: 1px solid $pure-white
+
+  &:not(:first-child)
+    margin-top: 10px
+
+  &:nth-child(odd)
+    background-color: $blog-main
+
+    & .list-item__btn
+      background-color: lighten($blog-main, 20%)
+
+      &:hover
+        background-color: lighten($blog-main, 10%)
+
+  &:nth-child(even)
+    background-color: lighten($blog-main, 20%)
+
+    & .list-item__btn
+      background-color: $blog-main
+
+      &:hover
+        background-color: lighten($blog-main, 10%)
+
+  &__categories,
+  &__comments,
+  &__date,
+  &__edit,
+  &__category,
+  &__author,
+  &__validation
+    text-align: center
+
+  &__date,
+  &__comments,
+  &__article
+    @include mobile
+      display: none
+
+  &__author,
+  &__text
+    @extend %words-break
+
+  & div.list-item__text
+    @include mobile-s
+      border-left: none
+
+  &__author
+    @include mobile-s
+      display: none
+
+  &__category
+    font-size: 1.125rem
+
+  &__edit
+    @extend %transition-s
+    font-size: 25px
+    cursor: pointer
+    @include laptop
+      font-size: 20px
+
+    &:hover
+      color: darken($pure-white, 25%)
+
+  &__link
+    @extend %words-break
+    @extend %transition-s
+    display: block
+    padding: 0 5px
+    color: $pure-white
+
+    &:hover
+      color: darken($pure-white, 25%)
+
+  &__text,
+  &__author,
+  &__validation
+    padding: 0 10px
+    @include mobile-s
+      padding: 0 5px
+
+  &__btn
+    @extend %transition-s
+    display: block
+    padding: 10px 0
+    border-radius: 15px
+    cursor: pointer
+    @include laptop
+      border-radius: 10px
+      padding: 7.5px 0
+
+  &__delete
+    @extend %transition-s
+    position: absolute
+    top: -5px
+    right: 5px
+    border: none
+    font-size: 40px
+    line-height: 40px
+    cursor: pointer
+
+    &:hover
+      color: darken($pure-white, 25%)
+
+
+// ==============================
+// USERS
+// ==============================
+
+.users-list
+  display: flex
+  flex-wrap: wrap
+
+  &__item
+    @extend %words-break
+    @extend %transition-s
+    padding: 15px 25px
+    margin: 10px
+    color: $pure-white
+    font-size: 1.25rem
+    border-radius: 20px
+    @include shadow-s
+    @include mobile
+      padding: 10px 20px
+    @include mobile-s
+      margin: 5px
+      display: flex
+      flex-wrap: wrap
+      padding: 10px 15px
+
+    &:hover
+      @include shadow-s(0, 5px)
+
+    &:nth-child(odd)
+      background-color: $blog-main
+
+    &:nth-child(even)
+      background-color: lighten($blog-main, 20%)
+
+  &__name
+    padding-right: 10px
+
+  &__email
+    padding-left: 10px
+    border-left: 1px solid $pure-white
+
+
+// ==============================
+// SETTINGS
+// ==============================
+
+.settings
+  @include mobile-s
+    display: flex
+    flex-direction: column
+
+  &_general
+    padding-bottom: 25px
+    border-bottom: 1px solid $pure-white
+
+  &_info
+    padding-top: 25px
+
+  &__title
+    margin: 0 0 5px
+    padding-left: 15px
+
+  &__item
+    @include mobile-s
+      display: flex
+      align-items: center
+      flex-direction: column
+
+    &:nth-child(odd) label
+      background-color: $blog-main
+
+    &:nth-child(even) label
+      background-color: lighten($blog-main, 20%)
+
+    &:not(:last-child)
+      margin-bottom: 15px
+
+    & label
+      display: inline-block
+      padding: 7.5px 10px
+      width: 200px
+      border-radius: 20px
+      text-align: center
+      color: $pure-white
+      cursor: pointer
+      @include shadow-s
+      @include mobile
+        width: 175px
+      @include mobile-s
+        width: 100%
+
+      &::after
+        content: ':'
+        @include mobile-s
+          content: ''
+
+    & input
+      @extend %transition-s
+      width: 250px
+      padding: 7.5px 12.5px
+      margin-left: 15px
+
+      border: none
+      outline: none
+      border-radius: 20px
+      @include shadow-s
+      @include mobile-s
+        margin: 5px 0 0 0
+        width: 100%
+
+      &:focus
+        box-shadow: 0 0 5px $focus
+
+  &__gallery
+    display: flex
+    padding: 5px
+    max-width: 1000px
+    flex-flow: row wrap
+    border: 1px solid $pure-white
+    border-radius: 25px
+    @include mobile
+      justify-content: center
+  
+  &__img
+    @extend %object-fit
+    position: relative
+    margin: 5px
+    height: 200px
+    flex-basis: 300px
+    border-radius: 15px
+
+  &__file-select
+    margin-top: 15px
+
+  &__delete
+    @extend %transition-s
+    position: absolute
+    top: -5px
+    right: 5px
+
+    border: none
+    font-size: 40px
+    line-height: 40px
+    color: $blog-dark
+    text-shadow: 2px 0 0 $pure-white, -2px 0 0 $pure-white, 0 2px 0 $pure-white, 0 -2px 0 $pure-white, 1px 1px $pure-white, -1px -1px 0 $pure-white, 1px -1px 0 $pure-white, -1px 1px 0 $pure-white
+    cursor: pointer
+
+    &:hover
+      color: lighten($blog-dark, 20%)
+
+  &__text
+    @extend %transition-s
+    padding: 15px
+    margin-top: 15px
+    max-width: 1000px
+    width: 100%
+    height: 200px
+
+    border: none
+    outline: none
+    border-radius: 20px
+    overflow-y: hidden
+    resize: none
+    @include shadow-s
+
+    &:focus
+      box-shadow: 0 0 5px $focus
+
+.file-select__input
+  display: none

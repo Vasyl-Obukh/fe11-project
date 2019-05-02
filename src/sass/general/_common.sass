@@ -27,6 +27,7 @@
 %words-break
   overflow-wrap: break-word
   word-wrap: break-word
+  word-break: break-all
   hyphens: auto
 
 %center
@@ -125,14 +126,13 @@
     position: relative
 
     & a
-      color: $white
+      color: $pure-white
 
-    &_change
-      transition: all .2s
+    &_alt
+      @extend %transition-s
 
       & a:hover
-        color: $blog-secondary
-        transition: all .2s
+        color: darken($pure-white, 20%)
 
     &:not(:first-child)
       margin-left: 10px
@@ -164,6 +164,9 @@
 
   &_submit
     margin-top: 5px
+  
+  &_file
+    display: inline-block
 
 
 // ==============================

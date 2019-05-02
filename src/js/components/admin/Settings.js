@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Submit from '../other/Submit';
 
 export default class Settings extends Component {
   constructor(props) {
@@ -190,14 +191,11 @@ export default class Settings extends Component {
               onChange={e => this.setState({ copyright: e.target.value })}
             />
           </div>
-          <button className='settings__submit' type='submit'>
-            Submit
-          </button>
+          <Submit />
         </form>
 
         <form className='settings settings_info' onSubmit={this.onAboutSubmit}>
           <h2 className='settings__title'>About us setings</h2>
-          <h3>Gallery</h3>
           {gallery.length ? (
             <ul className='settings__gallery'>
               {gallery.map((_, id) => (
@@ -219,8 +217,8 @@ export default class Settings extends Component {
             </ul>
           ) : null}
 
-          <div className='settings__file-select file-select'>
-            <label className='file-select__btn' htmlFor='gallery'>
+          <div className='settings__file-select'>
+            <label className='btn btn_file' htmlFor='gallery'>
               Select photos
             </label>
             <input
@@ -238,9 +236,7 @@ export default class Settings extends Component {
             placeholder='Tipe something about you...'
             onChange={e => this.setState({ text: e.target.value })}
           />
-          <button className='settings__submit' type='submit'>
-            Submit
-          </button>
+          <Submit />
         </form>
       </>
     );

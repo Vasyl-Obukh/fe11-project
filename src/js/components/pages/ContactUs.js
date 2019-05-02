@@ -64,14 +64,16 @@ export default function ContactUs({
           </div>
         ) : null}
         <div className='contact-us__location'>
-          <h2 className='contact-us__title'>
-            You can directly find us here:
-          </h2>
+          <h2 className='contact-us__title'>You can directly find us here:</h2>
           {address ? <p className='contact-us__address'>{address}</p> : null}
-          <iframe
-            src='https://www.google.com/maps/d/embed?mid=1a5vTqcy8yEw-Ha23Fk5G-eI0CPg3-E6H'
-            className='contact-us__map'
-          />
+          {navigator.onLine ? (
+            <iframe
+              src='https://www.google.com/maps/d/embed?mid=1a5vTqcy8yEw-Ha23Fk5G-eI0CPg3-E6H'
+              className='contact-us__map'
+            />
+          ) : (
+            <div className='contact-us__map contact-us__map_offline' />
+          )}
         </div>
       </div>
     </PageTemplate>
