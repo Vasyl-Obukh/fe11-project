@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Submit from '../other/Submit';
 import InputError from '../../InputError';
 
 export default class SignIn extends Component {
@@ -67,11 +68,9 @@ export default class SignIn extends Component {
           }
         />
         {this.state.error ? (
-          <p className='sign-form__error error'>{this.state.error}</p>
+          <p className='error'>{this.state.error}</p>
         ) : null}
-        <button className='sign-form__submit' type='submit'>
-          Sign in
-        </button>
+        <Submit className='sign-form__submit' text='Sign in' />
       </form>
     );
   }

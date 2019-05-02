@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import { Link } from 'react-router-dom';
 import ButtonAdd from '../other/ButtonAdd';
+import Submit from '../other/Submit';
 import InputError from '../../InputError';
 import paths from '../../constants/paths';
 
@@ -99,10 +100,8 @@ export default class Category extends Component {
                 />
               </div>
 
-              {this.state.error ? <p>{this.state.error}</p> : null}
-              <button className='submit' type='submit'>
-                Submit
-              </button>
+              {this.state.error ? <p className='error'>{this.state.error}</p> : null}
+              <Submit className='admin-modal__btn' />
             </form>
           </Modal>
         ) : null}

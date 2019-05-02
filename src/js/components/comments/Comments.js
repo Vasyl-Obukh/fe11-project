@@ -91,7 +91,7 @@ export default class Comments extends Component {
               placeholder='Enter your comment...'
             />
             {this.state.error ? (
-              <p className='comments__error'>{this.state.error}</p>
+              <p className='error'>{this.state.error}</p>
             ) : null}
             {this.state.message ? (
               <h3 className='comments__message'>Your comment will be added after validation</h3>

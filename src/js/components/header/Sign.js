@@ -48,7 +48,7 @@ export default class Sign extends Component {
               <div className='sign-modal__head'>
                 <span
                   className={`sign-modal__toggle sign-modal__toggle_left sign-modal__toggle_${
-                    this.state.isSignIn ? 'active' : 'default'
+                    this.state.isSignIn ? 'active' : 'alt'
                   }`}
                   onClick={() => this.showSignIn(true)}
                 >
@@ -57,7 +57,7 @@ export default class Sign extends Component {
                 <span
                   onClick={() => this.showSignIn(false)}
                   className={`sign-modal__toggle sign-modal__toggle_right sign-modal__toggle_${
-                    !this.state.isSignIn ? 'active' : 'default'
+                    !this.state.isSignIn ? 'active' : 'alt'
                   }`}
                 >
                   Sign up

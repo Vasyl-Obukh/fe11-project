@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import ArticleShort from './ArticleShort';
 import ButtonAdd from '../other/ButtonAdd';
+import Submit from '../other/Submit';
 import InputError from '../../InputError';
 
 export default class Article extends Component {
@@ -192,7 +193,7 @@ export default class Article extends Component {
                 </div>
               ) : null}
               <div className='settings__file-select file-select'>
-                <label className='file-select__btn' htmlFor='thumb'>
+                <label className='btn btn_file' htmlFor='thumb'>
                   Choose thumbnail
                 </label>
                 <input
@@ -205,7 +206,7 @@ export default class Article extends Component {
                   )}
                 />
               </div>
-              <h3>Choose categories (up to 3)</h3>
+              <h3 className='admin-modal__title'>Choose categories (up to 3)</h3>
               {categories.length ? (
                 <ul className='admin-modal__categories'>
                   {categories.map(_ => (
@@ -226,10 +227,8 @@ export default class Article extends Component {
                   ))}
                 </ul>
               ) : null}
-              {error ? <p>{error}</p> : null}
-              <button className='submit' type='submit'>
-                Submit
-              </button>
+              {error ? <p className='error'>{error}</p> : null}
+              <Submit className='admin-modal__btn' />
             </form>
           </Modal>
         ) : null}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Modal, { handleShow, handleHide, onOutsideClick } from '../Modal';
 import { formatDate } from '../../utilities';
+import Submit from '../other/Submit';
 import paths from '../../constants/paths';
 import InputError from '../../InputError';
 
@@ -99,10 +100,8 @@ export default class Comment extends Component {
                   autoComplete='off'
                 />
               </div>
-              {this.state.error ? <p>{this.state.error}</p> : null}
-              <button className='submit' type='submit'>
-                Submit
-              </button>
+              {this.state.error ? <p className='error'>{this.state.error}</p> : null}
+              <Submit className='admin-modal__btn' />
             </form>
           </Modal>
         ) : null}
