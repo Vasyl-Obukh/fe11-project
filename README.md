@@ -15,7 +15,7 @@
 ## Running
 
 * Open project folder in terminal or console
-* Execute command `yarn dev`
+* Execute command `npm run dev` for NPM or `yarn dev` for Yarn
 * After server start, application will be available by [URL: localhost](http://localhost:8080)
 * Use email **"admin@gmail.com"** and password **"1111"** to log in with administrator rights. For log in as regular user just sign up.
 * To stop server use **Ctrl+C** in terminal
