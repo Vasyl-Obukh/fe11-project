@@ -3,7 +3,7 @@ import ArticlePage from '../components/pages/ArticlePage';
 import { getBreadcrumbs } from '../utilities';
 
 const mapStateToProps = (state, ownProps) => {
-  let article = state.articles.find(
+  const article = state.articles.find(
     article => ownProps.match.params.articleId === article.id
   );
   return {

@@ -7,6 +7,7 @@ import {
   SidebarContainer,
   FooterContainer
 } from '../containers/Template';
+import ScrollTop from './other/ScrollTop';
 
 export default function PageTemplate({ children }) {
   return (
@@ -16,6 +17,7 @@ export default function PageTemplate({ children }) {
       <main className='main'>{children}</main>
       <SidebarContainer />
       <FooterContainer />
+      <ScrollTop />
     </>
   );
 }

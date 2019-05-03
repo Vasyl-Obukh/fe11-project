@@ -18,22 +18,24 @@ const mapStateToProps = (state, props) => {
   const getOffset = () => (currentPage - 1) * pageLimit;
   const pageLimit = state.settings.pageLimit || 5;
   const pageNeighbours = 1;
-  let urlTemplate = paths.SEARCH_FIRST_PAGE;
+  const urlTemplate = paths.SEARCH_FIRST_PAGE;
 
   number = parseInt(number);
   let currentPage = number > 0 ? number : 1;
   let offset = getOffset();
 
-  let query = new URLSearchParams(search).get('query');
-  let queryString = `?query=${query}`;
-  let regs = query.split(' ').map(_ => new RegExp(_, 'i'));
-
+  const query = new URLSearchParams(search).get('query');
+  const queryString = `?query=${query}`;
+  const regs = query
+    .split(/\W+/)
+    .filter(Boolean)
+    .map(_ => new RegExp(_, 'i'));
   let articles = state.articles.filter(article =>
     regs.some(_ => _.test(article.title) || _.test(article.overview))
   );
 
-  let pagesAmount = Math.ceil(articles.length / pageLimit); 
-  if(articles.length <= offset) {
+  const pagesAmount = Math.ceil(articles.length / pageLimit);
+  if (articles.length <= offset) {
     currentPage = pagesAmount;
     offset = getOffset();
   }
@@ -41,7 +43,7 @@ const mapStateToProps = (state, props) => {
     .sort(compareFunctions[sortTypes.LATEST])
     .slice(offset, offset + pageLimit);
   articles = linkCategories(articles, state.categories);
-  
+
   return {
     articles,
     query,

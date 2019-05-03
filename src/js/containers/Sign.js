@@ -6,7 +6,7 @@ import InputError from '../InputError';
 
 const mapStateToProps = ({ users }) => ({
   isUserExists: ({ email, password }) => {
-    let user = users.find(_ => _.password == password && _.email === email);
+    const user = users.find(_ => _.password == password && _.email === email);
     if (!user) {
       throw new InputError('Entered data is incorrect');
     }

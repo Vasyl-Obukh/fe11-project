@@ -9,15 +9,12 @@ import { changeCommentsNumber } from '../actions/articles';
 import sortTypes, { compareFunctions } from '../constants/sortTypes';
 import { linkUserName, linkArticleTitle } from '../utilities';
 
-const mapStateToProps = state => {
-  let comments = state.comments
+const mapStateToProps = state => ({ 
+  comments: state.comments
     .sort(compareFunctions[sortTypes.LATEST])
     .map(_ => linkArticleTitle(_, state.articles))
-    .map(_ => linkUserName(_, state.users));
-  return {
-    comments
-  };
-};
+    .map(_ => linkUserName(_, state.users))
+});
 
 const mapDispatchToProps = dispatch => ({
   deleteComment: (id, articleId, validate) => {

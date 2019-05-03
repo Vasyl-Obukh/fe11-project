@@ -6,16 +6,14 @@ import userTypes from '../constants/userTypes';
 import { linkUserName } from '../utilities';
 import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
-const mapStateToProps = ({ users, currentUser, ...state }, {articleId}) => {
-  let comments = state.comments
-    .filter(
-      comment =>
-        comment.validate === true && comment.articleId === articleId
-    )
-    .sort(compareFunctions[sortTypes.LATEST])
-    .map(_ => linkUserName(_, users));
+const mapStateToProps = ({ users, currentUser, comments }, { articleId }) => {
   return {
-    comments,
+    comments: comments
+      .filter(
+        comment => comment.validate === true && comment.articleId === articleId
+      )
+      .sort(compareFunctions[sortTypes.LATEST])
+      .map(_ => linkUserName(_, users)),
     currentUser,
     articleId
   };

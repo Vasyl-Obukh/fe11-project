@@ -50,13 +50,13 @@ export default function Pagination({
   };
 
   if (!pagesAmount || pagesAmount === 1) return null;
-  let dots = '...';
-  let pages = fetchPageNumbers();
+  const dots = '...';
+  const pages = fetchPageNumbers();
 
-  let prev = `${urlTemplate}/${
+  const prev = `${urlTemplate}/${
     currentPage - 1 !== 1 ? `page-${currentPage - 1}` : ''
   }${queryString}`;
-  let next = `${urlTemplate}/page-${currentPage + 1}${queryString}`;
+  const next = `${urlTemplate}/page-${currentPage + 1}${queryString}`;
 
   return (
     <ul className='pagination'>

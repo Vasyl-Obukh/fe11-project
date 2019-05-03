@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { logOut } from '../actions/currentUser';
 import AdminPanel from '../components/admin/AdminPanel';
 
-const mapStateToProps = state => ({
-  userType: state.currentUser.userType
+const mapStateToProps = ({ currentUser: { userType }}) => ({
+  userType
 });
 
 const mapDispatchToProps = dispatch => ({

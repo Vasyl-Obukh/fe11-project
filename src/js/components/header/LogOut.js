@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import userTypes from '../../constants/userTypes';
+import paths from '../../constants/paths';
 
 export default function LogOut({ userType, onLogOut }) {
   return (
     <div className='sign'>
       {userType === userTypes.ADMIN ? (
-        <Link className='sign__admin' to='/admin' title='To admin panel'>
+        <Link className='sign__admin' to={paths.ADMIN_PANEL} title='To admin panel'>
           <i className='fas fa-user-cog sign__img' />
         </Link>
       ) : null}

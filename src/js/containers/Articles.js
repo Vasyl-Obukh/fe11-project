@@ -39,15 +39,15 @@ const mapStateToProps = (state, props) => {
   let currentPage = number > 0 ? number : 1;
   let offset = getOffset();
 
-  let category = categoryName
+  const category = categoryName
     ? state.categories.find(category => category.name === categoryName)
     : null;
   let articles = category
     ? state.articles.filter(_ => _.categoriesId.includes(category.id))
     : [];
 
-  let urlTemplate = getUrlTemplate(path, categoryName);
-  let queryString = sortType !== sortTypes.LATEST ? `?sort=${sortType}` : '';
+  const urlTemplate = getUrlTemplate(path, categoryName);
+  const queryString = sortType !== sortTypes.LATEST ? `?sort=${sortType}` : '';
 
   switch (path) {
     case paths.MAIN_FIRST_PAGE:
@@ -88,7 +88,7 @@ const mapStateToProps = (state, props) => {
 
   articles = linkCategories(articles, state.categories);
 
-  let breadcrumbs = getBreadcrumbs({
+  const breadcrumbs = getBreadcrumbs({
     categoryName: category ? category.name : null,
     currentPage,
     path
