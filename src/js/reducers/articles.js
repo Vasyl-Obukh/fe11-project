@@ -1,4 +1,3 @@
-import { v4 } from 'uuid';
 import {
   ADD_ARTICLE,
   DELETE_ARTICLE,
@@ -6,7 +5,7 @@ import {
   CHANGE_COMMENTS_NUMBER
 } from '../constants/actionTypes';
 
-const article = (state = {}, {type, ...action}) => {
+const article = (state = {}, { type, ...action }) => {
   switch (type) {
     case CHANGE_ARTICLE:
       return {
@@ -16,7 +15,9 @@ const article = (state = {}, {type, ...action}) => {
     case CHANGE_COMMENTS_NUMBER:
       return {
         ...state,
-        commentsNumber: state.commentsNumber + (action.raise ? 1 : -1)
+        commentsNumber:
+          state.commentsNumber +
+          (action.raise ? 1 : state.commentsNumber > 0 ? -1 : 0)
       };
     default:
       return state;
@@ -24,14 +25,12 @@ const article = (state = {}, {type, ...action}) => {
 };
 
 const articles = (state = [], action) => {
-  const {type, ...data} = action;
+  const { type, ...data } = action;
   switch (type) {
     case ADD_ARTICLE:
       return [
         ...state,
         {
-          id: v4(),
-          date: new Date(),
           commentsNumber: 0,
           ...data
         }

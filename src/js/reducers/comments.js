@@ -1,4 +1,3 @@
-import { v4 } from 'uuid';
 import {
   ADD_COMMENT,
   CHANGE_COMMENT,
@@ -32,8 +31,6 @@ const comments = (state = [], action) => {
       return [
         ...state,
         {
-          id: v4(),
-          date: new Date(),
           validate: userType === userTypes.ADMIN ? true: false,
           ...data
         }

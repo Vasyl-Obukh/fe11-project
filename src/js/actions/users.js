@@ -1,21 +1,11 @@
+import { v4 } from 'uuid';
 import { ADD_USER } from '../constants/actionTypes';
 
 export const addUser = ({ name, email, password }) => ({
   type: ADD_USER,
+  id: v4(),
+  userType: userTypes.USER,
   name,
   email,
   password,
 });
-
-// export const deleteUser = id => ({
-//   type: DELETE_USER,
-//   id
-// });
-
-// export const changeUser = ({ id, name, email, password }) => ({
-//   type: CHANGE_USER,
-//   id,
-//   name,
-//   email,
-//   password
-// });

@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import {
   ADD_ARTICLE,
   DELETE_ARTICLE,
@@ -13,6 +14,8 @@ export const addArticle = ({
   categoriesId
 }) => ({
   type: ADD_ARTICLE,
+  id: v4(),
+  date: new Date(),
   title,
   text,
   overview,

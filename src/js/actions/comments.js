@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import {
   ADD_COMMENT,
   CHANGE_COMMENT,
@@ -8,9 +9,11 @@ import {
 
 export const addComment = ({ articleId, userId, userType, text }) => ({
   type: ADD_COMMENT,
+  id: v4(),
+  date: new Date(),
+  userType,
   articleId,
   userId,
-  userType,
   text
 });
 

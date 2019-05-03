@@ -1,4 +1,3 @@
-import { v4 } from 'uuid';
 import {
   ADD_CATEGORY,
   DELETE_CATEGORY,
@@ -27,7 +26,7 @@ const categories = (state = [], action) => {
       return [
         ...state,
         {
-          id: v4(),
+          id: action.id,
           name: action.name
         }
       ];

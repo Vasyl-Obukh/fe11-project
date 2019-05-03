@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import {
   ADD_CATEGORY,
   DELETE_CATEGORY,
@@ -6,6 +7,7 @@ import {
 
 export const addCategory = name => ({
   type: ADD_CATEGORY,
+  id: v4(),
   name
 });
 
