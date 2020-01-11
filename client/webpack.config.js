@@ -13,11 +13,19 @@ let conf = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'index.js',
-    publicPath: 'dist'
+    publicPath: '/dist'
   },
   devServer: {
+    port: 8080,
     overlay: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    publicPath: '/dist',
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {'^/api' : ''}
+      }
+    }
   },
   module: {
     rules: [
