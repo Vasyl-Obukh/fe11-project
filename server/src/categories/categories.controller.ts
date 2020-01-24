@@ -17,8 +17,8 @@ export class CategoriesController {
     await this.categoriesService.add(createCategoryDto);
   }
 
-  // @Get(':id')
-  // getById(@Param() params): Category {
-  //   return mockCategories.find(({ id }) => id === params.id);
-  // }
+  @Get(':id')
+  async getById(@Param() params): Promise<Category> {
+    return this.categoriesService.getById(params.id);
+  }
 }
