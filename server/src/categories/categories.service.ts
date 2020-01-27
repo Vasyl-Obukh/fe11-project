@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import { Model, Query } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Category } from './interfaces/category.interface';
@@ -19,5 +19,13 @@ export class CategoriesService {
 
   async getById(id: string): Promise<Category> {
     return this.categoryModel.find({_id: id}).exec();
+  }
+
+  async updateById(category: Category): Promise<Query> {
+    return this.categoryModel.updateOne({_id: category._id}, category);
+  }
+
+  async deleteById(id: string): Promise<Query> {
+    return this.categoryModel.deleteOne({_id: id});
   }
 }
