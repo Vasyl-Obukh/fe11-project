@@ -17,6 +17,6 @@ export class ArticlesController {
     @UseInterceptors(FileInterceptor('thumbnailUrl'))
     async addArticle(@Body() createArticleDto: CreateArticleDto, @UploadedFile() thumbnail) {
         const response: Readonly<Image> = await this.cloudService.uploadImage(thumbnail);
-        return this.articlesService.addArticle({...createArticleDto, thumbnailUrl: mapData(response)});
+        return this.articlesService.add({...createArticleDto, thumbnailUrl: mapData(response)});
     }
 }

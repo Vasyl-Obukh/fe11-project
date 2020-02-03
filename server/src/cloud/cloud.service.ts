@@ -6,8 +6,16 @@ import { extname } from 'path';
 @Injectable()
 export class CloudService {
     private readonly dataURI: DataURI = new DataURI();
-    private readonly getImageURL = img =>
-        this.dataURI.format(extname(img.originalname), img.buffer).content
+    private readonly getImageURL = image =>
+        this.dataURI.format(extname(image.originalname), image.buffer).content
+
+    static validateImage = (image): boolean | never => {
+        if (image && image.originalname && image.buffer) {
+            return true;
+        }
+
+        throw new Error('CloudService Error: image is not found');
+    }
 
     constructor() {
         cloudinary.config({
@@ -17,8 +25,10 @@ export class CloudService {
         });
     }
 
-    uploadImage = async (img) => cloudinary.uploader.upload(
-        this.getImageURL(img),
+    uploadImage = async (image) =>
+        CloudService.validateImage(image)
+        && cloudinary.uploader.upload(
+        this.getImageURL(image),
         (error, result) => {
             // tslint:disable-next-line:no-console
             console.log(result);
