@@ -12,5 +12,5 @@ export const ArticleSchema = new Schema({
         public_id: { type: String, require: true },
         format: { type: String, require: true },
     },
-    categoriesId: { type: mongo.ObjectId, ref: 'Category', require: true},
+    categoriesId: [{ type: mongo.ObjectId, ref: 'Category', require: true}],
 });
