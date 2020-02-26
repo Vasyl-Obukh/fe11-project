@@ -2,7 +2,7 @@ import { Body, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/c
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ArticlesService } from './articles.service';
 import { CloudService } from '../cloud/cloud.service';
-import { JsonParsePipe } from '../jsonParse.pipe';
+import { JsonParsePipe } from '../pipes/jsonParse.pipe';
 import { mapData } from '../cloud/imageUrl';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { Image } from '../cloud/interfaces/image.interface';
