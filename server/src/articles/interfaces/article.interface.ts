@@ -3,10 +3,10 @@ import { Image } from '../../cloud/interfaces/image.interface';
 
 export interface Article extends Document {
     _id: string;
-    data: Date;
+    date: Date;
     title: string;
     text: string;
     overview: string;
-    thumbnailUrl: string | Image;
+    thumbnailUrl: Image | string;
     categoriesId: string[];
 }

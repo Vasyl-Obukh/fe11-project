@@ -16,7 +16,7 @@ let conf = {
     publicPath: '/dist'
   },
   devServer: {
-    port: 8080,
+    port: 8081,
     overlay: true,
     historyApiFallback: true,
     publicPath: '/dist',

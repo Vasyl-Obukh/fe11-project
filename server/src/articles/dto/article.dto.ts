@@ -1,9 +1,9 @@
 import { Image } from '../../cloud/interfaces/image.interface';
 
-export class CreateArticleDto {
+export class ArticleDto {
     // tslint:disable-next-line:variable-name
     readonly _id: string;
-    readonly data: Date | undefined;
+    readonly date: Date | undefined;
     readonly title: string;
     readonly text: string;
     readonly overview: string;
