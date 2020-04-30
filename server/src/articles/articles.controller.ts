@@ -7,11 +7,14 @@ import { mapData, createUrl } from '../cloud/imageUrl';
 import { ArticleDto } from './dto/article.dto';
 import { Image } from '../cloud/interfaces/image.interface';
 import { Article } from './interfaces/article.interface';
+import { CommentsService } from '../comments/comments.service';
+import { Comment } from '../comments/interfaces/comment.interface';
 
 @Controller('articles')
 export class ArticlesController {
   constructor(
     private readonly articlesService: ArticlesService,
+    private readonly commentsService: CommentsService,
     private readonly cloudService: CloudService,
   ) {}
 
@@ -30,7 +33,16 @@ export class ArticlesController {
 
   @Get()
   async getAll(): Promise<Article[]> {
-    return this.articlesService.getAll();
+    const articles: Article[] = await this.articlesService.getAll();
+    const comments: Comment[] = await this.commentsService.get();
+
+    // @ts-ignore
+    return articles.map(article => ({ ...article.toObject(),
+      thumbnailUrl: createUrl(article.thumbnailUrl as Image),
+      commentsId: comments
+        .filter(comment => comment.validated && comment.articleId.toString() === article._id.toString())
+        .map(({ _id }) => _id),
+    }));
   }
 
   @Get(':id')
@@ -49,14 +61,17 @@ export class ArticlesController {
     @UploadedFile() thumbnail,
   ) {
     const oldArticle: Article = await this.articlesService.getById(articleDto._id);
-    const response: Readonly<Image> = await this.cloudService.updateImage(
-      thumbnail,
-      (oldArticle.thumbnailUrl as Image).public_id,
-    );
+    let response: Readonly<Image>;
+    if (!articleDto.thumbnailUrl) {
+      response = await this.cloudService.updateImage(
+        thumbnail,
+        (oldArticle.thumbnailUrl as Image).public_id,
+      );
+    }
 
     return this.articlesService.updateById({
         ...articleDto,
-        thumbnailUrl: mapData(response),
+        thumbnailUrl: articleDto.thumbnailUrl || mapData(response),
     });
   }
 

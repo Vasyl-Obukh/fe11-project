@@ -20,7 +20,7 @@ export default class Comment extends Component {
     this.onOutsideClick = onOutsideClick.bind(this);
   }
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const text = this.state.text.trim();
 
@@ -28,7 +28,15 @@ export default class Comment extends Component {
       if (!text) {
         throw new InputError('You need to fill up all fields');
       }
-      this.props.changeComment(text);
+      // this.props.changeComment(text);
+      await fetch('/api/comments', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ...this.props.comment, text })
+      });
+      this.props.fetchComments();
       this.handleHide();
     } catch (error) {
       if (error instanceof InputError) {
@@ -37,6 +45,24 @@ export default class Comment extends Component {
         console.log(error);
       }
     }
+  };
+
+  delete = async () => {
+    await fetch(`/api/comments/${this.props.comment._id}`, {
+      method: 'DELETE',
+    });
+    this.props.fetchComments();
+  }
+
+  validate = async validate => {
+    await fetch('/api/comments', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...this.props.comment, validated: validate })
+    });
+    this.props.fetchComments();
   };
 
   render() {
@@ -54,17 +80,17 @@ export default class Comment extends Component {
           </Link>
         </div>
         <div className='list-item__date'>{formatDate(comment.date)}</div>
-        {this.props.comment.validate ? (
+        {this.props.comment.validated ? (
           <div
             className='list-item__validation'
-            onClick={() => validateComment(false)}
+            onClick={() => this.validate(false)}
           >
             <span className='list-item__btn'>Unvalidate</span>
           </div>
         ) : (
           <div
             className='list-item__validation'
-            onClick={() => validateComment(true)}
+            onClick={() => this.validate(true)}
           >
             <span className='list-item__btn'>Validate</span>
           </div>
@@ -72,7 +98,7 @@ export default class Comment extends Component {
         <div className='list-item__edit' onClick={this.handleShow}>
           <i className='fas fa-edit' />
         </div>
-        <span className='list-item__delete' onClick={deleteComment}>
+        <span className='list-item__delete' onClick={this.delete}>
           &times;
         </span>
         {this.state.showModal ? (
@@ -116,13 +142,14 @@ Comment.propTypes = {
     articleTitle: PropTypes.string.isRequired,
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
     .isRequired,
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
     userName: PropTypes.string.isRequired,
-    validate: PropTypes.bool.isRequired
+    validated: PropTypes.bool.isRequired
   }).isRequired,
   changeComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
-  validateComment: PropTypes.func.isRequired
+  validateComment: PropTypes.func.isRequired,
+  fetchComments: PropTypes.func.isRequired,
 };

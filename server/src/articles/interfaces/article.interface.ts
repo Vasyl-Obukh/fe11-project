@@ -9,4 +9,5 @@ export interface Article extends Document {
     overview: string;
     thumbnailUrl: Image | string;
     categoriesId: string[];
+    commentsId: number;
 }

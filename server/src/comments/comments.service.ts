@@ -15,11 +15,11 @@ export class CommentsService {
         return createdComment.save();
     }
 
-    async get(): Promise<Comment> {
+    async get(): Promise<Comment[]> {
         return this.commentModel.find().exec();
     }
 
-    async getByArticle(articleId: string): Promise<Comment> {
+    async getByArticle(articleId: string): Promise<Comment[]> {
         return this.commentModel.find({ articleId }).exec();
     }
 

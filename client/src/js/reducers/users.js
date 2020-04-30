@@ -1,6 +1,6 @@
 import { ADD_USER } from '../constants/actionTypes';
 import InputError from '../InputError';
-import userTypes from '../constants/userTypes';
+import roles from '../constants/roles';
 
 const users = (state = [], {type, ...data}) => {
   switch (type) {
@@ -14,7 +14,7 @@ const users = (state = [], {type, ...data}) => {
       return [
         ...state,
         {
-          userType: userTypes.USER,
+          role: roles.USER,
           ...data
         }
       ];

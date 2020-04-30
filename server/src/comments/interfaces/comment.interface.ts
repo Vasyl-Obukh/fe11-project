@@ -7,4 +7,5 @@ export interface Comment extends Document {
     validated: boolean;
     userId: string;
     articleId: string;
+    userName: string;
 }

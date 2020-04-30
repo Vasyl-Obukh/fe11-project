@@ -7,7 +7,7 @@ import AdminArticles from '../../containers/AdminArticles';
 import AdminCategories from '../../containers/AdminCategories';
 import AdminComments from '../../containers/AdminComments';
 import AdminUsers from '../../containers/AdminUsers';
-import userTypes from '../../constants/userTypes';
+import roles from '../../constants/roles';
 import paths from '../../constants/paths';
 
 
@@ -17,7 +17,7 @@ export default class AdminPanel extends Component {
   }
 
   componentWillMount = () => {
-    this.props.userType !== userTypes.ADMIN
+    this.props.role !== roles.ADMIN
       ? this.props.history.push(paths.MAIN_FIRST_PAGE)
       : null;
   };

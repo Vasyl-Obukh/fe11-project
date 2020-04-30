@@ -4,17 +4,23 @@ import {
   CHANGE_COMMENT,
   DELETE_COMMENT,
   DELETE_ARTICLE_COMMENTS,
-  VALIDATE_COMMENT
+  VALIDATE_COMMENT,
+  SET_COMMENTS
 } from '../constants/actionTypes';
 
-export const addComment = ({ articleId, userId, userType, text }) => ({
+export const addComment = ({ articleId, userId, role, text }) => ({
   type: ADD_COMMENT,
   id: v4(),
   date: new Date(),
-  userType,
+  role,
   articleId,
   userId,
   text
+});
+
+export const setComments = comments => ({
+  payload: comments,
+  type: SET_COMMENTS,
 });
 
 export const changeComment = (id, text) => ({

@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import reducers from '../reducers/reducers';
 import stateData from './initialState';
+import {composeWithDevTools, ComposeWithDevTools} from 'redux-devtools-extension';
 
 const logger = store => next => action => {
   console.groupCollapsed('dispatching', action.type);
@@ -18,7 +19,7 @@ const saver = store => next => action => {
 };
 
 const storeFactory = (initialState = stateData) =>
-  applyMiddleware(logger, saver)(createStore)(
+  composeWithDevTools(applyMiddleware(logger, saver))(createStore)(
     reducers,
     localStorage['blog-app']
       ? JSON.parse(localStorage['blog-app'])

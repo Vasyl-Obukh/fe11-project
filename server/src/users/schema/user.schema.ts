@@ -16,3 +16,8 @@ UserSchema.pre('save', async function(next) {
     }
     next();
 });
+
+UserSchema.methods.getPublicFields = function() {
+    const { _id, name, email, role } = this;
+    return { _id, name, email, role };
+};

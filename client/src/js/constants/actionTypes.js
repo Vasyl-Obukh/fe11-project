@@ -1,9 +1,12 @@
 export const ADD_ARTICLE            = 'ADD_ARTICLE';
+export const SET_ARTICLES           = 'SET_ARTICLES';
 export const DELETE_ARTICLE         = 'DELETE_ARTICLE';
 export const CHANGE_ARTICLE         = 'CHANGE_ARTICLE';
 export const CHANGE_COMMENTS_NUMBER = 'CHANGE_COMMENTS_NUMBER';
 
 export const ADD_COMMENT             = 'ADD_COMMENT';
+export const SET_CATEGORIES          = 'SET_CATEGORIES';
+export const SET_COMMENTS            = 'SET_COMMENTS';
 export const DELETE_COMMENT          = 'DELETE_COMMENT';
 export const DELETE_ARTICLE_COMMENTS = 'DELETE_ARTICLE_COMMENTS';
 export const CHANGE_COMMENT          = 'CHANGE_COMMENT';

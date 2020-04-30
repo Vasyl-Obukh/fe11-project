@@ -31,7 +31,7 @@ export class AuthController {
 
     res.status(201)
       .cookie('ACCESS_TOKEN', token, cookieConfig)
-      .send();
+      .send(req.user.getPublicFields());
   }
 
   @UseGuards(JwtAuthGuard)

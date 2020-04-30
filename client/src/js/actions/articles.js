@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
 import {
   ADD_ARTICLE,
+  SET_ARTICLES,
   DELETE_ARTICLE,
   CHANGE_ARTICLE,
   CHANGE_COMMENTS_NUMBER
@@ -21,6 +22,11 @@ export const addArticle = ({
   overview,
   thumbnailUrl,
   categoriesId
+});
+
+export const setArticles = articles => ({
+  payload: articles,
+  type: SET_ARTICLES,
 });
 
 export const deleteArticle = id => ({

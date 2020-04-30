@@ -5,7 +5,9 @@ import { Category } from './interfaces/category.interface';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(
+    private readonly categoriesService: CategoriesService,
+  ) {}
 
   @Post()
   async add(@Body() categoryDto: CategoryDto): Promise<Category> {

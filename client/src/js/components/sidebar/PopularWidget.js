@@ -9,10 +9,10 @@ export default function PopularWidget({ articles = [] }) {
       <h3 className='widget-popular__title'>Popular</h3>
       <ul className='widget-popular__list'>
         {articles.map(_ => (
-          <li className='widget-popular__item' key={_.id}>
+          <li className='widget-popular__item' key={_._id}>
             <Link
               className='widget-popular__img-container'
-              to={paths.ARTICLE_PAGE.replace(/:\w*$/, _.id)}
+              to={paths.ARTICLE_PAGE.replace(/:\w*$/, _._id)}
             >
               <div
                 style={{ backgroundImage: `url(${_.thumbnailUrl})` }}
@@ -20,7 +20,7 @@ export default function PopularWidget({ articles = [] }) {
               />
             </Link>
             <h4 className='widget-popular__post-title' title={_.title}>
-              <Link to={paths.ARTICLE_PAGE.replace(/:\w*$/, _.id)}>
+              <Link to={paths.ARTICLE_PAGE.replace(/:\w*$/, _._id)}>
                 {_.title}
               </Link>
             </h4>

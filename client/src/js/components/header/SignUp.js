@@ -14,7 +14,7 @@ export default class SignUp extends Component {
     };
   }
 
-  onSignUp = e => {
+  onSignUp = async e => {
     e.preventDefault();
     let name = this.state.name.trim();
     let email = this.state.email.trim();
@@ -27,13 +27,20 @@ export default class SignUp extends Component {
       if (name.length < 2) {
         throw new InputError('Name has to contain , at least, 2 symbols');
       }
-      if (password.length < 7) {
-        throw new InputError('Password has to contain , at least, 7 symbols');
+      if (password.length < 8) {
+        throw new InputError('Password has to contain , at least, 8 symbols');
       }
       if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         throw new InputError('Email is invalid');
       }
-      this.props.addUser({name, email, password});
+      // this.props.addUser({name, email, password});
+      await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, password })
+      });
       this.props.showSignIn(true);
     } catch (error) {
       if(error instanceof InputError) {

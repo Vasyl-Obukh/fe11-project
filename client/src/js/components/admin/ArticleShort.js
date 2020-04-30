@@ -13,20 +13,20 @@ export default function ArticleShort({ article, handleShow, deleteArticle }) {
       <div className='list-item__title'>
         <Link
           className='list-item__link'
-          to={paths.ARTICLE_PAGE.replace(/:\w*/, article.id)}
+          to={paths.ARTICLE_PAGE.replace(/:\w*/, article._id)}
         >
           {article.title}
         </Link>
       </div>
       <div className='list-item__categories'>
         {article.categoriesName.length ? (
-          article.categoriesName.map((_, id) => (
+          article.categoriesName.map(({ name, _id}) => (
             <Link
-              key={id}
+              key={_id}
               className='list-item__link'
-              to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, _)}
+              to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, _id)}
             >
-              {_}
+              {name}
             </Link>
           ))
         ) : (
@@ -47,10 +47,10 @@ export default function ArticleShort({ article, handleShow, deleteArticle }) {
 
 ArticleShort.propTypes = {
   article: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    categoriesName: PropTypes.arrayOf(PropTypes.string),
-    commentsNumber: PropTypes.number.isRequired,
+    categoriesName: PropTypes.array.isRequired,
+    commentsNumber: PropTypes.number/*.isRequired*/,
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
       .isRequired
   }),

@@ -10,6 +10,6 @@ export default sortTypes;
 export const compareFunctions = {
   [sortTypes.LATEST]: (a, b) => new Date(b.date) - new Date(a.date),
   [sortTypes.FIRSTS]: (a, b) => new Date(a.date) - new Date(b.date),
-  [sortTypes.POPULAR]: (a, b) => b.commentsNumber - a.commentsNumber,
+  [sortTypes.POPULAR]: (a, b) => b.commentsId.length - a.commentsId.length,
   [sortTypes.ALPHABETIC]: (a, b) => a.name > b.name ? 1 : -1
 };

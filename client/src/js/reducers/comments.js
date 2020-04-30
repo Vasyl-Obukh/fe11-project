@@ -3,9 +3,10 @@ import {
   CHANGE_COMMENT,
   DELETE_COMMENT,
   DELETE_ARTICLE_COMMENTS,
-  VALIDATE_COMMENT
+  VALIDATE_COMMENT,
+  SET_COMMENTS
 } from '../constants/actionTypes';
-import userTypes from '../constants/userTypes';
+import roles from '../constants/roles';
 
 const comment = (state = {}, action) => {
   switch (action.type) {
@@ -25,13 +26,15 @@ const comment = (state = {}, action) => {
 };
 
 const comments = (state = [], action) => {
-  const {type, userType, ...data} = action;
+  const {type, role, payload, ...data} = action;
   switch (type) {
+    case SET_COMMENTS:
+      return payload;
     case ADD_COMMENT:
       return [
         ...state,
         {
-          validate: userType === userTypes.ADMIN ? true: false,
+          validate: role === roles.ADMIN,
           ...data
         }
       ];

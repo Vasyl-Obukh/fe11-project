@@ -31,17 +31,17 @@ export const getBreadcrumbs = ({
     {
       name: 'Home',
       url: paths.MAIN_FIRST_PAGE,
-      last: path === paths.MAIN_FIRST_PAGE ? true : false
+      last: path === paths.MAIN_FIRST_PAGE
     }
   ];
-  if (path === paths.CATEGORY_FIRST_PAGE || path === paths.CATEGORY_N_PAGE) {
+  if (categoryName && (path === paths.CATEGORY_FIRST_PAGE || path === paths.CATEGORY_N_PAGE)) {
     breadcrumbs.push({
       name:
         categoryName.length >= 12
           ? categoryName.slice(0, 10) + '...'
           : categoryName,
       url: paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, categoryName),
-      last: currentPage === 1 ? true : false
+      last: currentPage === 1
     });
   }
   if (page) {
@@ -75,18 +75,17 @@ export const linkCategories = (articles, categories) =>
   articles.map(article => ({
     ...article,
     categoriesName: categories
-      .filter(category => article.categoriesId.includes(category.id))
-      .map(category => category.name)
+      .filter(category => article.categoriesId.includes(category._id))
   }));
 
 export const linkUserName = (comment, users) => ({
   ...comment,
-  userName: users.find(_ => _.id === comment.userId).name
+  //userName: 'test'//users.find(_ => _._id === comment.userId).name
 });
 
 export const linkArticleTitle = (comment, articles) => ({
   ...comment,
-  articleTitle: articles.find(_ => _.id === comment.articleId).title
+  articleTitle: articles.find(_ => _._id === comment.articleId).title
 });
 
 export const getSortType = query => {

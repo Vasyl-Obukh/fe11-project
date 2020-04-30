@@ -9,4 +9,5 @@ export class ArticleDto {
     readonly overview: string;
     readonly thumbnailUrl: string | Image;
     readonly categoriesId: string[];
+    readonly commentsId: number;
 }

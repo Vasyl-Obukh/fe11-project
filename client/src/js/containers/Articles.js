@@ -5,6 +5,7 @@ import sortTypes, { compareFunctions } from '../constants/sortTypes';
 import paths from '../constants/paths';
 import { getBreadcrumbs, linkCategories, getSortType } from '../utilities';
 import Articles from '../components/articles/Articles';
+import * as actions from '../actions/articles';
 
 const getUrlTemplate = (path, name) =>
   path === paths.CATEGORY_FIRST_PAGE
@@ -20,7 +21,7 @@ const mapStateToProps = (state, props) => {
     },
     match: {
       path,
-      params: { number = 1, categoryName }
+      params: { number = 1, categoryId }
     }
   } = props;
   const pageLimit = state.settings.pageLimit || 5;
@@ -39,14 +40,14 @@ const mapStateToProps = (state, props) => {
   let currentPage = number > 0 ? number : 1;
   let offset = getOffset();
 
-  const category = categoryName
-    ? state.categories.find(category => category.name === categoryName)
+  const category = categoryId
+    ? state.categories.find(category => category._id === categoryId)
     : null;
   let articles = category
-    ? state.articles.filter(_ => _.categoriesId.includes(category.id))
+    ? state.articles.filter(_ => _.categoriesId.includes(category._id))
     : [];
 
-  const urlTemplate = getUrlTemplate(path, categoryName);
+  const urlTemplate = getUrlTemplate(path, category ? category.name : '');
   const queryString = sortType !== sortTypes.LATEST ? `?sort=${sortType}` : '';
 
   switch (path) {
@@ -115,4 +116,8 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Articles));
+const mapDispatchToProps = dispatch => ({
+  setArticles: articles => dispatch(actions.setArticles(articles)),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Articles));

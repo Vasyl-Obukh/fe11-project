@@ -12,7 +12,7 @@ export default class Category extends Component {
     super(props);
     const { category } = this.props;
     this.state = {
-      addNew: this.props.new ? true : false,
+      addNew: !!this.props.new,
       showModal: false,
       name: category ? category.name : '',
       error: ''
@@ -23,17 +23,33 @@ export default class Category extends Component {
     this.onOutsideClick = onOutsideClick.bind(this);
   }
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const name = this.state.name.trim();
 
     try {
       if (!name) throw new InputError('You need to fill up all fields');
       if (this.state.addNew) {
-        this.props.addCategory(name);
+        await fetch('/api/categories', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name })
+        });
+        this.props.fetchCategories();
+        // this.props.addCategory(name);
         this.setState({ name: '', error: '' });
       } else {
-        this.props.changeCategory({ id: this.props.category.id, name });
+        //this.props.changeCategory({ _id: this.props.category._id, name });
+        await fetch('/api/categories', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ ...this.props.category, name })
+        });
+        this.props.fetchCategories();
       }
       this.handleHide();
     } catch (error) {
@@ -45,7 +61,15 @@ export default class Category extends Component {
     }
   };
 
-  onDelete = e => (confirm(this.message) ? this.props.deleteCategory(e) : null);
+  onDelete = async e => {
+    if (confirm(this.message)) {
+      //this.props.deleteCategory(e)
+      await fetch(`/api/categories/${this.props.category._id}`, {
+        method: 'DELETE',
+      });
+      this.props.fetchCategories();
+    }
+  };
 
   render() {
     return (
@@ -112,11 +136,12 @@ export default class Category extends Component {
 
 Category.propTypes = {
   category: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   }),
   new: PropTypes.bool,
   addCategory: PropTypes.func,
   changeCategory: PropTypes.func,
-  deleteCategory: PropTypes.func
+  deleteCategory: PropTypes.func,
+  fetchCategories: PropTypes.func,
 };

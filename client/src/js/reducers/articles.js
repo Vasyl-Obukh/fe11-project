@@ -1,5 +1,6 @@
 import {
   ADD_ARTICLE,
+  SET_ARTICLES,
   DELETE_ARTICLE,
   CHANGE_ARTICLE,
   CHANGE_COMMENTS_NUMBER
@@ -25,8 +26,10 @@ const article = (state = {}, { type, ...action }) => {
 };
 
 const articles = (state = [], action) => {
-  const { type, ...data } = action;
+  const { type, payload, ...data } = action;
   switch (type) {
+    case SET_ARTICLES:
+      return payload;
     case ADD_ARTICLE:
       return [
         ...state,

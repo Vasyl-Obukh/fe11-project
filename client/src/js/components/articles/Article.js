@@ -6,19 +6,19 @@ import paths from '../../constants/paths';
 
 export default function Article({
   article: {
-    id,
+    _id,
     title,
     categoriesName,
     date,
     thumbnailUrl,
     overview,
-    commentsNumber
+    commentsId,
   }
 }) {
   return (
     <article className='article'>
       <h2 className='article__title'>
-        <Link to={paths.ARTICLE_PAGE.replace(/:\w*/, id)}>{title}</Link>
+        <Link to={paths.ARTICLE_PAGE.replace(/:\w*/, _id)}>{title}</Link>
       </h2>
 
       <div className='article__head'>
@@ -26,14 +26,14 @@ export default function Article({
           <span>Categories: </span>
           {categoriesName.length ? (
             <div className='article__categories-list'>
-              {categoriesName.map((category, id) => {
+              {categoriesName.map(({ _id, name }) => {
                 return (
                   <Link
                     className='article__category'
-                    key={id}
-                    to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, category)}
+                    key={_id}
+                    to={paths.CATEGORY_FIRST_PAGE.replace(/:\w*/, _id)}
                   >
-                    {category}
+                    {name}
                   </Link>
                 );
               })}
@@ -59,11 +59,11 @@ export default function Article({
 
       <div className='article__footer'>
         <span className='article__comments-number'>
-          <i className='far fa-comments' /> {commentsNumber}
+          <i className='far fa-comments' /> {commentsId.length}
         </span>
         <Link
           className='article__ref'
-          to={paths.ARTICLE_PAGE.replace(/:\w*/, id)}
+          to={paths.ARTICLE_PAGE.replace(/:\w*/, _id)}
         >
           Read more...
         </Link>
@@ -74,13 +74,16 @@ export default function Article({
 
 Article.propTypes = {
   article: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    categoriesName: PropTypes.arrayOf(PropTypes.string),
+    categoriesName: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string,
+    })),
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
       .isRequired,
     thumbnailUrl: PropTypes.string.isRequired,
     overview: PropTypes.string.isRequired,
-    commentsNumber: PropTypes.number.isRequired
+    commentsId: PropTypes.arrayOf(PropTypes.string).isRequired
   })
 };

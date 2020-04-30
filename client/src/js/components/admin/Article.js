@@ -11,12 +11,13 @@ export default class Article extends Component {
     super(props);
     const { article } = this.props;
     this.state = {
-      addNew: this.props.new ? true : false,
+      addNew: !!this.props.new,
       showModal: false,
       title: article ? article.title : '',
       text: article ? article.text : '',
       overview: article ? article.overview : '',
       thumbnailUrl: article ? article.thumbnailUrl : '',
+      thumbnailFile: article ? article.thumbnailUrl : '',
       categoriesId: article ? article.categoriesId : [],
       error: ''
     };
@@ -28,9 +29,10 @@ export default class Article extends Component {
   onFileLoad = e => {
     const reader = new FileReader();
     reader.onload = () => {
-      this.setState({ thumbnailUrl: reader.result, error: '' });
+      this.setState({ thumbnailFile: reader.result, error: '' });
     };
     reader.readAsDataURL(e.target.files[0]);
+    this.setState({ thumbnailUrl: e.target.files[0] || '', error: '' });
   };
 
   onCheck = e => {
@@ -46,7 +48,7 @@ export default class Article extends Component {
     this.setState({ categoriesId });
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const { thumbnailUrl, categoriesId, addNew } = this.state;
     const title = this.state.title.trim();
@@ -60,31 +62,34 @@ export default class Article extends Component {
       if (!thumbnailUrl) {
         throw new InputError('You need to choose thumbnail');
       }
+      const data = new FormData();
+      data.append('thumbnailUrl', thumbnailUrl);
+      data.append('categoriesId', JSON.stringify(categoriesId));
+      data.append('title', title);
+      data.append('text', text);
+      data.append('overview', overview);
+
       if (addNew) {
-        this.props.addArticle({
-          title,
-          text,
-          overview,
-          thumbnailUrl,
-          categoriesId
+        await fetch('/api/articles', {
+          method: 'POST',
+          body: data
         });
         this.setState({
           title: '',
           text: '',
           overview: '',
           thumbnailUrl: '',
+          thumbnailFile: '',
           categoriesId: []
         });
       } else {
-        this.props.changeArticle({
-          id: this.props.article.id,
-          title,
-          text,
-          overview,
-          thumbnailUrl,
-          categoriesId
+        data.append('_id', this.props.article._id);
+        await fetch('/api/articles', {
+          method: 'PUT',
+          body: data
         });
       }
+      this.props.fetchArticles();
       this.handleHide();
     } catch (error) {
       if (error instanceof InputError) {
@@ -95,6 +100,13 @@ export default class Article extends Component {
     }
   };
 
+  delete = async () => {
+    await fetch(`/api/articles/${this.props.article._id}`, {
+      method: 'DELETE'
+    });
+    this.props.fetchArticles();
+  };
+
   render() {
     const {
       state: {
@@ -103,7 +115,7 @@ export default class Article extends Component {
         title,
         text,
         overview,
-        thumbnailUrl,
+        thumbnailFile,
         categoriesId,
         error
       },
@@ -118,7 +130,7 @@ export default class Article extends Component {
           <ArticleShort
             article={article}
             handleShow={this.handleShow}
-            deleteArticle={deleteArticle}
+            deleteArticle={this.delete}
           />
         )}
         {showModal ? (
@@ -182,12 +194,12 @@ export default class Article extends Component {
                   placeholder={"Type the article's overview..."}
                 />
               </div>
-              {thumbnailUrl ? (
+              {thumbnailFile ? (
                 <div className='admin-modal__thumb'>
                   <div
                     className='admin-modal__img'
                     style={{
-                      backgroundImage: `url(${thumbnailUrl})`
+                      backgroundImage: `url(${thumbnailFile})`
                     }}
                   />
                 </div>
@@ -210,19 +222,19 @@ export default class Article extends Component {
               {categories.length ? (
                 <ul className='admin-modal__categories'>
                   {categories.map(_ => (
-                    <li key={_.id} className='admin-modal__category'>
+                    <li key={_._id} className='admin-modal__category'>
                       <input
-                        id={_.id}
+                        id={_._id}
                         type='checkbox'
                         disabled={
                           categoriesId.length >= 3 &&
                           !categoriesId.includes(_.id)
                         }
-                        defaultChecked={categoriesId.includes(_.id)}
+                        defaultChecked={categoriesId.includes(_._id)}
                         onChange={this.onCheck}
-                        value={_.id}
+                        value={_._id}
                       />
-                      <label htmlFor={_.id}>{_.name}</label>
+                      <label htmlFor={_._id}>{_.name}</label>
                     </li>
                   ))}
                 </ul>
@@ -241,7 +253,7 @@ Article.propTypes = {
   article: PropTypes.object,
   categories: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
     })
   ),

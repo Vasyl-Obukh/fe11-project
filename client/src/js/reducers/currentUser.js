@@ -1,8 +1,8 @@
 import { LOG_IN, LOG_OUT } from '../constants/actionTypes';
-import userTypes from '../constants/userTypes';
+import roles from '../constants/roles';
 
 const currentUser = (
-  state = { userType: userTypes.NON_AUTHORIZED },
+  state = { role: roles.NON_AUTHORIZED },
   {type, ...data}
 ) => {
   switch (type) {
@@ -12,7 +12,7 @@ const currentUser = (
       };
     case LOG_OUT:
       return {
-        userType: userTypes.NON_AUTHORIZED
+        role: roles.NON_AUTHORIZED
       };
     default:
       return state;

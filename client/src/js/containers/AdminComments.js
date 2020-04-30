@@ -3,13 +3,13 @@ import Comments from '../components/admin/Comments';
 import {
   deleteComment,
   changeComment,
-  validateComment
+  validateComment, setComments
 } from '../actions/comments';
 import { changeCommentsNumber } from '../actions/articles';
 import sortTypes, { compareFunctions } from '../constants/sortTypes';
 import { linkUserName, linkArticleTitle } from '../utilities';
 
-const mapStateToProps = state => ({ 
+const mapStateToProps = state => ({
   comments: state.comments
     .sort(compareFunctions[sortTypes.LATEST])
     .map(_ => linkArticleTitle(_, state.articles))
@@ -25,7 +25,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(validateComment(id, validate));
     dispatch(changeCommentsNumber(articleId, validate));
   },
-  changeComment: (id, text) => dispatch(changeComment(id, text))
+  changeComment: (id, text) => dispatch(changeComment(id, text)),
+  setComments: comments => dispatch(setComments(comments)),
 });
 
 export default connect(

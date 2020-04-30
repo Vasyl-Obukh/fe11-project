@@ -1,7 +1,8 @@
 import {
   ADD_CATEGORY,
   DELETE_CATEGORY,
-  CHANGE_CATEGORY
+  CHANGE_CATEGORY,
+  SET_CATEGORIES,
 } from '../constants/actionTypes';
 import InputError from '../InputError';
 
@@ -19,6 +20,8 @@ const category = (state = {}, { type, name }) => {
 
 const categories = (state = [], action) => {
   switch (action.type) {
+    case SET_CATEGORIES:
+      return action.payload;
     case ADD_CATEGORY:
       if (state.find(_ => _.name === action.name)) {
         throw new InputError('This category name is taken');

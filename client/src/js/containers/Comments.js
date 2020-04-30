@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import Comments from '../components/comments/Comments';
-import { addComment } from '../actions/comments';
+import { addComment, setComments } from '../actions/comments';
 import { changeCommentsNumber } from '../actions/articles';
-import userTypes from '../constants/userTypes';
+import roles from '../constants/roles';
 import { linkUserName } from '../utilities';
 import sortTypes, { compareFunctions } from '../constants/sortTypes';
 
@@ -10,7 +10,7 @@ const mapStateToProps = ({ users, currentUser, comments }, { articleId }) => {
   return {
     comments: comments
       .filter(
-        comment => comment.validate === true && comment.articleId === articleId
+        comment => comment.validated === true && comment.articleId === articleId
       )
       .sort(compareFunctions[sortTypes.LATEST])
       .map(_ => linkUserName(_, users)),
@@ -22,10 +22,11 @@ const mapStateToProps = ({ users, currentUser, comments }, { articleId }) => {
 const mapDispatchToProps = dispatch => ({
   addComment: comment => {
     dispatch(addComment(comment));
-    comment.userType === userTypes.ADMIN
+    comment.role === roles.ADMIN
       ? dispatch(changeCommentsNumber(comment.articleId, true))
       : null;
-  }
+  },
+  setComments: comments => dispatch(setComments(comments)),
 });
 
 export default connect(

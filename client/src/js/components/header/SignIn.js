@@ -13,7 +13,7 @@ export default class SignIn extends Component {
     };
   }
 
-  onSignIn = e => {
+  onSignIn = async e => {
     e.preventDefault();
 
     let email = this.state.email.trim();
@@ -23,7 +23,15 @@ export default class SignIn extends Component {
       if (email === '' || password === '' ) {
         throw new InputError('You need to fill up all fields');
       }
-      let user = this.props.isUserExists({email, password});
+      // let user = this.props.isUserExists({email, password});
+      const user = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      }).then(_ => _.json());
+
       if(user) {
         this.props.logIn(user);
       }

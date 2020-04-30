@@ -5,4 +5,6 @@ export class CommentDto {
     readonly text: string;
     readonly userId: string;
     readonly articleId: string;
+    readonly validated: boolean;
+    readonly userName: string;
 }

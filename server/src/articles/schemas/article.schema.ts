@@ -13,4 +13,5 @@ export const ArticleSchema = new Schema({
         format: { type: String, required: true },
     },
     categoriesId: [{ type: mongo.ObjectId, ref: 'Category', required: true}],
+    commentsId: [{ type: mongo.ObjectId, ref: 'Comment' }],
 });

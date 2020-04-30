@@ -65,7 +65,7 @@ export default class Slider extends Component {
         />
         <div className='slider__images'>
           {articles.map((_, id) => (
-            <Link key={id} to={paths.ARTICLE_PAGE.replace(/:\w*/, _.id)}>
+            <Link key={id} to={paths.ARTICLE_PAGE.replace(/:\w*/, _._id)}>
               <div
                 className={`slider__image slider__image_${
                   this.state.currentSlide === id ? 'active' : 'hidden'
@@ -87,7 +87,7 @@ export default class Slider extends Component {
 Slider.propTypes = {
   articles: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
+      _id: PropTypes.string,
       thumbnailUrl: PropTypes.string,
       title: PropTypes.string
     })

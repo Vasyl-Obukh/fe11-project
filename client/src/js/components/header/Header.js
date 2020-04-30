@@ -6,11 +6,11 @@ import Navbar from './NavBar';
 import Search from './Search';
 import Sign from '../../containers/Sign';
 import LogOut from './LogOut';
-import userTypes from '../../constants/userTypes';
+import roles from '../../constants/roles';
 
 export default function Header({
   categories = [],
-  currentUser = userTypes.NON_AUTHORIZED,
+  currentUser = roles.NON_AUTHORIZED,
   logOut
 }) {
   return (
@@ -19,11 +19,11 @@ export default function Header({
       <Logo />
       <Navbar categories={categories} />
       <Search />
-      {currentUser.userType === userTypes.NON_AUTHORIZED ? (
+      {currentUser.role === roles.NON_AUTHORIZED ? (
         <Sign />
       ) : (
         <LogOut
-          userType={currentUser.userType}
+          role={currentUser.role}
           onLogOut={logOut}
         />
       )}
@@ -34,7 +34,7 @@ export default function Header({
 Header.propTypes = {
   categories: PropTypes.array,
   currentUser: PropTypes.shape({
-    userType: PropTypes.string,
+    role: PropTypes.string,
     name: PropTypes.string
   }).isRequired,
   logOut: PropTypes.func.isRequired
