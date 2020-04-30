@@ -1,0 +1,11 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd server && npm i && nest start",
+    "heroku-postbuild": "cd client && npm i && npm build"
+  }
+}
